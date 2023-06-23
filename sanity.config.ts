@@ -14,6 +14,7 @@ import {
   unsplashAssetSource,
   unsplashImageAsset,
 } from "sanity-plugin-asset-source-unsplash";
+import { markdownSchema } from "sanity-plugin-markdown/next";
 
 export default defineConfig({
   basePath: "/studio",
@@ -23,6 +24,7 @@ export default defineConfig({
   // Add and edit the content schema in the './sanity/schema' folder
   schema,
   plugins: [
+    markdownSchema(),
     unsplashImageAsset(),
     deskTool({
       defaultDocumentNode: getDefaultDocumentNode,

@@ -1,19 +1,12 @@
-import BlogList from "@/components/blog-list";
+import "easymde/dist/easymde.min.css";
+import PreviewProvider from "@/components/preview-provider";
 import PreviewBlogList from "@/components/preview-blog-list";
-import { groq } from "next-sanity";
-import { draftMode } from "next/headers";
-import { lazy } from "react";
-import { clientFetch, getClient } from "../../../sanity/lib/client";
 import Link from "next/link";
-
-const PreviewProvider = lazy(() => import("@/components/preview-provider"));
-
-export const fetchPostsQuery = groq`
-*[_type == "post"]{
-  ...,
-  author->,
-  categories[]->
-} | order(_createdAt desc)`;
+import { clientFetch, getClient } from "../../sanity/lib/client";
+import { draftMode } from "next/headers";
+import { fetchPostsQuery } from "@/app/(user)/page";
+import BlogList from "@/components/blog-list";
+import { groq } from "next-sanity";
 
 export const revalidate = 60;
 

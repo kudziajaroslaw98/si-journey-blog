@@ -1,14 +1,22 @@
 "use client";
 
-import { usePreview } from "../../sanity/lib/sanity.preview";
 import BlogList from "./blog-list";
+import { useLiveQuery } from "@sanity/preview-kit";
 
 type Props = {
+  posts: Post[];
   query: string;
 };
 
-export default function PreviewBlogList({ query }: Props) {
-  const posts = usePreview(null, query);
-  console.log("loading..", posts);
-  return <BlogList posts={posts} />;
+export default function PreviewBlogList({ posts, query }: Props) {
+  const [data, loading] = useLiveQuery(posts, query);
+
+  if (loading) {
+    return <>Loading...</>;
+  }
+  return (
+    <>
+      <BlogList posts={data} />
+    </>
+  );
 }

@@ -64,9 +64,9 @@ export default defineType({
       type: "datetime",
     }),
     defineField({
-      name: "body",
-      title: "Body",
-      type: "blockContent",
+      type: "markdown",
+      description: "A Github flavored markdown field with image uploading",
+      name: "markdown",
     }),
   ],
 

@@ -15,6 +15,7 @@ interface Post extends Base {
   timeToRead: string;
   title: string;
   description: string;
+  markdown: string;
 }
 
 interface Author extends Base {
