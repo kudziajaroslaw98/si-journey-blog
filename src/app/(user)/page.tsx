@@ -1,30 +1,21 @@
-import BlogList from "@/components/blog-list";
-import PreviewBlogList from "@/components/preview-blog-list";
-import { groq } from "next-sanity";
 import { draftMode } from "next/headers";
 import { lazy } from "react";
-import { clientFetch, getClient } from "../../../sanity/lib/client";
+import { getClient } from "../../../sanity/lib/client";
 import Link from "next/link";
-import { fetchPostsQuery } from "@/app/page";
+import { groq } from "next-sanity";
+import dynamic from "next/dynamic";
 
+const BlogList = dynamic(() => import("@/components/blog-list"));
+const PreviewBlogList = dynamic(() => import("@/components/preview-blog-list"));
 const PreviewProvider = lazy(() => import("@/components/preview-provider"));
 
 export const revalidate = 60;
-
-export async function generateStaticParams() {
-  const query = groq`
-        *[_type == "post"]
-        {
-            slug
-        }
-    `;
-  const slugs: Post[] = await clientFetch(query);
-  const slugRoutes = slugs.map((slug) => slug.slug.current);
-
-  return slugRoutes.map((slug) => ({
-    slug,
-  }));
-}
+export const fetchPostsQuery = groq`
+*[_type == "post"]{
+  ...,
+  author->,
+  categories[]->
+} | order(_createdAt desc)`;
 
 const Page = async () => {
   const preview = draftMode().isEnabled

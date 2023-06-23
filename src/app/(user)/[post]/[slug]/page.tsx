@@ -39,20 +39,19 @@ const Page = async ({ params: { slug } }: Props) => {
 
   const post: Post = await clientFetch(query, { slug });
   return (
-    <article className="max-w-3xl mx-auto px-10 pb-28">
+    <article className="max-w-3xl mx-auto px-6 md:px-10 pb-28">
       <h1 className="text-5xl">
         {draftMode().isEnabled ? "preview mode" : ""}
       </h1>
 
-      <section className="my-8 w-full relative">
-        {post?.mainImage && (
-          <Image
-            className="object-fill absolute"
-            alt={post.title}
-            src={urlFor(post.mainImage).url()}
-            fill
-          />
-        )}
+      <section className="my-8 w-full">
+        <Image
+          className="object-cover"
+          alt={post.title}
+          src={urlFor(post.mainImage).url()}
+          width={688}
+          height={400}
+        />
       </section>
       <section className="text-gray-100 w-full">
         <div className="flex flex-col justify-between space-y-10">
