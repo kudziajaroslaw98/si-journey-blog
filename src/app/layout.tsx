@@ -1,9 +1,10 @@
-import { Inter } from "next/font/google";
 import "./globals.css";
-import "easymde/dist/easymde.min.css";
+import dynamic from "next/dynamic";
 
-const inter = Inter({ subsets: ["latin"] });
-
+const Header = dynamic(() => import("@/components/header"));
+const Banner = dynamic(() => import("@/components/banner"));
+// @ts-ignore
+// dynamic(() => import("easymde/dist/easymde.min.css"));
 export const metadata = {
   title: "Journey - blog",
   viewport: "width=device-width, initial-scale=1",
@@ -18,7 +19,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-emperor-950`}>{children}</body>
+      <body className={`bg-emperor-950`}>
+        <div className="max-w-7xl mx-auto">
+          <Header></Header>
+          <Banner></Banner>
+          {children}
+        </div>
+      </body>
     </html>
   );
 }
