@@ -17,15 +17,14 @@ export function getClient(preview?: { token: string }): SanityClient {
     logger: console,
   });
   if (preview) {
-    if (!preview.token) {
-      throw new Error("You must provide a token to preview drafts");
+    if (preview.token) {
+      return client.withConfig({
+        token: preview.token,
+        useCdn: false,
+        ignoreBrowserTokenWarning: true,
+        perspective: "previewDrafts",
+      });
     }
-    return client.withConfig({
-      token: preview.token,
-      useCdn: false,
-      ignoreBrowserTokenWarning: true,
-      perspective: "previewDrafts",
-    });
   }
   return client;
 }
