@@ -4,9 +4,40 @@
 
 
 h1 {
-    @apply text-4xl font-extrabold;
+    @apply text-4xl font-black;
+}
+
+h2 {
+    @apply text-3xl font-extrabold;
 }
 
 h3 {
-    @apply text-2xl font-extrabold;
+    @apply text-2xl font-bold;
+}
+
+h4 {
+    @apply text-xl font-semibold;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.arrow-fill path {
+    @apply group-hover:fill-emperor-100 transition-colors;
+}
+
+.background-image-common{
+    @apply w-[22.5rem] h-[46.5625rem] object-center object-cover rounded-2xl;
+
+}
+
+* {
+    scroll-behavior: smooth;
 }

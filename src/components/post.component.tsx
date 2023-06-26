@@ -1,3 +1,5 @@
-export const PostComponent = () => {
-  return <></>;
-};
+function PostComponent() {
+  return <>asd</>
+}
+
+export default PostComponent

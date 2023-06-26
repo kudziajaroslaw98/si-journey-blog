@@ -1,23 +1,24 @@
-import Image from "next/image";
-import urlFor from "@/lib/urlFor";
-import ClientSiteRoute from "@/components/client-site-route";
-import { ArrowRightIcon } from "@heroicons/react/24/solid";
+import Image from 'next/image'
+import { ArrowRightIcon } from '@heroicons/react/24/solid'
+import urlFor from '@/lib/urlFor.ts'
+import ClientSiteRoute from '@/components/client-site-route.tsx'
+import { Post } from '../../typings.ts'
 
 type PostCardProps = {
-  post: Post;
-};
+  post: Post
+}
 
-export const PostCardComponent = ({ post }: PostCardProps) => {
+function PostCardComponent({ post }: PostCardProps) {
   return (
-    <ClientSiteRoute key={post._id} route={`/post/${post.slug?.current}`}>
+    <ClientSiteRoute key={post._id} route={`/blog/post/${post.slug?.current}`}>
       <div className="group flex mt-10 flex-col -mx-5 md:mx-3 bg-emperor-100 rounded-md overflow-hidden max-w-[32rem] h-[30rem] transition-all">
         <div className="relative w-full h-2/3 drop-shadow-xl group-hover:scale-105 group-hover:rotate-1 transition-transform duration-200 ease-out">
-          {post?.mainImage ? (
+          {post.mainImage ? (
             <Image
               className="object-cover object-left lg:object-center"
               src={urlFor(post.mainImage).url()}
               alt={post.author.name}
-              priority={true}
+              priority
               fill
             />
           ) : null}
@@ -55,17 +56,18 @@ export const PostCardComponent = ({ post }: PostCardProps) => {
               </div>
             </div>
 
-            <span className="flex hidden s items-center w-fit cursor-pointer flex-row font-medium relative group/readMore trasition-all">
+            <span className="hidden sm:flex items-center w-fit cursor-pointer flex-row font-medium relative group/readMore trasition-all">
               <span className="z-20 trasition-all group-hover/readMore:text-emperor-100 flex justify-center items-center ">
                 Read Post
                 <ArrowRightIcon className="ml-2 h-4 w-4" />
               </span>
 
-              <span className="z-10 group-hover/readMore:opacity-100 flex -mx-2 -my-1 opacity-0 top-0 absolute -inset-0 rotate-0 group-hover/readMore:-rotate-1 bg-picton-blue-500 transition-all rounded-md"></span>
+              <span className="z-10 group-hover/readMore:opacity-100 flex -mx-2 -my-1 opacity-0 top-0 absolute -inset-0 rotate-0 group-hover/readMore:-rotate-1 bg-picton-blue-500 transition-all rounded-md" />
             </span>
           </div>
         </div>
       </div>
     </ClientSiteRoute>
-  );
-};
+  )
+}
+export default PostCardComponent

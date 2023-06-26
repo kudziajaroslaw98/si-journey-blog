@@ -1,13 +1,14 @@
-import "./globals.css";
-import dynamic from "next/dynamic";
+import './globals.css';
+import dynamic from 'next/dynamic';
+import React from 'react';
 
-const Header = dynamic(() => import("@/components/header"));
-const Banner = dynamic(() => import("@/components/banner"));
+const Header = dynamic(() => import('@/components/header.tsx'));
+// const Banner = dynamic(() => import('@/components/banner.tsx'))
 // @ts-ignore
-// dynamic(() => import("easymde/dist/easymde.min.css"));
+dynamic(() => import('easymde/dist/easymde.min.css'));
 export const metadata = {
-  title: "Journey - blog",
-  viewport: "width=device-width, initial-scale=1",
+  title: 'Journey - blog',
+  viewport: 'width=device-width, initial-scale=1',
   description:
     "Explore Journey's blog - your go-to guide for self-improvement and personal growth. Dive into our articles to inspire change, encourage positive habits, and lead a fulfilling life. Begin your journey towards becoming the best version of yourself today.",
 };
@@ -18,11 +19,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`bg-emperor-950`}>
+    <html lang="en" className="scroll-smooth">
+      <body className="bg-emperor-950 text-emperor-100 no-scrollbar font-inter">
         <div className="max-w-7xl mx-auto">
-          <Header></Header>
-          <Banner></Banner>
+          <Header />
+
           {children}
         </div>
       </body>
