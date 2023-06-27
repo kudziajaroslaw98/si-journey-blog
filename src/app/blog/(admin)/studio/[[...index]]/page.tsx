@@ -7,14 +7,13 @@
  * https://github.com/sanity-io/next-sanity
  */
 
-import { Metadata } from 'next'
-import { metadata as studioMetadata } from 'next-sanity/studio/metadata'
-import Studio from './Studio.tsx'
+import { Metadata } from 'next';
+import { metadata as studioMetadata } from 'next-sanity/studio/metadata';
+import Studio from './Studio.tsx';
 
 export const metadata: Metadata = {
   ...studioMetadata,
-  viewport: `${studioMetadata.viewport}, interactive-widget=resizes-content`,
-}
+};
 export default function StudioPage() {
-  return <Studio />
+  return <Studio />;
 }

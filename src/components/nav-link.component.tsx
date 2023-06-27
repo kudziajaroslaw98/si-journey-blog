@@ -8,6 +8,7 @@ type NavLinkProps = {
   label: string;
   button: boolean;
   scroll?: boolean;
+  className?: string;
 };
 
 export function NavLinkComponent({
@@ -15,6 +16,7 @@ export function NavLinkComponent({
   label,
   button = false,
   scroll = true,
+  className,
 }: NavLinkProps) {
   const pathname = usePathname();
   const linkHref = pathname.startsWith('/blog') ? href : href.replace('/', '');
@@ -37,7 +39,7 @@ export function NavLinkComponent({
     <Link
       href={linkHref}
       target={button ? '_blank' : undefined}
-      className={`${button ? classStyles.buttonLink : ''}`}
+      className={`${className || ''} ${button ? classStyles.buttonLink : ''}`}
       scroll={scroll}
     >
       <span

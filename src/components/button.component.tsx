@@ -16,7 +16,9 @@ function ButtonComponent({
   return (
     <button
       type="button"
-      className={`${className} group inline-flex py-2 px-6 items-start gap-2.5 rounded-lg hover:bg-picton-blue-900 transition-colors ${
+      className={`${
+        className || ''
+      } group inline-flex py-2 px-6 items-start gap-2.5 rounded-lg hover:bg-picton-blue-900 transition-colors ${
         outline ? 'border border-picton-blue-500' : ''
       }`}
     >

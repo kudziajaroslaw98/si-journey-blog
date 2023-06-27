@@ -34,8 +34,31 @@ h4 {
 }
 
 .background-image-common{
-    @apply w-[22.5rem] h-[46.5625rem] object-center object-cover rounded-2xl;
+    @apply w-full sm:w-[22.5rem] h-[46.5625rem] object-center object-cover sm:rounded-2xl;
 
+}
+
+.circle1{
+    background: linear-gradient(270deg, rgba(141, 203, 236, 0.20) 0%, rgba(141, 203, 236, 0.00) 100%);
+}
+
+.circle2{
+    background: linear-gradient(270deg, rgba(177, 141, 236, 0.20) 0%, rgba(177, 141, 236, 0.00) 100%);
+}
+
+.circle3{
+    background: linear-gradient(270deg, rgba(236, 158, 141, 0.20) 0%, rgba(236, 158, 141, 0.00) 100%);
+}
+
+.circle4{
+    background: linear-gradient(270deg, rgba(143, 236, 141, 0.20) 0%, rgba(143, 236, 141, 0.00) 100%);
+}
+
+.gradient-text {
+    font-weight: 800;
+    background: -webkit-linear-gradient(225deg, rgba(23, 96, 141, 1) 0%, rgba(41, 151, 206, 1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 * {
