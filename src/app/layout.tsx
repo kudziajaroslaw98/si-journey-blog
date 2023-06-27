@@ -20,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="bg-emperor-950 text-emperor-100 no-scrollbar font-inter">
+      <body className="bg-emperor-950 text-emperor-100 no-scrollbar font-inter overflow-x-clip">
         <div className="w-full">
           <div className="">
             <Header />

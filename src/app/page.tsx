@@ -9,10 +9,10 @@ import Image5 from '@/public/images/image-5.jpg';
 
 function Page() {
   return (
-    <div className="space-y-36">
+    <div className="space-y-36  overflow-x-clip">
       <div className="xl:max-w-6xl xl:mx-auto relative w-full h-[46.5625rem] flex flex-col justify-center px-12 sm:px-24 xl:px-0">
         <div className="w-[39.3125rem] space-y-6">
-          <h1 className="text-[4rem] sm:text-[5rem] md:text-[6rem] h-fit font-bold tracking-[-0.18rem] leading-[4rem] md:leading-[6rem] text-emperor-100">
+          <h1 className="text-[3rem] sm:text-[5rem] md:text-[6rem] h-fit font-bold tracking-[-0.18rem] leading-[4rem] md:leading-[6rem] text-emperor-100">
             Pure self <br />
             improvement
             <br />
@@ -34,7 +34,7 @@ function Page() {
           <Image
             src={Image1}
             alt="Background tile"
-            className="background-image-common brightness-[.2] max-[450px]:w-[22.5rem] sm:brightness-[.4]"
+            className="background-image-common brightness-[.2] sm:brightness-[.4]"
             priority
           />
           <Image
@@ -64,9 +64,9 @@ function Page() {
         </div>
       </div>
       <div className="w-full bg-emperor-100 text-emperor-900">
-        <div className="xl:max-w-6xl xl:mx-auto py-36 space-y-36">
-          <h1 className="text-5xl font-medium -tracking-[0.09rem]">
-            Stay <span className="gradient-text">curious</span> yet <br />
+        <div className="xl:max-w-6xl xl:mx-auto py-36 space-y-36 px-12 sm:px-24 xl:px-0">
+          <h1 className="text-5xl font-medium -tracking-[0.09rem] max-w-[35rem]">
+            Stay <span className="gradient-text">curious</span> yet{' '}
             <span className="gradient-text">focused</span>
           </h1>
           <div className="flex justify-between flex-wrap">
