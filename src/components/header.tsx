@@ -26,31 +26,31 @@ export default function Header() {
         />
 
         <NavLinkComponent href="/blog" label="Blog" button={false} />
-
-        <NavLinkComponent
-          href="/#about-us"
-          label="About Us"
-          button={false}
-          scroll={false}
-          className="hidden sm:block"
-        />
-
-        <NavLinkComponent
-          href="/#pricing"
-          label="Pricing"
-          button={false}
-          scroll={false}
-          className="hidden lg:block"
-        />
-
-        <NavLinkComponent
-          href="/#contact-us"
-          label="Contact Us"
-          button={false}
-          scroll={false}
-          className="hidden lg:block"
-        />
       </div>
     </header>
   );
 }
+
+//         <NavLinkComponent
+//           href="/#about-us"
+//           label="About Us"
+//           button={false}
+//           scroll={false}
+//           className="hidden sm:block"
+//         />
+//
+//         <NavLinkComponent
+//           href="/#pricing"
+//           label="Pricing"
+//           button={false}
+//           scroll={false}
+//           className="hidden lg:block"
+//         />
+//
+//         <NavLinkComponent
+//           href="/#contact-us"
+//           label="Contact Us"
+//           button={false}
+//           scroll={false}
+//           className="hidden lg:block"
+//         />

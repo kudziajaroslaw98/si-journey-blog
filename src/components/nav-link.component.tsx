@@ -19,7 +19,7 @@ export function NavLinkComponent({
   className,
 }: NavLinkProps) {
   const pathname = usePathname();
-  const linkHref = pathname.startsWith('/blog') ? href : href.replace('/', '');
+  // const linkHref = pathname.startsWith('/blog') ? href : href.replace('/', '');
   const classStyles = {
     activeLink: `${
       !button ? 'hover:after:!w-6 after:!w-3 after:!bg-picton-blue-500' : ''
@@ -37,7 +37,7 @@ export function NavLinkComponent({
   const active = isActiveRoute(href);
   return (
     <Link
-      href={linkHref}
+      href={href}
       target={button ? '_blank' : undefined}
       className={`${className || ''} ${button ? classStyles.buttonLink : ''}`}
       scroll={scroll}

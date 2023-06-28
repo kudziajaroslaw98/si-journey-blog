@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import ButtonComponent from '@/components/button.component.tsx';
 
 import Image1 from '@/public/images/image-1.jpg';
@@ -6,6 +7,7 @@ import Image2 from '@/public/images/image-2.jpg';
 import Image3 from '@/public/images/image-3.jpg';
 import Image4 from '@/public/images/image-4.jpg';
 import Image5 from '@/public/images/image-5.jpg';
+import TestimonialCardComponent from '@/components/testimonial-card.component.tsx';
 
 function Page() {
   return (
@@ -23,12 +25,14 @@ function Page() {
             No ads, no distractions.
           </p>
         </div>
-        <ButtonComponent
-          text="Start Reading"
-          arrow
-          outline
-          className="mt-16 w-fit"
-        />
+        <Link href="https://www.patreon.com/JourneySI">
+          <ButtonComponent
+            text="Start Reading"
+            arrow
+            outline
+            className="mt-16 w-fit"
+          />
+        </Link>
 
         <div className="absolute sm:translate-x-[35%] right-0 top-0 w-full h-full flex flex-row-reverse gap-8 -z-10">
           <Image
@@ -112,6 +116,44 @@ function Page() {
                 the amount of superfluous content you need to sift through.
               </span>
             </div>
+          </div>
+        </div>
+      </div>
+      <div className="w-full text-emperor-100">
+        <div className="xl:max-w-6xl xl:mx-auto space-y-24 relative">
+          <div className="space-y-8">
+            <h2 className="text-5xl font-semibold -tracking-[0.09rem] max-w-[35rem] mx-auto text-center">
+              Don’t take our word for it.
+            </h2>
+            <h1 className="gradient-text text-5xl font-extrabold -tracking-[0.09rem] max-w-[35rem] mx-auto text-center">
+              Trust our readers
+            </h1>
+          </div>
+          <div className="flex overflow-x-visible space-x-8 absolute -left-[18.5rem]">
+            <TestimonialCardComponent
+              name="John"
+              text="This blog has genuinely changed my life. The self-improvement strategies are practical, and I can apply them to my daily life seamlessly. Can't recommend it enough!"
+            />
+            <TestimonialCardComponent
+              name="Samantha"
+              text="The blog posts on this site are incredibly insightful and inspiring. I've learned so much and have seen noticeable changes in my life since I started reading regularly"
+            />
+            <TestimonialCardComponent
+              name="Peter"
+              text="Every article is like a mini life lesson. It's wonderful how much knowledge and inspiration I can gather from each post. Truly an amazing blog!"
+            />
+            <TestimonialCardComponent
+              name="Lisa"
+              text="I always look forward to new blog posts. The content is always fresh, relevant, and full of practical tips. It's been a great tool for my personal growth journey."
+            />
+            <TestimonialCardComponent
+              name="Alex"
+              text="I love the depth of the articles, and they're always presented in such a clear and concise manner. Reading this blog has become a staple part of my morning routine."
+            />
+            <TestimonialCardComponent
+              name="Michelle"
+              text="The articles here truly stimulate thought and self-reflection. I love the fresh perspectives and in-depth analysis. This blog has become a part of my self-improvement journey!"
+            />
           </div>
         </div>
       </div>
