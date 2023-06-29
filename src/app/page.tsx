@@ -15,7 +15,7 @@ function Page() {
       <div className="xl:max-w-6xl xl:mx-auto relative w-full h-[46.5625rem] flex flex-col justify-center px-12 sm:px-24 xl:px-0">
         <div className="w-full sm:w-[29.3125rem] md:w-[39.3125rem] flex flex-col text-center md:text-left">
           <div className="space-y-6">
-            <h1 className="text-[3.5rem] sm:text-[5rem] md:text-[6rem] h-fit font-bold tracking-[-0.18rem] leading-[4rem] md:leading-[6rem] text-emperor-100">
+            <h1 className="text-[2.5rem] sm:text-[5rem] md:text-[6rem] h-fit font-bold tracking-[-0.18rem] leading-[3rem] md:leading-[6rem] text-emperor-100">
               Pure self <br />
               improvement
               <br />
