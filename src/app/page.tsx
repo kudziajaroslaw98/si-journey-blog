@@ -13,9 +13,9 @@ function Page() {
   return (
     <div className="space-y-36  overflow-x-clip">
       <div className="xl:max-w-6xl xl:mx-auto relative w-full h-[46.5625rem] flex flex-col justify-center px-12 sm:px-24 xl:px-0">
-        <div className="w-[25.3125rem] sm:w-[29.3125rem] md:w-[39.3125rem] flex flex-col text-center md:text-left">
-          <div className=" space-y-6">
-            <h1 className="text-[4rem] sm:text-[5rem] md:text-[6rem] h-fit font-bold tracking-[-0.18rem] leading-[4rem] md:leading-[6rem] text-emperor-100">
+        <div className="w-full sm:w-[29.3125rem] md:w-[39.3125rem] flex flex-col text-center md:text-left">
+          <div className="space-y-6">
+            <h1 className="text-[3.5rem] sm:text-[5rem] md:text-[6rem] h-fit font-bold tracking-[-0.18rem] leading-[4rem] md:leading-[6rem] text-emperor-100">
               Pure self <br />
               improvement
               <br />
@@ -124,14 +124,14 @@ function Page() {
       <div className="w-full text-emperor-100">
         <div className="max-w-6xl xl:mx-auto h-[49.3125rem] space-y-24 relative px-12 sm:px-24 xl:px-0">
           <div className="space-y-8">
-            <h2 className="text-[2.3rem] sm:text-[3rem] md:text-[3.5rem] leading-[1.1]  font-semibold -tracking-[0.09rem] max-w-[50rem] mx-auto text-center">
+            <h2 className="text-[2rem] sm:text-[3rem] md:text-[3.5rem] leading-[1.1]  font-semibold -tracking-[0.09rem] max-w-[50rem] mx-auto text-center">
               Don’t take our word for it.
             </h2>
-            <h1 className="text-[2.3rem] sm:text-[3rem] md:text-[3.5rem] leading-[1.1]  gradient-text font-extrabold -tracking-[0.09rem] max-w-[50rem] mx-auto text-center">
+            <h1 className="text-[2rem] sm:text-[3rem] md:text-[3.5rem] leading-[1.1]  gradient-text font-extrabold -tracking-[0.09rem] max-w-[50rem] mx-auto text-center">
               Trust our readers
             </h1>
           </div>
-          <div className="flex overflow-x-visible space-x-8 absolute -left-[10.5rem] xl:-left-[18.5rem]">
+          <div className="flex overflow-x-visible space-x-8 absolute -left-[13.5rem] xl:-left-[18.5rem]">
             <TestimonialCardComponent
               className="xl:-bottom-8 xl:blur-[1px]"
               name="John"
