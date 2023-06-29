@@ -13,7 +13,7 @@ function TestimonialCardComponent({
   return (
     <div>
       <div
-        className={`p-6 rounded-lg w-[16.625rem] h-[27.75rem] flex flex-col items-center relative bg-[#101010] ${className}`}
+        className={`p-6 rounded-lg w-[16.625rem] h-[27.75rem] flex flex-col items-center relative bg-[#101010] shadow-xl ${className}`}
       >
         <div className="space-y-4 flex flex-col items-center">
           <div className="w-16 h-16 rounded-full bg-emperor-100" />
