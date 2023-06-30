@@ -1,4 +1,5 @@
 import { ImageResponse } from 'next/server';
+import urlFor from '@/lib/urlFor.ts';
 
 export const alt = 'Twitter Card Image';
 export const size = {
@@ -13,21 +14,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
   ).then((res) => res.json());
 
   return new ImageResponse(
-    (
-      <div
-        style={{
-          fontSize: 48,
-          background: 'white',
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        {post.title}
-      </div>
-    ),
+    <img src={urlFor(post.mainImage).url()} alt={post.title} />,
     {
       ...size,
     }
