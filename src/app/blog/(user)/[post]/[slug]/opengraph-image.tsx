@@ -8,9 +8,10 @@ export const size = {
 export const contentType = 'image/png';
 
 export default async function Image({ params }: { params: { slug: string } }) {
-  const post = await fetch(
-    `https://si-journey-blog-git-develop-kj44389.vercel.app/blog/post/${params.slug}`
-  ).then((res) => res.json());
+  const post = await fetch(`blog/post/${params.slug}`).then((res) => {
+    console.log(res);
+    res.json();
+  });
   console.log(post);
 
   return new ImageResponse(
