@@ -285,12 +285,14 @@ function Page() {
                 <span className="gradient-text !font-bold"> Patreon</span>
               </p>
 
-              <ButtonComponent
-                text="Become Patreon"
-                arrow
-                outline
-                className="w-fit"
-              />
+              <Link href="https://www.patreon.com/JourneySI">
+                <ButtonComponent
+                  text="Become Patreon"
+                  arrow
+                  outline
+                  className="w-fit"
+                />
+              </Link>
             </div>
           </div>
         </div>
