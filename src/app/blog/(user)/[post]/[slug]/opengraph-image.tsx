@@ -1,4 +1,6 @@
 import { ImageResponse } from 'next/server';
+import Image from 'next/image';
+import urlFor from '@/lib/urlFor.ts';
 
 export const alt = 'About Acme';
 export const size = {
@@ -7,29 +9,18 @@ export const size = {
 };
 export const contentType = 'image/png';
 
-export default async function Image({ params }: { params: { slug: string } }) {
-  const post = await fetch(`https://.../posts/${params.slug}`).then((res) =>
+export default async function OpengraphImage({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const post = await fetch(`/blog/post/${params.slug}`).then((res) =>
     res.json()
   );
 
+  console.log(post);
+
   return new ImageResponse(
-    (
-      <div
-        style={{
-          fontSize: 48,
-          background: 'white',
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        {post.title}
-      </div>
-    ),
-    {
-      ...size,
-    }
+    <Image src={urlFor(post.mainImage).url()} alt="open graph image" />
   );
 }
