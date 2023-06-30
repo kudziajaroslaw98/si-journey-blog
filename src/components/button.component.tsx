@@ -1,4 +1,4 @@
-import Arrow from '@/public/images/arrow.svg';
+import Arrow from '@/public/images/svg/arrow.svg';
 
 type ButtonComponentProps = {
   text: string;

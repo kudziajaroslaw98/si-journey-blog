@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import { Bars3Icon } from '@heroicons/react/24/solid';
-import Logo from '@/public/images/logo.svg';
+
 import { NavLinkComponent } from '@/components/nav-link.component.tsx';
+import Logo from '@/public/images/svg/logo.svg';
 
 export default function Header() {
   return (
