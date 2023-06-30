@@ -7,6 +7,9 @@ const Header = dynamic(() => import('@/components/header.tsx'));
 // @ts-ignore
 dynamic(() => import('easymde/dist/easymde.min.css'));
 export const metadata = {
+  metadataBase: new URL(
+    'https://si-journey-blog-git-develop-kj44389.vercel.app/'
+  ),
   title: 'Journey - blog',
   viewport: 'width=device-width, initial-scale=1.0',
   description:
