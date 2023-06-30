@@ -9,7 +9,7 @@ import Image4 from '@/public/images/image-4.jpg';
 import Image5 from '@/public/images/image-5.jpg';
 import TestimonialCardComponent from '@/components/testimonial-card.component.tsx';
 import Arrow from '@/public/images/arrow.svg';
-import jarekPhoto from '@/public/images/jarek-photo-phone2.jpg';
+import jarekPhoto from '@/public/images/jarek-photo-phone.jpg';
 
 function Page() {
   return (
