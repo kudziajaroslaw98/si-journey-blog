@@ -10,7 +10,7 @@ export const contentType = 'image/png';
 export default async function Image({ params }: { params: { slug: string } }) {
   const post = await fetch(`blog/post/${params.slug}`).then((res) => {
     console.log(res);
-    res.json();
+    return res.json();
   });
   console.log(post);
 
