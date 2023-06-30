@@ -1,11 +1,11 @@
-import Iframe from "sanity-plugin-iframe-pane";
-import type { DefaultDocumentNodeResolver } from "sanity/desk";
+import Iframe from 'sanity-plugin-iframe-pane'
+import type { DefaultDocumentNodeResolver } from 'sanity/desk'
 
-export const getDefaultDocumentNode: DefaultDocumentNodeResolver = (
+const getDefaultDocumentNode: DefaultDocumentNodeResolver = (
   S,
   { schemaType }
 ) => {
-  if (schemaType === "post") {
+  if (schemaType === 'post') {
     return S.document().views([
       S.view.form(),
 
@@ -13,16 +13,18 @@ export const getDefaultDocumentNode: DefaultDocumentNodeResolver = (
         .component(Iframe)
         .options({
           url: `${
-            process.env.NEXT_PUBLIC_VERCEL_URL ?? "http://localhost:3000"
+            process.env.NEXT_PUBLIC_VERCEL_URL ?? 'http://localhost:3000'
           }/api/draft`,
-          defaultSize: "desktop",
+          defaultSize: 'desktop',
           reload: {
             buttton: true,
           },
           attributes: {},
         })
-        .title("Preview"),
-    ]);
+        .title('Preview'),
+    ])
   }
-  return S.document().views([S.view.form()]);
-};
+  return S.document().views([S.view.form()])
+}
+
+export default getDefaultDocumentNode

@@ -1,8 +1,9 @@
-import { PostCardComponent } from "@/components/post-card.component";
+import PostCardComponent from '@/components/post-card.component.tsx'
+import { Post } from '../../typings.ts'
 
-type Props = {
-  posts: Post[];
-};
+export interface Props {
+  posts: Post[]
+}
 
 function BlogList({ posts }: Props) {
   return (
@@ -13,7 +14,7 @@ function BlogList({ posts }: Props) {
         ))}
       </div>
     </div>
-  );
+  )
 }
 
-export default BlogList;
+export default BlogList

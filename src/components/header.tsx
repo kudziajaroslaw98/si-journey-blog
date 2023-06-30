@@ -1,18 +1,67 @@
-import Link from "next/link";
+import Link from 'next/link';
+import { Bars3Icon } from '@heroicons/react/24/solid';
+
+import { NavLinkComponent } from '@/components/nav-link.component.tsx';
+import Logo from '@/public/images/svg/logo.svg';
 
 export default function Header() {
   return (
-    <header className="flex items-center justify-between space-x-2 px-10 py-5">
-      <h1 className="text-2xl leading-6 md:text-6xl text-emperor-100">
-        Journey
-      </h1>
+    <header className="fixed w-full z-50 bg-emperor-950 space-x-2 px-5 py-2 drop-shadow-2xl md:px-10 md:py-5">
+      <div className="w-full flex items-center justify-between xl:max-w-6xl xl:mx-auto">
+        <Link className="flex items-center gap-2 sm:gap-6" href="/">
+          <Logo className="object-fit w-8 h-8" />
 
-      <Link
-        href="#"
-        className="px-6 py-2 text-sm hover:bg-picton-blue-700 ring-picton-blue-600 hover:ring-1 hover:ring-offset-2 ring-offset-emperor-950 transition-all text-emperor-100 bg-picton-blue-600 flex items-center rounded-md text-center"
-      >
-        Donate
-      </Link>
+          <h1 className="text-xl md:text-3xl uppercase leading-6 text-emperor-100">
+            Journey
+          </h1>
+        </Link>
+
+        <div className="flex justify-end items-center gap-6 md:gap-12 flex-1">
+          <Bars3Icon className="w-8 h-8 text-emperor-100 md:hidden cursor-pointer" />
+
+          <div className="hidden md:flex justify-end items-center gap-6 md:gap-12 ">
+            <NavLinkComponent
+              href="https://www.patreon.com/JourneySI"
+              label="Become Patreon"
+              button
+            />
+
+            <NavLinkComponent
+              href="/"
+              label="Home"
+              button={false}
+              scroll={false}
+              className="hidden sm:block"
+            />
+
+            <NavLinkComponent href="/blog" label="Blog" button={false} />
+          </div>
+        </div>
+      </div>
     </header>
   );
 }
+
+//         <NavLinkComponent
+//           href="/#about-us"
+//           label="About Us"
+//           button={false}
+//           scroll={false}
+//           className="hidden sm:block"
+//         />
+//
+//         <NavLinkComponent
+//           href="/#pricing"
+//           label="Pricing"
+//           button={false}
+//           scroll={false}
+//           className="hidden lg:block"
+//         />
+//
+//         <NavLinkComponent
+//           href="/#contact-us"
+//           label="Contact Us"
+//           button={false}
+//           scroll={false}
+//           className="hidden lg:block"
+//         />
