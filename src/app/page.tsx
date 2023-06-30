@@ -351,7 +351,7 @@ function Page() {
               </Link>
             </div>
 
-            <div className="flex justify-center items-center lg:justify-between ">
+            <div className="flex justify-center items-center text-center lg:text-left lg:justify-between ">
               <span>Your journey with self improvement starts here</span>
 
               <div className="space-x-12 hidden lg:flex">
