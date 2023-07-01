@@ -1,18 +1,18 @@
-import { groq } from 'next-sanity'
-import Image from 'next/image'
-import ReactMarkdown from 'react-markdown'
-import { draftMode } from 'next/headers'
-import { clientFetch } from '@/sanity/lib/client.ts'
-import urlFor from '@/lib/urlFor.ts'
-import { Post } from '../../../../../../typings.ts'
+import { groq } from 'next-sanity';
+import Image from 'next/image';
+import ReactMarkdown from 'react-markdown';
+import { draftMode } from 'next/headers';
+import { clientFetch } from '@/sanity/lib/client.ts';
+import urlFor from '@/lib/urlFor.ts';
+import { Post } from '../../../../../../typings.ts';
 
 type Props = {
   params: {
-    slug: string
-  }
-}
+    slug: string;
+  };
+};
 
-export const revalidate = 10
+export const revalidate = 10;
 
 export async function generateStaticParams() {
   const query = groq`
@@ -20,13 +20,13 @@ export async function generateStaticParams() {
         {
             slug
         }
-    `
-  const slugs: Post[] = await clientFetch(query)
-  const slugRoutes = slugs.map((slug) => slug.slug.current)
+    `;
+  const slugs: Post[] = await clientFetch(query);
+  const slugRoutes = slugs.map((slug) => slug.slug.current);
 
   return slugRoutes.map((slug) => ({
     slug,
-  }))
+  }));
 }
 
 const Page = async ({ params: { slug } }: Props) => {
@@ -36,23 +36,21 @@ const Page = async ({ params: { slug } }: Props) => {
               author->, 
               categories[]->
          }
-       `
+       `;
 
-  const post: Post = await clientFetch(query, { slug })
+  const post: Post = await clientFetch(query, { slug });
   return (
-    <article className="max-w-3xl mx-auto px-6 md:px-10 pb-28">
+    <article className="max-w-3xl mx-auto px-6 md:px-10 pt-8">
       <h1 className="text-5xl">
         {draftMode().isEnabled ? 'preview mode' : ''}
       </h1>
 
-      <section className="my-8 w-full">
+      <section className="flex my-8 w-full h-[25rem] relative">
         <Image
-          className="object-cover"
+          className="object-cover rounded-lg shadow-lg"
           alt={post.title}
           src={urlFor(post.mainImage).url()}
-          width={688}
-          height={400}
-          priority
+          fill
         />
       </section>
       <section className="text-gray-100 w-full">
@@ -93,7 +91,7 @@ const Page = async ({ params: { slug } }: Props) => {
         <ReactMarkdown>{post.markdown}</ReactMarkdown>
       </section>
     </article>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;

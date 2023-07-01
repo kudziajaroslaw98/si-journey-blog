@@ -1,12 +1,21 @@
+'use client';
+
 import Link from 'next/link';
 import { Bars3Icon } from '@heroicons/react/24/solid';
+import { usePathname } from 'next/navigation';
 
 import { NavLinkComponent } from '@/components/nav-link.component.tsx';
 import Logo from '@/public/images/svg/logo.svg';
 
 export default function Header() {
+  const pathname = usePathname();
+  const isStudioMode = pathname.includes('studio');
   return (
-    <header className="fixed w-full z-50 bg-emperor-950 space-x-2 px-5 py-2 drop-shadow-2xl md:px-10 md:py-5">
+    <header
+      className={`${
+        isStudioMode ? 'hidden' : 'fixed'
+      } w-full z-50 top-0 bg-emperor-950 space-x-2 px-5 py-2 drop-shadow-2xl md:px-10 md:py-5`}
+    >
       <div className="w-full flex items-center justify-between xl:max-w-6xl xl:mx-auto">
         <Link className="flex items-center gap-2 sm:gap-6" href="/">
           <Logo className="object-fit w-8 h-8" />
@@ -41,27 +50,3 @@ export default function Header() {
     </header>
   );
 }
-
-//         <NavLinkComponent
-//           href="/#about-us"
-//           label="About Us"
-//           button={false}
-//           scroll={false}
-//           className="hidden sm:block"
-//         />
-//
-//         <NavLinkComponent
-//           href="/#pricing"
-//           label="Pricing"
-//           button={false}
-//           scroll={false}
-//           className="hidden lg:block"
-//         />
-//
-//         <NavLinkComponent
-//           href="/#contact-us"
-//           label="Contact Us"
-//           button={false}
-//           scroll={false}
-//           className="hidden lg:block"
-//         />

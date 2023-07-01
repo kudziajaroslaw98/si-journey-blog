@@ -1,6 +1,7 @@
 import './globals.css';
 import dynamic from 'next/dynamic';
 import React from 'react';
+import Footer from '@/components/footer.tsx';
 
 const Header = dynamic(() => import('@/components/header.tsx'));
 // const Banner = dynamic(() => import('@/components/banner.tsx'))
@@ -28,7 +29,9 @@ export default function RootLayout({
           <div className="">
             <Header />
 
-            {children}
+            <div className="pt-16 pb-16">{children}</div>
+
+            <Footer />
           </div>
         </div>
       </body>
