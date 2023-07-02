@@ -1,3 +1,4 @@
+import React from 'react';
 import { Metadata } from 'next';
 import { groq } from 'next-sanity';
 import Image from 'next/image';
@@ -28,8 +29,16 @@ export const generateMetadata = async ({
 
 	const post: Post = await clientFetch(query, { slug });
 	return {
-		title: post.title,
-		description: post.description,
+		title: `Journey Blog: ${post.title}` ?? 'Journey - blog',
+		description:
+			post.description ??
+			"Explore Journey's blog - your go-to guide for self-improvement and personal growth.",
+		openGraph: {
+			title: `Journey Blog: ${post.title}` ?? 'Journey - blog',
+			description:
+				post.description ??
+				"Explore Journey's blog - your go-to guide for self-improvement and personal growth.",
+		},
 	};
 };
 
