@@ -2,6 +2,8 @@
   "semi": true,
   "trailingComma": "es5",
   "singleQuote": true,
-  "tabWidth": 2,
-  "useTabs": false
+  "tabWidth": 1,
+  "useTabs": true,
+  "jsxSingleQuote": true,
+  "bracketSpacing": true
 }

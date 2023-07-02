@@ -1,6 +1,6 @@
-import { createClient, type SanityClient } from 'next-sanity'
-import { cache } from 'react'
-import { apiVersion, dataset, projectId } from '../env.ts'
+import { createClient, type SanityClient } from 'next-sanity';
+import { cache } from 'react';
+import { apiVersion, dataset, projectId } from '../env.ts';
 
 export function getClient(preview?: { token: string }): SanityClient {
   const client = createClient({
@@ -12,9 +12,9 @@ export function getClient(preview?: { token: string }): SanityClient {
     useCdn: true,
     token: process.env.SANITY_API_READ_TOKEN,
     perspective: 'published',
-    studioUrl: '/studio',
+    studioUrl: '/blog/studio',
     logger: console,
-  })
+  });
   if (preview) {
     if (preview.token) {
       return client.withConfig({
@@ -22,10 +22,10 @@ export function getClient(preview?: { token: string }): SanityClient {
         useCdn: false,
         ignoreBrowserTokenWarning: true,
         perspective: 'previewDrafts',
-      })
+      });
     }
   }
-  return client
+  return client;
 }
-const client = getClient()
-export const clientFetch = cache(client.fetch.bind(client))
+const client = getClient();
+export const clientFetch = cache(client.fetch.bind(client));

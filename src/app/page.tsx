@@ -4,19 +4,17 @@ import Link from 'next/link';
 import ButtonComponent from '@/components/button.component.tsx';
 import TestimonialCardComponent from '@/components/testimonial-card.component.tsx';
 
-import Image1 from '@/public/images/image-1.jpg';
-import Image2 from '@/public/images/image-2.jpg';
-import Image3 from '@/public/images/image-3.jpg';
-import Image4 from '@/public/images/image-4.jpg';
-import Image5 from '@/public/images/image-5.jpg';
+import Image1 from '@/public/images/image-1.webp';
+import Image2 from '@/public/images/image-2.webp';
+import Image3 from '@/public/images/image-3.webp';
+import Image4 from '@/public/images/image-4.webp';
+import Image5 from '@/public/images/image-5.webp';
 import jarekPhoto from '@/public/images/jarek-photo-phone.jpg';
 
 import Arrow from '@/public/images/svg/arrow.svg';
 import Email from '@/public/images/svg/email.svg';
-import Logo from '@/public/images/svg/logo.svg';
-import Instagram from '@/public/images/svg/instagram.svg';
-import Patreon from '@/public/images/svg/patreon.svg';
-import Twitter from '@/public/images/svg/twitter.svg';
+import Phone from '@/public/images/svg/phone.svg';
+import Location from '@/public/images/svg/location.svg';
 
 import John from '@/public/images/people/john.png';
 import Alex from '@/public/images/people/alex.png';
@@ -333,7 +331,7 @@ function Page() {
 
               <div className="space-y-8 text-center flex flex-col items-center font-normal p-4">
                 <div className="flex w-24 h-24 items-center justify-center p-6 bg-emperor-900 shadow-xl rounded-lg">
-                  <Email />
+                  <Phone />
                 </div>
 
                 <span className="text-emperor-300">Feel free to call</span>
@@ -345,64 +343,12 @@ function Page() {
 
               <div className="space-y-8 text-center flex flex-col items-center font-normal p-4">
                 <div className="flex w-24 h-24 items-center justify-center p-6 bg-emperor-900 shadow-xl rounded-lg">
-                  <Email />
+                  <Location />
                 </div>
 
                 <span className="text-emperor-300">Feel free to come</span>
 
                 <span>Not available yet</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="w-full text-emperor-100 space-y-4 pb-16">
-          <div className="max-w-6xl xl:mx-auto space-y-8 px-12 sm:px-24 xl:px-0">
-            <div className="flex justify-center items-center lg:justify-between ">
-              <Link className="flex items-center gap-2 sm:gap-6" href="/">
-                <Logo className="object-fit w-8 h-8" />
-
-                <h1 className="text-xl md:text-3xl uppercase leading-6 text-emperor-100">
-                  Journey
-                </h1>
-              </Link>
-            </div>
-
-            <div className="flex justify-center items-center text-center lg:text-left lg:justify-between ">
-              <span>Your journey with self improvement starts here</span>
-
-              <div className="space-x-12 hidden lg:flex">
-                <Link href="/#home">Home</Link>
-
-                <Link href="/#benefits">Benefits</Link>
-
-                <Link href="/#aboutUs">About Us</Link>
-
-                <Link href="/#pricing">Pricing</Link>
-
-                <Link href="/#contactUs">Contact Us</Link>
-              </div>
-            </div>
-          </div>
-
-          <hr className="max-w-6xl xl:mx-auto" />
-
-          <div className="max-w-6xl xl:mx-auto space-y-24 px-12 sm:px-24 xl:px-0">
-            <div className="flex flex-col space-y-8 justify-center items-center lg:flex-row lg:justify-between ">
-              <span>© 2023 Journey. All Rights reserved.</span>
-
-              <div className="flex space-x-8">
-                <Link href="https://www.instagram.com/embrace.journey.si/">
-                  <Instagram />
-                </Link>
-
-                <Link href="https://www.patreon.com/JourneySI">
-                  <Patreon />
-                </Link>
-
-                <Link href="https://twitter.com/JarekJorney">
-                  <Twitter />
-                </Link>
               </div>
             </div>
           </div>
