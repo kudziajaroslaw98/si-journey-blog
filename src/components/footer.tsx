@@ -32,15 +32,9 @@ function Footer() {
           <span>Your journey with self improvement starts here</span>
 
           <div className="space-x-12 hidden lg:flex">
-            <Link href="/#home">Home</Link>
+            <Link href="/">Home</Link>
 
-            <Link href="/#benefits">Benefits</Link>
-
-            <Link href="/#aboutUs">About Us</Link>
-
-            <Link href="/#pricing">Pricing</Link>
-
-            <Link href="/#contactUs">Contact Us</Link>
+            <Link href="/blog">Blog</Link>
           </div>
         </div>
       </div>
