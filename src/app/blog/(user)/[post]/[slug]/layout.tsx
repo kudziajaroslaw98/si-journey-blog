@@ -8,7 +8,7 @@ type Props = {
   slug: string;
 };
 
-export async function Layout({
+export default async function Layout({
   children,
   params: { slug },
 }: {
