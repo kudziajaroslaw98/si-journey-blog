@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { getClient } from '@/sanity/lib/client.ts';
 
-import BlogBanner from '@/public/images/blog-banner.jpg';
+import BlogBanner from '@/public/images/blog-banner.webp';
 import { Category } from '../../../../typings.ts';
 import PaginationComponent from '@/components/pagination.component.tsx';
 
