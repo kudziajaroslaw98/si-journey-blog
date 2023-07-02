@@ -6,8 +6,6 @@ import React from 'react';
 import Footer from '@/components/footer.tsx';
 
 const Header = dynamic(() => import('@/components/header.tsx'));
-// @ts-ignore
-dynamic(() => import('easymde/dist/easymde.min.css'));
 export const metadata: Metadata = {
 	metadataBase: new URL(
 		'https://si-journey-blog-git-develop-kj44389.vercel.app/'

@@ -38,28 +38,29 @@ const Page = async () => {
 	const categories = await client.fetch(fetchCategoriesQuery);
 
 	return (
-		<div className="no-scrollbar relative px-4 sm:px-6 ">
-			<div className="relative mx-auto max-w-6xl space-y-16 pt-16">
-				<div className="relative w-full h-[18.25rem] shadow-lg">
+		<div className='no-scrollbar relative px-4 sm:px-6 '>
+			<div className='relative mx-auto max-w-6xl space-y-16 pt-16'>
+				<div className='relative w-full h-[18.25rem] shadow-lg'>
 					<Image
-						className="object-cover object-center rounded-lg shadow-lg"
+						className='object-cover object-center rounded-lg shadow-lg'
 						src={BlogBanner}
-						alt="Joruney blog banner"
+						alt='Joruney blog banner'
 						priority
+						fetchPriority='high'
 						fill
 					/>
 				</div>
 
-				<div className="flex flex-col space-y-8">
+				<div className='flex flex-col space-y-8'>
 					<h1>Feed</h1>
 
-					<hr className="w-full border-emperor-700" />
+					<hr className='w-full border-emperor-700' />
 
-					<div className="flex gap-x-4 gap-y-4 text-emperor-500 flex-wrap">
+					<div className='flex gap-x-4 gap-y-4 text-emperor-500 flex-wrap'>
 						{categories.map((category: Category) => (
 							<div
 								key={category._id}
-								className="category first-of-type:text-emperor-100 hover:text-picton-blue-500 transition-colors cursor-pointer"
+								className='category first-of-type:text-emperor-100 hover:text-picton-blue-500 transition-colors cursor-pointer'
 							>
 								<span>{category.title}</span>
 							</div>
@@ -67,7 +68,7 @@ const Page = async () => {
 					</div>
 				</div>
 
-				<div className="flex flex-wrap justify-center ">
+				<div className='flex flex-wrap justify-center '>
 					{preview ? (
 						<PreviewProvider token={preview?.token}>
 							<PreviewBlogList posts={posts} query={fetchPostsQuery} />
@@ -77,7 +78,7 @@ const Page = async () => {
 					)}
 				</div>
 
-				<div className="w-full flex justify-center">
+				<div className='w-full flex justify-center'>
 					<PaginationComponent />
 				</div>
 			</div>
