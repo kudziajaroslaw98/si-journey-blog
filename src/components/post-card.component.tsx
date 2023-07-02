@@ -19,7 +19,6 @@ function PostCardComponent({ post }: PostCardProps) {
               className="object-cover object-left lg:object-center"
               src={urlFor(post.mainImage).url()}
               alt={post.author.name}
-              priority
               fill
             />
           ) : null}

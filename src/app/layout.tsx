@@ -5,7 +5,6 @@ import React from 'react';
 import Footer from '@/components/footer.tsx';
 
 const Header = dynamic(() => import('@/components/header.tsx'));
-// const Banner = dynamic(() => import('@/components/banner.tsx'))
 // @ts-ignore
 dynamic(() => import('easymde/dist/easymde.min.css'));
 export const metadata: Metadata = {
@@ -14,6 +13,21 @@ export const metadata: Metadata = {
   ),
   title: 'Journey - blog',
   viewport: 'width=device-width, initial-scale=1.0',
+  openGraph: {
+    type: 'website',
+    url: 'https://si-journey-blog-git-develop-kj44389.vercel.app/',
+    title: 'Journey - blog',
+    description:
+      "Explore Journey's blog - your go-to guide for self-improvement and personal growth. Dive into our articles to inspire change, encourage positive habits, and lead a fulfilling life. Begin your journey towards becoming the best version of yourself today.",
+    images: [
+      {
+        url: 'https://si-journey-blog-git-develop-kj44389.vercel.app/static/images/blog-banner.webp',
+        width: 1200,
+        height: 630,
+        alt: 'Journey Blog',
+      },
+    ],
+  },
   authors: [
     { name: 'Jarek Kudzia', url: 'https://github.com/kudziajaroslaw98' },
   ],
