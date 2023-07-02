@@ -1,3 +1,5 @@
+import React from 'react';
+import { Metadata } from 'next';
 import { groq } from 'next-sanity';
 import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
@@ -13,6 +15,32 @@ type Props = {
 };
 
 export const revalidate = 10;
+
+export const generateMetadata = async ({
+	params: { slug },
+}: Props): Promise<Metadata> => {
+	const query = groq`
+       *[_type == "post" && slug.current == $slug][0]{
+              ...,
+              author->, 
+              categories[]->
+         }
+    `;
+
+	const post: Post = await clientFetch(query, { slug });
+	return {
+		title: `Journey Blog: ${post.title}` ?? 'Journey - blog',
+		description:
+			post.description ??
+			"Explore Journey's blog - your go-to guide for self-improvement and personal growth.",
+		openGraph: {
+			title: `Journey Blog: ${post.title}` ?? 'Journey - blog',
+			description:
+				post.description ??
+				"Explore Journey's blog - your go-to guide for self-improvement and personal growth.",
+		},
+	};
+};
 
 export async function generateStaticParams() {
 	const query = groq`
@@ -37,7 +65,6 @@ const Page = async ({ params: { slug } }: Props) => {
               categories[]->
          }
        `;
-
 	const post: Post = await clientFetch(query, { slug });
 	return (
 		<article className='max-w-3xl mx-auto px-6 md:px-10 pt-8'>
