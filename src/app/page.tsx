@@ -4,11 +4,11 @@ import Link from 'next/link';
 import ButtonComponent from '@/components/button.component.tsx';
 import TestimonialCardComponent from '@/components/testimonial-card.component.tsx';
 
-import Image1 from '@/public/images/image-1.jpg';
-import Image2 from '@/public/images/image-2.jpg';
-import Image3 from '@/public/images/image-3.jpg';
-import Image4 from '@/public/images/image-4.jpg';
-import Image5 from '@/public/images/image-5.jpg';
+import Image1 from '@/public/images/image-1.webp';
+import Image2 from '@/public/images/image-2.webp';
+import Image3 from '@/public/images/image-3.webp';
+import Image4 from '@/public/images/image-4.webp';
+import Image5 from '@/public/images/image-5.webp';
 import jarekPhoto from '@/public/images/jarek-photo-phone.jpg';
 
 import Arrow from '@/public/images/svg/arrow.svg';
