@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 			"Explore Journey's blog - your go-to guide for self-improvement and personal growth. Dive into our articles to inspire change, encourage positive habits, and lead a fulfilling life. Begin your journey towards becoming the best version of yourself today.",
 		images: [
 			{
-				url: 'https://si-journey-blog-git-develop-kj44389.vercel.app/static/images/blog-banner.webp',
+				url: 'https://si-journey-blog-git-develop-kj44389.vercel.app/images/blog-banner.webp',
 				width: 1200,
 				height: 630,
 				alt: 'Journey Blog',
