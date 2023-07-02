@@ -30,11 +30,22 @@ export default async function Layout({
       {/* eslint-disable-next-line react/no-children-prop */}
       <Head>
         <meta
+          name="description"
+          content={
+            post.description ||
+            "Explore Journey's blog - your go-to guide for self-improvement and personal growth."
+          }
+        />
+        <meta
           property="og:description"
           content={
             post.description ||
             "Explore Journey's blog - your go-to guide for self-improvement and personal growth."
           }
+        />
+        <meta
+          name="title"
+          content={`Journey Blog: ${post.title}` || 'Journey - blog'}
         />
         <meta
           property="og:title"
