@@ -6,9 +6,12 @@ import { getClient } from '@/sanity/lib/client.ts';
 
 import BlogBanner from '@/public/images/blog-banner.webp';
 import { Category } from '../../../../typings.ts';
-import PaginationComponent from '@/components/pagination.component.tsx';
+import BlogList from '@/components/blog-list.tsx';
 
-const BlogList = dynamic(() => import('@/components/blog-list.tsx'));
+const PaginationComponent = dynamic(
+	() => import('@/components/pagination.component.tsx')
+);
+
 const PreviewBlogList = dynamic(
 	() => import('@/components/preview-blog-list.tsx')
 );
@@ -47,6 +50,7 @@ const Page = async () => {
 						alt='Joruney blog banner'
 						priority
 						fetchPriority='high'
+						placeholder='blur'
 						fill
 					/>
 				</div>
