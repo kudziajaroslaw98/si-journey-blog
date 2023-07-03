@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import React from 'react';
 import { Metadata } from 'next';
 import { groq } from 'next-sanity';
@@ -13,6 +14,8 @@ type Props = {
 		slug: string;
 	};
 };
+
+dynamic(() => require('easymde/dist/easymde.min.css'));
 
 export const revalidate = 10;
 
