@@ -18,7 +18,7 @@ function PostCardComponent({ post, index }: PostCardProps) {
 					{post.mainImage ? (
 						<Image
 							className='object-cover object-left lg:object-center'
-							src={urlFor(post.mainImage).url()}
+							src={urlFor(post.mainImage, 368).url()}
 							alt={post.author.name}
 							fetchPriority={index < 3 ? 'high' : 'low'}
 							fill
@@ -38,7 +38,7 @@ function PostCardComponent({ post, index }: PostCardProps) {
 							{post?.author?.image && (
 								<Image
 									className='rounded-full object-center object-fill min-w-[2rem] min-h-[2rem]'
-									src={urlFor(post.author.image).url()}
+									src={urlFor(post.author.image, 32).url()}
 									alt={post.author.name}
 									width={32}
 									height={32}

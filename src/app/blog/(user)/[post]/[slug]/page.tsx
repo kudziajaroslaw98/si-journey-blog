@@ -1,11 +1,11 @@
 import dynamic from 'next/dynamic';
-import React from 'react';
+import React, { cache } from 'react';
 import { Metadata } from 'next';
 import { groq } from 'next-sanity';
 import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import { draftMode } from 'next/headers';
-import { clientFetch } from '@/sanity/lib/client.ts';
+import { getClient } from '@/sanity/lib/client.ts';
 import urlFor from '@/lib/urlFor.ts';
 import { Post } from '../../../../../../typings.ts';
 
@@ -18,6 +18,8 @@ type Props = {
 dynamic(() => require('easymde/dist/easymde.min.css'));
 
 export const revalidate = 10;
+const client = getClient();
+const clientFetch = cache(client.fetch.bind(client));
 
 export const generateMetadata = async ({
 	params: { slug },
@@ -69,6 +71,7 @@ const Page = async ({ params: { slug } }: Props) => {
          }
        `;
 	const post: Post = await clientFetch(query, { slug });
+
 	return (
 		<article className='max-w-3xl mx-auto px-6 md:px-10 pt-8'>
 			<h1 className='text-5xl'>{draftMode().isEnabled ? 'preview mode' : ''}</h1>
@@ -77,7 +80,7 @@ const Page = async ({ params: { slug } }: Props) => {
 				<Image
 					className='object-cover rounded-lg shadow-lg'
 					alt={post.title}
-					src={urlFor(post.mainImage).url()}
+					src={urlFor(post.mainImage, 688).url()}
 					priority
 					fill
 				/>
@@ -100,7 +103,7 @@ const Page = async ({ params: { slug } }: Props) => {
 						{post?.author?.image && (
 							<Image
 								className='rounded-full'
-								src={urlFor(post.author.image).url()}
+								src={urlFor(post.author.image, 40).url()}
 								alt={post.author.name}
 								height={40}
 								width={40}

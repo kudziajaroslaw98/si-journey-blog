@@ -1,44 +1,31 @@
 import { draftMode } from 'next/headers';
 import { groq } from 'next-sanity';
 import dynamic from 'next/dynamic';
+import { cache } from 'react';
+
 import Image from 'next/image';
 import { getClient } from '@/sanity/lib/client.ts';
-
 import BlogBanner from '@/public/images/blog-banner.webp';
 import { Category } from '../../../../typings.ts';
 import BlogList from '@/components/blog-list.tsx';
+import PreviewProvider from '@/components/preview-provider.tsx';
+import PreviewBlogList from '@/components/preview-blog-list.tsx';
 
 const PaginationComponent = dynamic(
 	() => import('@/components/pagination.component.tsx')
 );
-
-const PreviewBlogList = dynamic(
-	() => import('@/components/preview-blog-list.tsx')
-);
-const PreviewProvider = dynamic(
-	() => import('@/components/preview-provider.tsx')
-);
-
-export const revalidate = 60;
-const fetchPostsQuery = groq`
-*[_type == "post"]{
-  ...,
-  author->,
-  categories[]->
-} | order(_createdAt desc)`;
-
-const fetchCategoriesQuery = groq`
-*[_type == "category"]{
-  ...
-}`;
+const client = getClient();
+const clientFetch = cache(client.fetch.bind(client));
+const fetchPostsQuery = groq`*[_type == "post"]{..., author->, categories[]->} | order(_createdAt desc)`;
+const fetchCategoriesQuery = groq`*[_type == "category"]{ ... }`;
+export const revalidate = 600;
 
 const Page = async () => {
+	const posts = await clientFetch(fetchPostsQuery);
+	const categories = await clientFetch(fetchCategoriesQuery);
 	const preview = draftMode().isEnabled
 		? { token: process.env.SANITY_API_READ_TOKEN! }
 		: undefined;
-	const client = getClient(preview);
-	const posts = await client.fetch(fetchPostsQuery);
-	const categories = await client.fetch(fetchCategoriesQuery);
 
 	return (
 		<div className='no-scrollbar relative px-4 sm:px-6 '>

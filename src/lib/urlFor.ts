@@ -1,10 +1,13 @@
-import imageUrlBuilder from '@sanity/image-url'
-import { getClient } from '@/sanity/lib/client.ts'
+import imageUrlBuilder from '@sanity/image-url';
+import { getClient } from '@/sanity/lib/client.ts';
 
-const builder = imageUrlBuilder(getClient())
+const builder = imageUrlBuilder(getClient());
 
-function urlFor(source: any) {
-  return builder.image(source)
+function urlFor(source: any, width: number) {
+	return builder
+		.image(source)
+		.auto('format')
+		.width(width + 200);
 }
 
-export default urlFor
+export default urlFor;
