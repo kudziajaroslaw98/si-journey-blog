@@ -8,12 +8,16 @@ import RatingTextComponent from '@/components/rating-text.component.tsx';
 type PostCardProps = {
 	post: Post;
 	index: number;
+	category?: string;
 };
 
-function PostCardComponent({ post, index }: PostCardProps) {
+function PostCardComponent({ post, index, category }: PostCardProps) {
 	return (
-		<ClientSiteRoute key={post._id} route={`/blog/post/${post.slug?.current}`}>
-			<div className='group flex flex-col bg-emperor-1000 rounded-md overflow-hidden w-full max-w-[30rem] md:max-w-[21rem] min-[880px]:max-w-[26rem] lg:max-w-[19rem] xl:max-w-[23rem] h-[19rem] transition-all shadow-lg'>
+		<ClientSiteRoute
+			key={post._id}
+			route={`/blog/${category}/post/${post.slug?.current}`}
+		>
+			<div className='group flex flex-col bg-emperor-1000 rounded-md overflow-hidden w-full h-[19rem] transition-all shadow-lg'>
 				<div className='relative w-full h-[14.375rem] drop-shadow-xl group-hover:scale-105 group-hover:rotate-1 transition-transform duration-200 ease-out'>
 					{post.mainImage ? (
 						<Image

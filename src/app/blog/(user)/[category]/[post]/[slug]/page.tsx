@@ -1,47 +1,42 @@
-import dynamic from 'next/dynamic';
-import React, { cache } from 'react';
 import { Metadata } from 'next';
+import React, { cache } from 'react';
 import { groq } from 'next-sanity';
 import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import { draftMode } from 'next/headers';
 import { getClient } from '@/sanity/lib/client.ts';
 import urlFor from '@/lib/urlFor.ts';
-import { Post } from '../../../../../../typings.ts';
+import { Post } from '../../../../../../../typings.ts';
 
 type Props = {
 	params: {
 		slug: string;
+		category: string;
 	};
 };
-
-dynamic(() => require('easymde/dist/easymde.min.css'));
 
 export const revalidate = 10;
 const client = getClient();
 const clientFetch = cache(client.fetch.bind(client));
 
+// *[_type == "post" && categories[]->slug.current match $categorySlug] | order(_createdAt desc) [5...10] - searching posts by category
+
 export const generateMetadata = async ({
-	params: { slug },
+	params: { category, slug },
 }: Props): Promise<Metadata> => {
 	const query = groq`
-       *[_type == "post" && slug.current == $slug][0]{
-              ...,
-              author->, 
-              categories[]->
-         }
-    `;
+       *[_type == "post" && slug.current == $slug && categories[]->slug.current match $category][0]{...,author->, categories[]->}  | order(_createdAt desc)`;
 
-	const post: Post = await clientFetch(query, { slug });
+	const post: Post = await clientFetch(query, { slug, category });
 	return {
-		title: `Journey Blog: ${post.title}` ?? 'Journey - blog',
+		title: `Journey Blog: ${post?.title}` ?? 'Journey - blog',
 		description:
-			post.description ??
+			post?.description ??
 			"Explore Journey's blog - your go-to guide for self-improvement and personal growth.",
 		openGraph: {
-			title: `Journey Blog: ${post.title}` ?? 'Journey - blog',
+			title: `Journey Blog: ${post?.title}` ?? 'Journey - blog',
 			description:
-				post.description ??
+				post?.description ??
 				"Explore Journey's blog - your go-to guide for self-improvement and personal growth.",
 		},
 	};
@@ -62,15 +57,15 @@ export async function generateStaticParams() {
 	}));
 }
 
-const Page = async ({ params: { slug } }: Props) => {
+const Page = async ({ params: { category, slug } }: Props) => {
 	const query = groq`
-       *[_type == "post" && slug.current == $slug][0]{
+       *[_type == "post" && slug.current == $slug && categories[]->slug.current match $category][0]{
               ...,
               author->, 
               categories[]->
          }
        `;
-	const post: Post = await clientFetch(query, { slug });
+	const post: Post = await clientFetch(query, { slug, category });
 
 	return (
 		<article className='max-w-3xl mx-auto px-6 md:px-10 pt-8'>

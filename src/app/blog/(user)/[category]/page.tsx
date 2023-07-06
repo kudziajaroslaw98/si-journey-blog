@@ -1,28 +1,54 @@
-import { draftMode } from 'next/headers';
 import { groq } from 'next-sanity';
+import { draftMode } from 'next/headers';
 import dynamic from 'next/dynamic';
-import { cache } from 'react';
-
 import Image from 'next/image';
-import { getClient } from '@/sanity/lib/client.ts';
+import { cache } from 'react';
 import BlogBanner from '@/public/images/blog-banner.webp';
-import { Category } from '../../../../typings.ts';
+import { getClient } from '@/sanity/lib/client.ts';
 import BlogList from '@/components/blog-list.tsx';
 import PreviewProvider from '@/components/preview-provider.tsx';
 import PreviewBlogList from '@/components/preview-blog-list.tsx';
+import { QueryUtils } from '@/utils/query-utils.ts';
+import CategoryNavComponent from '@/components/blog-posts/category-nav/category-nav.component.tsx';
+import { Category } from '../../../../../typings.ts';
 
 const PaginationComponent = dynamic(
 	() => import('@/components/pagination.component.tsx')
 );
+
 const client = getClient();
 const clientFetch = cache(client.fetch.bind(client));
-const fetchPostsQuery = groq`*[_type == "post"]{..., author->, categories[]->} | order(_createdAt desc)`;
-const fetchCategoriesQuery = groq`*[_type == "category"]{ ... }`;
 export const revalidate = 600;
 
-const Page = async () => {
-	const posts = await clientFetch(fetchPostsQuery);
-	const categories = await clientFetch(fetchCategoriesQuery);
+export async function generateStaticParams() {
+	const query = groq`
+        *[_type == "category"]
+        {
+            slug
+        }
+    `;
+	const slugs: Category[] = await clientFetch(query);
+	const slugRoutes = slugs.map((slug) => slug.slug.current);
+
+	return slugRoutes.map((slug) => ({
+		slug,
+	}));
+}
+
+type Props = {
+	params: {
+		category: string;
+	};
+};
+
+const Page = async ({ params: { category } }: Props) => {
+	let posts = [];
+	if (category === 'all') {
+		posts = await clientFetch(QueryUtils().fetchPostsQuery);
+	} else {
+		posts = await clientFetch(QueryUtils().fetchCategoryPostsQuery, { category });
+	}
+	const categories = await clientFetch(QueryUtils().fetchCategoriesQuery);
 	const preview = draftMode().isEnabled
 		? { token: process.env.SANITY_API_READ_TOKEN! }
 		: undefined;
@@ -47,25 +73,16 @@ const Page = async () => {
 
 					<hr className='w-full border-emperor-700' />
 
-					<div className='flex gap-x-4 gap-y-4 text-emperor-500 flex-wrap'>
-						{categories.map((category: Category) => (
-							<div
-								key={category._id}
-								className='category first-of-type:text-emperor-100 hover:text-picton-blue-500 transition-colors cursor-pointer'
-							>
-								<span>{category.title}</span>
-							</div>
-						))}
-					</div>
+					<CategoryNavComponent categories={categories} />
 				</div>
 
-				<div className='flex flex-wrap justify-center '>
+				<div>
 					{preview ? (
 						<PreviewProvider token={preview?.token}>
-							<PreviewBlogList posts={posts} query={fetchPostsQuery} />
+							<PreviewBlogList posts={posts} />
 						</PreviewProvider>
 					) : (
-						<BlogList posts={posts} />
+						<BlogList posts={posts} category={category} />
 					)}
 				</div>
 

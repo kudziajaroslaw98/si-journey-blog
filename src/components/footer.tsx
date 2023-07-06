@@ -34,7 +34,7 @@ function Footer() {
 					<div className='space-x-12 hidden lg:flex'>
 						<Link href='/'>Home</Link>
 
-						<Link href='/blog'>Blog</Link>
+						<Link href='/blog/all'>Blog</Link>
 					</div>
 				</div>
 			</div>

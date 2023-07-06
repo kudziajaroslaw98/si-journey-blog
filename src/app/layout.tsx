@@ -54,7 +54,7 @@ export default function RootLayout({
 					<div className=''>
 						<Header />
 
-						<div className='pt-16 pb-16'>{children}</div>
+						<div>{children}</div>
 
 						<Footer />
 					</div>

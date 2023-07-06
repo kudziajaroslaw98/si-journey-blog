@@ -48,7 +48,7 @@ function Page() {
 						</p>
 					</div>
 
-					<Link href='/blog'>
+					<Link href='/blog/all'>
 						<ButtonComponent
 							text='Start Reading'
 							arrow
