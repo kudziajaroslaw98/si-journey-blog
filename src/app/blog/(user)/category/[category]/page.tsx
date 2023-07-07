@@ -1,12 +1,9 @@
 import { groq } from 'next-sanity';
-import { draftMode } from 'next/headers';
 import Image from 'next/image';
 import { cache } from 'react';
 import BlogBanner from '@/public/images/blog-banner.webp';
 import { getClient } from '@/sanity/lib/client.ts';
 import BlogList from '@/components/blog-list.tsx';
-import PreviewProvider from '@/components/preview-provider.tsx';
-import PreviewBlogList from '@/components/preview-blog-list.tsx';
 import { QueryUtils } from '@/utils/query-utils.ts';
 import CategoryNavComponent from '@/components/blog-posts/category-nav/category-nav.component.tsx';
 import { Category } from '../../../../../../typings.ts';
@@ -37,16 +34,16 @@ type Props = {
 };
 
 const Page = async ({ params: { category } }: Props) => {
-	let posts = [];
-	if (category === 'all') {
-		posts = await clientFetch(QueryUtils().fetchPostsQuery);
-	} else {
-		posts = await clientFetch(QueryUtils().fetchCategoryPostsQuery, { category });
-	}
+	// let posts = [];
+	// if (category === 'all') {
+	// 	posts = await clientFetch(QueryUtils().fetchPostsQuery);
+	// } else {
+	// 	posts = await clientFetch(QueryUtils().fetchCategoryPostsQuery, { category });
+	// }
 	const categories = await clientFetch(QueryUtils().fetchCategoriesQuery);
-	const preview = draftMode().isEnabled
-		? { token: process.env.SANITY_API_READ_TOKEN! }
-		: undefined;
+	// const preview = draftMode().isEnabled
+	// 	? { token: process.env.SANITY_API_READ_TOKEN! }
+	// 	: undefined;
 
 	return (
 		<div className='no-scrollbar relative px-4 sm:px-6 '>
@@ -72,13 +69,7 @@ const Page = async ({ params: { category } }: Props) => {
 				</div>
 
 				<div>
-					{preview ? (
-						<PreviewProvider token={preview?.token}>
-							<PreviewBlogList posts={posts} />
-						</PreviewProvider>
-					) : (
-						<BlogList posts={posts} />
-					)}
+					<BlogList category={category} />
 				</div>
 			</div>
 		</div>
