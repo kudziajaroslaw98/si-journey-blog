@@ -43,7 +43,7 @@ export default function Header() {
 							className='hidden sm:block'
 						/>
 
-						<NavLinkComponent href='/blog/all' label='Blog' button={false} />
+						<NavLinkComponent href='/blog/category/all' label='Blog' button={false} />
 					</div>
 				</div>
 			</div>

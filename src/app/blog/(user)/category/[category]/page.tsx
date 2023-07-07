@@ -1,6 +1,5 @@
 import { groq } from 'next-sanity';
 import { draftMode } from 'next/headers';
-import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { cache } from 'react';
 import BlogBanner from '@/public/images/blog-banner.webp';
@@ -10,11 +9,7 @@ import PreviewProvider from '@/components/preview-provider.tsx';
 import PreviewBlogList from '@/components/preview-blog-list.tsx';
 import { QueryUtils } from '@/utils/query-utils.ts';
 import CategoryNavComponent from '@/components/blog-posts/category-nav/category-nav.component.tsx';
-import { Category } from '../../../../../typings.ts';
-
-const PaginationComponent = dynamic(
-	() => import('@/components/pagination.component.tsx')
-);
+import { Category } from '../../../../../../typings.ts';
 
 const client = getClient();
 const clientFetch = cache(client.fetch.bind(client));
@@ -82,12 +77,8 @@ const Page = async ({ params: { category } }: Props) => {
 							<PreviewBlogList posts={posts} />
 						</PreviewProvider>
 					) : (
-						<BlogList posts={posts} category={category} />
+						<BlogList posts={posts} />
 					)}
-				</div>
-
-				<div className='w-full flex justify-center'>
-					<PaginationComponent />
 				</div>
 			</div>
 		</div>

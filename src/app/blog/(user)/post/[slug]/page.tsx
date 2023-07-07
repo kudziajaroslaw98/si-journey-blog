@@ -6,12 +6,11 @@ import ReactMarkdown from 'react-markdown';
 import { draftMode } from 'next/headers';
 import { getClient } from '@/sanity/lib/client.ts';
 import urlFor from '@/lib/urlFor.ts';
-import { Post } from '../../../../../../../typings.ts';
+import { Post } from '../../../../../../typings.ts';
 
 type Props = {
 	params: {
 		slug: string;
-		category: string;
 	};
 };
 
@@ -22,12 +21,12 @@ const clientFetch = cache(client.fetch.bind(client));
 // *[_type == "post" && categories[]->slug.current match $categorySlug] | order(_createdAt desc) [5...10] - searching posts by category
 
 export const generateMetadata = async ({
-	params: { category, slug },
+	params: { slug },
 }: Props): Promise<Metadata> => {
 	const query = groq`
-       *[_type == "post" && slug.current == $slug && categories[]->slug.current match $category][0]{...,author->, categories[]->}  | order(_createdAt desc)`;
+       *[_type == "post" && slug.current == $slug][0]{...,author->, categories[]->}  | order(_createdAt desc)`;
 
-	const post: Post = await clientFetch(query, { slug, category });
+	const post: Post = await clientFetch(query, { slug });
 	return {
 		title: `Journey Blog: ${post?.title}` ?? 'Journey - blog',
 		description:
@@ -57,28 +56,30 @@ export async function generateStaticParams() {
 	}));
 }
 
-const Page = async ({ params: { category, slug } }: Props) => {
+const Page = async ({ params: { slug } }: Props) => {
 	const query = groq`
-       *[_type == "post" && slug.current == $slug && categories[]->slug.current match $category][0]{
+       *[_type == "post" && slug.current == $slug][0]{
               ...,
               author->, 
               categories[]->
          }
        `;
-	const post: Post = await clientFetch(query, { slug, category });
+	const post: Post = await clientFetch(query, { slug });
 
 	return (
 		<article className='max-w-3xl mx-auto px-6 md:px-10 pt-8'>
 			<h1 className='text-5xl'>{draftMode().isEnabled ? 'preview mode' : ''}</h1>
 
 			<section className='flex my-8 w-full h-[25rem] relative'>
-				<Image
-					className='object-cover rounded-lg shadow-lg'
-					alt={post.title}
-					src={urlFor(post.mainImage, 688).url()}
-					priority
-					fill
-				/>
+				{post?.mainImage && (
+					<Image
+						className='object-cover rounded-lg shadow-lg'
+						alt={post?.title}
+						src={urlFor(post?.mainImage, 688).url()}
+						priority
+						fill
+					/>
+				)}
 			</section>
 			<section className='text-gray-100 w-full'>
 				<div className='flex flex-col justify-between space-y-10'>
@@ -99,23 +100,23 @@ const Page = async ({ params: { category, slug } }: Props) => {
 							<Image
 								className='rounded-full'
 								src={urlFor(post.author.image, 40).url()}
-								alt={post.author.name}
+								alt={post?.author?.name}
 								height={40}
 								width={40}
 							/>
 						)}
 
 						<div className='w-64'>
-							<h3 className='text-lg font-bold'>{post.author.name}</h3>
+							<h3 className='text-lg font-bold'>{post?.author?.name}</h3>
 
-							<span>{post.timeToRead}</span>
+							<span>{post?.timeToRead}</span>
 						</div>
 					</div>
 				</div>
 			</section>
 
 			<section className='font-open-sans font-extralight text-emperor-100 leading-relaxed text-xl mx-auto whitespace-break-spaces py-10'>
-				<ReactMarkdown>{post.markdown}</ReactMarkdown>
+				<ReactMarkdown>{post?.markdown}</ReactMarkdown>
 			</section>
 		</article>
 	);

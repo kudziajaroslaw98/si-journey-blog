@@ -10,14 +10,14 @@ type Props = {
 function CategoryNavComponent({ categories }: Props) {
 	const pathname = usePathname();
 	const isCategoryActive = (category: string) => {
-		if (pathname === `/blog/${category}`) {
+		if (pathname === `/blog/category/${category}`) {
 			return true;
 		}
 		return false;
 	};
 	return (
 		<div className='flex gap-x-4 gap-y-4 text-emperor-500 flex-wrap'>
-			<Link href='/blog/all'>
+			<Link href='/blog/category/all'>
 				<div
 					className={`category hover:text-picton-blue-600 transition-colors cursor-pointer ${
 						isCategoryActive('all') ? 'text-picton-blue-500' : ''
@@ -27,7 +27,10 @@ function CategoryNavComponent({ categories }: Props) {
 				</div>
 			</Link>
 			{categories.map((categoryPill: Category) => (
-				<Link href={`/blog/${categoryPill.slug.current}`}>
+				<Link
+					key={categoryPill.slug.current}
+					href={`/blog/category/${categoryPill.slug.current}`}
+				>
 					<div
 						key={categoryPill._id}
 						className={`category hover:text-picton-blue-600 transition-colors cursor-pointer ${
