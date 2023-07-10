@@ -1,5 +1,6 @@
 import { ImageResponse } from 'next/server';
 import urlFor from '@/lib/urlFor.ts';
+import getAbsolutePath from '@/utils/absolute-path.ts';
 
 export const alt = 'Twitter Card Image';
 export const size = {
@@ -10,7 +11,7 @@ export const contentType = 'image/png';
 
 export default async function Image({ params }: { params: { slug: string } }) {
 	const post = await fetch(
-		`https://si-journey-blog.vercel.app/blog/post/${params.slug}/api`
+		`${getAbsolutePath()}/blog/post/${params.slug}/api`
 	).then((res) => res.json());
 
 	return new ImageResponse(

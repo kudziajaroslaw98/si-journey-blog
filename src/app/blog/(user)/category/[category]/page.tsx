@@ -34,12 +34,22 @@ type Props = {
 };
 
 const Page = async ({ params: { category } }: Props) => {
-	// let posts = [];
-	// if (category === 'all') {
-	// 	posts = await clientFetch(QueryUtils().fetchPostsQuery);
-	// } else {
-	// 	posts = await clientFetch(QueryUtils().fetchCategoryPostsQuery, { category });
-	// }
+	let posts = [];
+	const from = 0;
+	const PAGE_SIZE = 18;
+	if (category === 'all') {
+		posts = await clientFetch(QueryUtils().fetchPaginatedPostsQuery, {
+			from,
+			to: PAGE_SIZE,
+		});
+	} else {
+		posts = await clientFetch(QueryUtils().fetchPaginatedCategoryPostsQuery, {
+			category,
+			from,
+			to: PAGE_SIZE,
+		});
+	}
+
 	const categories = await clientFetch(QueryUtils().fetchCategoriesQuery);
 	// const preview = draftMode().isEnabled
 	// 	? { token: process.env.SANITY_API_READ_TOKEN! }
@@ -69,7 +79,7 @@ const Page = async ({ params: { category } }: Props) => {
 				</div>
 
 				<div>
-					<BlogList category={category} />
+					<BlogList category={category} initialPosts={posts} />
 				</div>
 			</div>
 		</div>
