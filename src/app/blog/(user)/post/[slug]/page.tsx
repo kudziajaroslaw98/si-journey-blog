@@ -67,7 +67,7 @@ const Page = async ({ params: { slug } }: Props) => {
 	const post: Post = await clientFetch(query, { slug });
 
 	return (
-		<article className='max-w-3xl mx-auto px-6 md:px-10 pt-8'>
+		<article className='max-w-6xl mx-auto px-6 md:px-10 pt-8 md:pt-16 flex flex-col justify-center'>
 			<h1 className='text-5xl'>{draftMode().isEnabled ? 'preview mode' : ''}</h1>
 
 			<section className='flex my-8 w-full h-[25rem] relative'>
@@ -75,15 +75,16 @@ const Page = async ({ params: { slug } }: Props) => {
 					<Image
 						className='object-cover rounded-lg shadow-lg'
 						alt={post?.title}
-						src={urlFor(post?.mainImage, 688).url()}
+						src={urlFor(post?.mainImage, 888).url()}
 						priority
 						fill
 					/>
 				)}
 			</section>
-			<section className='text-gray-100 w-full'>
+
+			<section className='w-full max-w-3xl text-gray-100 mx-auto py-8'>
 				<div className='flex flex-col justify-between space-y-10'>
-					<div>
+					<div className='flex flex-col gap-y-2'>
 						<h1 className='text-4xl font-extrabold'>{post?.title}</h1>
 
 						<p className='text-gray-400 text-sm'>
@@ -101,21 +102,23 @@ const Page = async ({ params: { slug } }: Props) => {
 								className='rounded-full'
 								src={urlFor(post.author.image, 40).url()}
 								alt={post?.author?.name}
-								height={40}
-								width={40}
+								height={64}
+								width={64}
 							/>
 						)}
 
 						<div className='w-64'>
-							<h3 className='text-lg font-bold'>{post?.author?.name}</h3>
+							<h3 className='text-2xl font-inter text-emperor-100 font-normal'>
+								{post?.author?.name}
+							</h3>
 
-							<span>{post?.timeToRead}</span>
+							<span className='text-emperor-500'>{post?.timeToRead}</span>
 						</div>
 					</div>
 				</div>
 			</section>
 
-			<section className='font-open-sans font-extralight text-emperor-100 leading-relaxed text-xl mx-auto whitespace-break-spaces py-10'>
+			<section className='markdown max-w-3xl font-open-sans font-extralight text-emperor-100 leading-relaxed text-xl mx-auto whitespace-break-spaces py-10'>
 				<ReactMarkdown>{post?.markdown}</ReactMarkdown>
 			</section>
 		</article>

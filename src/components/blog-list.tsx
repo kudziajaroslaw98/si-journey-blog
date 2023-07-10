@@ -50,7 +50,7 @@ function BlogList({ category, initialPosts }: Props) {
 			{postList?.map((post, index) => (
 				<PostCardComponent key={post._id} post={post} index={index} />
 			))}
-			{!reachedEnd && (
+			{!reachedEnd && postList.length < PAGE_SIZE && (
 				<span className='w-full' ref={loadingRef}>
 					Loading...
 				</span>
