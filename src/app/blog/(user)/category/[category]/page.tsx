@@ -1,12 +1,12 @@
-import { groq } from 'next-sanity';
+import {groq} from 'next-sanity';
 import Image from 'next/image';
-import { cache } from 'react';
+import {cache} from 'react';
 import BlogBanner from '@/public/images/blog-banner.webp';
-import { getClient } from '@/sanity/lib/client.ts';
+import {getClient} from '@/sanity/lib/client.ts';
 import BlogList from '@/components/blog-list.tsx';
-import { QueryUtils } from '@/utils/query-utils.ts';
+import {QueryUtils} from '@/utils/query-utils.ts';
 import CategoryNavComponent from '@/components/blog-posts/category-nav/category-nav.component.tsx';
-import { Category } from '../../../../../../typings.ts';
+import {Category} from '../../../../../../typings.ts';
 
 const client = getClient();
 const clientFetch = cache(client.fetch.bind(client));
@@ -57,7 +57,7 @@ const Page = async ({ params: { category } }: Props) => {
 
 	return (
 		<div className='no-scrollbar relative px-4 sm:px-6 '>
-			<div className='relative mx-auto max-w-6xl space-y-16 pt-16'>
+			<div className='relative mx-auto max-w-6xl space-y-16 pt-6'>
 				<div className='relative w-full h-[18.25rem] shadow-lg'>
 					<Image
 						className='object-cover object-center rounded-lg shadow-lg'

@@ -1,10 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import { Bars3Icon } from '@heroicons/react/24/solid';
-import { usePathname } from 'next/navigation';
+import {Bars3Icon} from '@heroicons/react/24/solid';
+import {usePathname} from 'next/navigation';
 
-import { NavLinkComponent } from '@/components/nav-link.component.tsx';
+import {NavLinkComponent} from '@/components/nav-link.component.tsx';
 import Logo from '@/public/images/svg/logo.svg';
 
 export default function Header() {
@@ -14,7 +14,7 @@ export default function Header() {
 		<header
 			className={`${
 				isStudioMode ? 'hidden' : 'fixed'
-			} w-full z-50 top-0 bg-emperor-950 space-x-2 px-5 py-2 drop-shadow-2xl md:px-10 md:py-5`}
+			} w-full z-50 top-0 bg-emperor-950 space-x-2 px-5 py-3 drop-shadow-2xl md:px-10`}
 		>
 			<div className='w-full flex items-center justify-between xl:max-w-6xl xl:mx-auto'>
 				<Link className='flex items-center gap-2 sm:gap-6' href='/'>
