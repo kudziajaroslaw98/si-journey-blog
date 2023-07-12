@@ -25,9 +25,9 @@ function ButtonComponent({
 				outline ? 'border border-picton-blue-500' : ''
 			}`}
 		>
-			<span className='flex items-center group-hover:text-emperor-100 text-picton-blue-500 font-bold after:hidden transition-colors'>
+			<span className='flex after:hidden items-center font-bold transition-colors text-picton-blue-500 group-hover:text-emperor-100'>
 				{text}{' '}
-				{arrow && <Arrow className='arrow-fill ml-3 animate-bounce-horizontal' />}
+				{arrow && <Arrow className='ml-3 arrow-fill animate-bounce-horizontal' />}
 			</span>
 		</button>
 	);

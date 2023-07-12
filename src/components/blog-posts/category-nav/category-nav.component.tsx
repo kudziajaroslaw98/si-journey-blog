@@ -1,8 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { Category } from '../../../../typings.ts';
+import {usePathname} from 'next/navigation';
+import {Category} from '../../../../typings.ts';
 
 type Props = {
 	categories: Category[];
@@ -16,7 +16,7 @@ function CategoryNavComponent({ categories }: Props) {
 		return false;
 	};
 	return (
-		<div className='flex gap-x-4 gap-y-4 text-emperor-500 flex-wrap'>
+		<div className='flex flex-wrap gap-x-4 gap-y-4 text-emperor-500'>
 			<Link href='/blog/category/all'>
 				<div
 					className={`category hover:text-picton-blue-600 transition-colors cursor-pointer ${

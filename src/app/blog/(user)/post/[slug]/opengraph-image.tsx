@@ -1,4 +1,4 @@
-import { ImageResponse } from 'next/server';
+import {ImageResponse} from 'next/server';
 import urlFor from '@/lib/urlFor.ts';
 import getAbsolutePath from '@/utils/absolute-path.ts';
 

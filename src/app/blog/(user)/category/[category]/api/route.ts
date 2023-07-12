@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { clientFetch } from '@/sanity/lib/client.ts';
-import { Post } from '../../../../../../../typings.ts';
-import { QueryUtils } from '@/utils/query-utils.ts';
+import {NextRequest, NextResponse} from 'next/server';
+import {clientFetch} from '@/sanity/lib/client.ts';
+import {Post} from '../../../../../../../typings.ts';
+import {QueryUtils} from '@/utils/query-utils.ts';
 
 export async function GET(
 	req: NextRequest,

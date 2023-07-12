@@ -56,11 +56,11 @@ const Page = async ({ params: { category } }: Props) => {
 	// 	: undefined;
 
 	return (
-		<div className='no-scrollbar relative px-4 sm:px-6 '>
-			<div className='relative mx-auto max-w-6xl space-y-16 pt-6'>
-				<div className='relative w-full h-[18.25rem] shadow-lg'>
+		<div className='relative px-4 no-scrollbar sm:px-6'>
+			<div className='relative mx-auto max-w-6xl pt-6 space-y-16'>
+				<div className='relative w-full shadow-lg h-[18.25rem]'>
 					<Image
-						className='object-cover object-center rounded-lg shadow-lg'
+						className='rounded-lg object-cover object-center shadow-lg'
 						src={BlogBanner}
 						alt='Joruney blog banner'
 						priority

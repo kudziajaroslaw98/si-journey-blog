@@ -1,7 +1,7 @@
 'use client'
 
-import { definePreview } from 'next-sanity/preview'
-import { dataset, projectId } from '../env.ts'
+import {definePreview} from 'next-sanity/preview'
+import {dataset, projectId} from '../env.ts'
 
 function onPublicAccessOnly() {
   throw new Error('This function is only available on public access')

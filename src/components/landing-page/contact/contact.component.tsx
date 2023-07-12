@@ -4,9 +4,9 @@ import Location from '@/public/images/svg/location.svg';
 
 export default function ContactComponent() {
 	return (
-		<div className='flex w-full justify-center sm:justify-center md:justify-between flex-col space-y-8 md:space-y-0 md:flex-row items-center'>
-			<div className='space-y-8 text-center flex flex-col items-center font-normal p-4'>
-				<div className='flex w-24 h-24 items-center justify-center p-6 bg-emperor-900 shadow-xl rounded-lg'>
+		<div className='flex w-full flex-col items-center justify-center space-y-8 sm:justify-center md:space-y-0 md:flex-row md:justify-between'>
+			<div className='flex flex-col items-center p-4 text-center font-normal space-y-8'>
+				<div className='flex h-24 w-24 items-center justify-center rounded-lg p-6 shadow-xl bg-emperor-900'>
 					<Email />
 				</div>
 
@@ -15,10 +15,10 @@ export default function ContactComponent() {
 				<span>jarek.journey@gmail.com</span>
 			</div>
 
-			<span className='text-emperor-500 hidden md:block'>OR</span>
+			<span className='hidden text-emperor-500 md:block'>OR</span>
 
-			<div className='space-y-8 text-center flex flex-col items-center font-normal p-4'>
-				<div className='flex w-24 h-24 items-center justify-center p-6 bg-emperor-900 shadow-xl rounded-lg'>
+			<div className='flex flex-col items-center p-4 text-center font-normal space-y-8'>
+				<div className='flex h-24 w-24 items-center justify-center rounded-lg p-6 shadow-xl bg-emperor-900'>
 					<Phone />
 				</div>
 
@@ -27,10 +27,10 @@ export default function ContactComponent() {
 				<span>Not available yet</span>
 			</div>
 
-			<span className='text-emperor-500 hidden md:block'>OR</span>
+			<span className='hidden text-emperor-500 md:block'>OR</span>
 
-			<div className='space-y-8 text-center flex flex-col items-center font-normal p-4'>
-				<div className='flex w-24 h-24 items-center justify-center p-6 bg-emperor-900 shadow-xl rounded-lg'>
+			<div className='flex flex-col items-center p-4 text-center font-normal space-y-8'>
+				<div className='flex h-24 w-24 items-center justify-center rounded-lg p-6 shadow-xl bg-emperor-900'>
 					<Location />
 				</div>
 

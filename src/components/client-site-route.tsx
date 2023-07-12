@@ -12,7 +12,7 @@ function ClientSiteRoute({
 }) {
 	return (
 		<Link
-			className='w-full max-w-[30rem] md:max-w-[21rem] min-[880px]:max-w-[26rem] lg:max-w-[19rem] xl:max-w-[23rem] '
+			className='w-full max-w-[30rem] md:max-w-[21rem] lg:max-w-[19rem] xl:max-w-[23rem] min-[880px]:max-w-[26rem]'
 			href={route}
 		>
 			{children}

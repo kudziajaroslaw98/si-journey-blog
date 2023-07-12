@@ -8,9 +8,9 @@ import TestimonialCardComponent from '@/components/testimonial-card.component.ts
 
 export default function TestimonialsComponent() {
 	return (
-		<div className='flex overflow-x-visible space-x-8 absolute -left-[13.5rem] xl:-left-[18.5rem]'>
+		<div className='absolute flex overflow-x-visible space-x-8 -left-[13.5rem] xl:-left-[18.5rem]'>
 			<TestimonialCardComponent
-				className='xl:-bottom-8 xl:blur-[1px]'
+				className='xl:blur-[1px] xl:-bottom-8'
 				name='John'
 				image={John}
 				text="This blog has genuinely changed my life. The self-improvement strategies are practical, and I can apply them to my daily life seamlessly. Can't recommend it enough!"
@@ -43,7 +43,7 @@ export default function TestimonialsComponent() {
 			/>
 
 			<TestimonialCardComponent
-				className='xl:-bottom-8 xl:blur-[1px]'
+				className='xl:blur-[1px] xl:-bottom-8'
 				name='Michelle'
 				image={Michelle}
 				text='The articles here truly stimulate thought and self-reflection. I love the fresh perspectives and in-depth analysis. This blog has become a part of my self-improvement journey!'

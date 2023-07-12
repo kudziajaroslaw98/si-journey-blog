@@ -1,7 +1,7 @@
-import { cache } from 'react';
-import { NextRequest, NextResponse } from 'next/server';
-import { groq } from 'next-sanity';
-import { getClient } from '@/sanity/lib/client.ts';
+import {cache} from 'react';
+import {NextRequest, NextResponse} from 'next/server';
+import {groq} from 'next-sanity';
+import {getClient} from '@/sanity/lib/client.ts';
 
 export async function GET(req: NextRequest) {
 	const client = getClient();

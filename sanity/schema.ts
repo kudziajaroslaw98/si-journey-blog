@@ -1,4 +1,4 @@
-import { type SchemaTypeDefinition } from 'sanity'
+import {type SchemaTypeDefinition} from 'sanity'
 
 import blockContent from './schemas/blockContent.ts'
 import category from './schemas/category.ts'

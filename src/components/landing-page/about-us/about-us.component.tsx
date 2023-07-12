@@ -4,10 +4,10 @@ import Arrow from '@/public/images/svg/arrow.svg';
 
 export default function AboutUsComponent() {
 	return (
-		<div className='flex flex-col lg:flex-row justify-center items-center'>
-			<div className='w-[26.5rem] h-[25.5625rem] relative'>
+		<div className='flex flex-col items-center justify-center lg:flex-row'>
+			<div className='relative w-[26.5rem] h-[25.5625rem]'>
 				<Image
-					className='object-cover object-center shadow-xl rounded-lg'
+					className='rounded-lg object-cover object-center shadow-xl'
 					src={jarekPhoto}
 					fill
 					fetchPriority='low'
@@ -16,17 +16,17 @@ export default function AboutUsComponent() {
 				/>
 			</div>
 
-			<div className='flex flex-col w-full h-fit pt-24 lg:pt-0 lg:pl-24 justify-between'>
+			<div className='flex h-fit w-full flex-col justify-between pt-24 lg:pt-0 lg:pl-24'>
 				<div className='space-y-12'>
 					<div className='flex flex-col text-center lg:text-left'>
-						<h2 className='font-bold text-4xl'>Jarek Kudzia</h2>
+						<h2 className='text-4xl font-bold'>Jarek Kudzia</h2>
 
-						<h5 className='font-bold text-picton-blue-600 text-xl'>
+						<h5 className='text-xl font-bold text-picton-blue-600'>
 							Founder of Journey
 						</h5>
 					</div>
 
-					<p className='font-open-sans leading-normal'>
+					<p className='leading-normal font-open-sans'>
 						As a seasoned programmer and an avid self-improvement advocate, I blend my
 						analytical mindset with a passion for personal growth. I believe in
 						fostering physical prowess through calisthenics and martial arts, while
@@ -45,20 +45,20 @@ export default function AboutUsComponent() {
 				</div>
 
 				<div className='flex items-center pt-12'>
-					<span className='w-3 h-3 bg-emperor-200 rounded-full mr-4' />
+					<span className='mr-4 h-3 w-3 rounded-full bg-emperor-200' />
 
-					<span className='w-3 h-3 bg-emperor-200 rounded-full mr-4' />
+					<span className='mr-4 h-3 w-3 rounded-full bg-emperor-200' />
 
-					<span className='w-3 h-3 bg-emperor-200 rounded-full mr-4' />
+					<span className='mr-4 h-3 w-3 rounded-full bg-emperor-200' />
 
 					<button
-						className='ml-4 flex space-x-2 justify-center items-center'
+						className='ml-4 flex items-center justify-center space-x-2'
 						type='button'
 						disabled
 					>
 						<span className='text-emperor-200'>More staff soon</span>
 
-						<span className='scale-75 hidden'>
+						<span className='hidden scale-75'>
 							<Arrow />
 						</span>
 					</button>

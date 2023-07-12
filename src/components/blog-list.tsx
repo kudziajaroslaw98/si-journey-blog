@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useRef, useState, useTransition } from 'react';
+import {useEffect, useRef, useState, useTransition} from 'react';
 import PostCardComponent from '@/components/post-card.component.tsx';
-import { Post } from '../../typings.ts';
+import {Post} from '../../typings.ts';
 import getAbsolutePath from '@/utils/absolute-path.ts';
 
 export interface Props {
@@ -49,7 +49,7 @@ function BlogList({ category, initialPosts }: Props) {
 	}, [postList]);
 
 	return (
-		<div className='flex flex-wrap w-full justify-evenly gap-x-4 gap-y-16'>
+		<div className='flex w-full flex-wrap justify-evenly gap-x-4 gap-y-16'>
 			{postList?.map((post, index) => (
 				<PostCardComponent key={post._id} post={post} index={index} />
 			))}

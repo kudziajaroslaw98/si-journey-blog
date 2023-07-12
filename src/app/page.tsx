@@ -33,17 +33,17 @@ const BenefitsComponent = dynamic(
 function Page() {
 	return (
 		<div className='overflow-x-clip'>
-			<div className='xl:max-w-6xl xl:mx-auto relative w-full h-screen flex flex-col justify-center px-12 sm:px-24 xl:px-0'>
-				<div className='w-full sm:w-[29.3125rem] md:w-[39.3125rem] flex flex-col text-center md:text-left'>
+			<div className='relative flex h-screen w-full flex-col justify-center px-12 sm:px-24 xl:mx-auto xl:max-w-6xl xl:px-0'>
+				<div className='flex w-full flex-col text-center sm:w-[29.3125rem] md:w-[39.3125rem] md:text-left'>
 					<div className='space-y-6'>
-						<h1 className='text-[2.5rem] sm:text-[5rem] md:text-[6rem] h-fit font-bold tracking-[-0.18rem] leading-[3rem] sm:leading-[6rem] text-emperor-100'>
+						<h1 className='h-fit font-bold text-[2.5rem] tracking-[-0.18rem] leading-[3rem] text-emperor-100 sm:text-[5rem] sm:leading-[6rem] md:text-[6rem]'>
 							Pure self <br />
 							improvement
 							<br />
 							content
 						</h1>
 
-						<p className='text-emperor-100 text-lg sm:text-xl md:text-2xl font-open-sans'>
+						<p className='text-lg text-emperor-100 font-open-sans sm:text-xl md:text-2xl'>
 							No ads, no distractions.
 						</p>
 					</div>
@@ -58,7 +58,7 @@ function Page() {
 					</Link>
 				</div>
 
-				<div className='absolute sm:translate-x-[35%] right-0 sm:top-[8rem] w-full h-full flex flex-row-reverse gap-8 -z-20 '>
+				<div className='absolute right-0 -z-20 flex h-full w-full flex-row-reverse gap-8 sm:translate-x-[35%] sm:top-[8rem]'>
 					<Image
 						src={Image1}
 						alt='Background tile'
@@ -71,7 +71,7 @@ function Page() {
 					<Image
 						src={Image2}
 						alt='Background tile'
-						className='background-image-common blur-[2px] brightness-[.2] xl:brightness-[.6] object-left hidden sm:block'
+						className='hidden object-left background-image-common blur-[2px] brightness-[.2] sm:block xl:brightness-[.6]'
 						priority
 						fetchPriority='high'
 						placeholder='blur'
@@ -80,7 +80,7 @@ function Page() {
 					<Image
 						src={Image3}
 						alt='Background tile'
-						className='background-image-common blur-[4px] brightness-[.2] xl:brightness-[.5] hidden sm:block'
+						className='hidden background-image-common blur-[4px] brightness-[.2] sm:block xl:brightness-[.5]'
 						priority
 						fetchPriority='high'
 						placeholder='blur'
@@ -89,7 +89,7 @@ function Page() {
 					<Image
 						src={Image4}
 						alt='Background tile'
-						className='background-image-common blur-[6px] brightness-[.4] hidden md:block'
+						className='hidden background-image-common blur-[6px] brightness-[.4] md:block'
 						fetchPriority='high'
 						priority
 						placeholder='blur'
@@ -98,7 +98,7 @@ function Page() {
 					<Image
 						src={Image5}
 						alt='Background tile'
-						className='background-image-common blur-[8px] brightness-[.3] hidden xl:block'
+						className='hidden background-image-common blur-[8px] brightness-[.3] xl:block'
 						fetchPriority='high'
 						priority
 					/>
@@ -106,8 +106,8 @@ function Page() {
 			</div>
 			<div className='space-y-36'>
 				<div className='w-full bg-emperor-100 text-emperor-900'>
-					<div className='xl:max-w-6xl xl:mx-auto py-36 space-y-36 px-12 sm:px-24 xl:px-0'>
-						<h1 className='text-[3rem] sm:text-[3.5rem] md:text-[4rem] leading-[1.05] font-medium -tracking-[0.09rem] max-w-[35rem] text-center md:text-left'>
+					<div className='px-12 py-36 space-y-36 sm:px-24 xl:mx-auto xl:max-w-6xl xl:px-0'>
+						<h1 className='text-center font-medium text-[3rem] leading-[1.05] -tracking-[0.09rem] max-w-[35rem] sm:text-[3.5rem] md:text-[4rem] md:text-left'>
 							Stay <span className='gradient-text'>curious</span> yet{' '}
 							<span className='gradient-text'>focused</span>
 						</h1>
@@ -117,13 +117,13 @@ function Page() {
 				</div>
 
 				<div className='w-full text-emperor-100'>
-					<div className='max-w-6xl xl:mx-auto h-[49.3125rem] space-y-24 relative px-12 sm:px-24 xl:px-0'>
+					<div className='relative max-w-6xl px-12 h-[49.3125rem] space-y-24 sm:px-24 xl:mx-auto xl:px-0'>
 						<div className='space-y-8'>
-							<h2 className='text-[2rem] sm:text-[3rem] md:text-[3.5rem] leading-[1.1]  font-semibold -tracking-[0.09rem] max-w-[50rem] mx-auto text-center'>
+							<h2 className='mx-auto text-center font-semibold text-[2rem] leading-[1.1] -tracking-[0.09rem] max-w-[50rem] sm:text-[3rem] md:text-[3.5rem]'>
 								Don’t take our word for it.
 							</h2>
 
-							<h1 className='text-[2rem] sm:text-[3rem] md:text-[3.5rem] leading-[1.1]  gradient-text font-extrabold -tracking-[0.09rem] max-w-[50rem] mx-auto text-center'>
+							<h1 className='mx-auto text-center font-extrabold text-[2rem] leading-[1.1] gradient-text -tracking-[0.09rem] max-w-[50rem] sm:text-[3rem] md:text-[3.5rem]'>
 								Trust our readers
 							</h1>
 						</div>
@@ -133,8 +133,8 @@ function Page() {
 				</div>
 
 				<div className='w-full bg-emperor-100 text-emperor-900'>
-					<div className='xl:max-w-6xl xl:mx-auto py-36 space-y-36 px-12 sm:px-24 xl:px-0'>
-						<h1 className='text-[3rem] sm:text-[3.5rem] md:text-[4rem] leading-[1.05] font-medium -tracking-[0.09rem] max-w-[35rem] text-center lg:text-left'>
+					<div className='px-12 py-36 space-y-36 sm:px-24 xl:mx-auto xl:max-w-6xl xl:px-0'>
+						<h1 className='text-center font-medium text-[3rem] leading-[1.05] -tracking-[0.09rem] max-w-[35rem] sm:text-[3.5rem] md:text-[4rem] lg:text-left'>
 							About <span className='gradient-text'>Us</span>
 						</h1>
 
@@ -142,10 +142,10 @@ function Page() {
 					</div>
 				</div>
 
-				<div className='w-full text-emperor-100 '>
-					<div className='relative max-w-6xl xl:mx-auto h-[49.3125rem] space-y-24 px-12 sm:px-24 xl:px-0'>
-						<div className='absolute pricing-background-image right-[-20rem] xl:right-[-34rem] bottom-[-5.875rem] w-[90rem] h-[58.375rem] blur-[2px] -z-10' />
-						<h1 className='text-[2rem] sm:text-[3rem] md:text-[3.5rem] leading-[1.5] gradient-text -tracking-[0.09rem] max-w-[50rem] mx-auto text-center'>
+				<div className='w-full text-emperor-100'>
+					<div className='relative max-w-6xl px-12 h-[49.3125rem] space-y-24 sm:px-24 xl:mx-auto xl:px-0'>
+						<div className='absolute -z-10 pricing-background-image right-[-20rem] bottom-[-5.875rem] w-[90rem] h-[58.375rem] blur-[2px] xl:right-[-34rem]' />
+						<h1 className='mx-auto text-center text-[2rem] leading-[1.5] gradient-text -tracking-[0.09rem] max-w-[50rem] sm:text-[3rem] md:text-[3.5rem]'>
 							Pricing
 						</h1>
 
@@ -153,9 +153,9 @@ function Page() {
 					</div>
 				</div>
 
-				<div className='w-full text-emperor-100 '>
-					<div className='relative max-w-6xl xl:mx-auto space-y-24 px-12 sm:px-24 xl:px-0'>
-						<h1 className='text-[2rem] sm:text-[3rem] md:text-[3.5rem] leading-[1.5] -tracking-[0.09rem] mx-auto  md:text-left text-center'>
+				<div className='w-full text-emperor-100'>
+					<div className='relative max-w-6xl px-12 space-y-24 sm:px-24 xl:mx-auto xl:px-0'>
+						<h1 className='mx-auto text-center text-[2rem] leading-[1.5] -tracking-[0.09rem] sm:text-[3rem] md:text-[3.5rem] md:text-left'>
 							Have questions?
 						</h1>
 
