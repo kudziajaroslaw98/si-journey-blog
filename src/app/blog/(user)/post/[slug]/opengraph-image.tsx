@@ -1,4 +1,4 @@
-import {ImageResponse} from 'next/server';
+import { ImageResponse } from 'next/server';
 import urlFor from '@/lib/urlFor.ts';
 import getAbsolutePath from '@/utils/absolute-path.ts';
 
@@ -11,7 +11,7 @@ export const contentType = 'image/png';
 
 export default async function Image({ params }: { params: { slug: string } }) {
 	const post = await fetch(
-		`${getAbsolutePath()}/blog/post/${params.slug}/api`
+		`${getAbsolutePath()}/blog/post/${params.slug}/api/open-graph`
 	).then((res) => res.json());
 
 	return new ImageResponse(

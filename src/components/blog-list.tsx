@@ -1,8 +1,8 @@
 'use client';
 
-import {useEffect, useRef, useState, useTransition} from 'react';
+import { useEffect, useRef, useState, useTransition } from 'react';
 import PostCardComponent from '@/components/post-card.component.tsx';
-import {Post} from '../../typings.ts';
+import { Post } from '../../typings.ts';
 import getAbsolutePath from '@/utils/absolute-path.ts';
 
 export interface Props {
@@ -15,14 +15,15 @@ function BlogList({ category, initialPosts }: Props) {
 
 	const [postList, setPostList] = useState<Post[]>(initialPosts ?? []);
 	const [reachedEnd, setReachedEnd] = useState<boolean>(
-		postList.length < PAGE_SIZE
+		(postList.length < PAGE_SIZE && postList.length !== initialPosts?.length) ||
+			initialPosts?.length === 0
 	);
 	const [isPending, startTransition] = useTransition();
 
 	const loadingRef = useRef<HTMLDivElement>(null);
 	let observer: IntersectionObserver | null = null;
 
-	const fetchMoreApi = `${getAbsolutePath()}/blog/category/${category}/api?from=${
+	const fetchMoreApi = `${getAbsolutePath()}/api/category?slug=${category}&from=${
 		postList.length
 	}&to=${postList.length + PAGE_SIZE}`;
 

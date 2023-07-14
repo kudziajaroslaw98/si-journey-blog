@@ -36,6 +36,13 @@ export interface Image {
 	asset: Reference;
 }
 
+export interface Comment extends Base {
+	name: string;
+	message: string;
+	picture: Image;
+	postReference: Reference;
+}
+
 export interface Author extends Base {
 	bio: Block[];
 	image: Image;
@@ -60,6 +67,8 @@ export interface Post extends Base {
 	title: string;
 	description: string;
 	markdown: string;
+	likes: number;
+	comments: Comment[];
 }
 
 export interface Title {

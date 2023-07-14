@@ -1,12 +1,12 @@
-import {groq} from 'next-sanity';
+import { groq } from 'next-sanity';
 import Image from 'next/image';
-import {cache} from 'react';
+import { cache } from 'react';
 import BlogBanner from '@/public/images/blog-banner.webp';
-import {getClient} from '@/sanity/lib/client.ts';
+import { getClient } from '@/sanity/lib/client.ts';
 import BlogList from '@/components/blog-list.tsx';
-import {QueryUtils} from '@/utils/query-utils.ts';
+import { QueryUtils } from '@/utils/query-utils.ts';
 import CategoryNavComponent from '@/components/blog-posts/category-nav/category-nav.component.tsx';
-import {Category} from '../../../../../../typings.ts';
+import { Category } from '../../../../../../typings.ts';
 
 const client = getClient();
 const clientFetch = cache(client.fetch.bind(client));
@@ -34,7 +34,7 @@ type Props = {
 };
 
 const Page = async ({ params: { category } }: Props) => {
-	let posts = [];
+	let posts;
 	const from = 0;
 	const PAGE_SIZE = 18;
 	if (category === 'all') {
@@ -56,9 +56,9 @@ const Page = async ({ params: { category } }: Props) => {
 	// 	: undefined;
 
 	return (
-		<div className='relative px-4 no-scrollbar sm:px-6'>
-			<div className='relative mx-auto max-w-6xl pt-6 space-y-16'>
-				<div className='relative w-full shadow-lg h-[18.25rem]'>
+		<div className='no-scrollbar relative px-4 sm:px-6'>
+			<div className='relative mx-auto max-w-6xl space-y-16 pt-6'>
+				<div className='relative h-[18.25rem] w-full shadow-lg'>
 					<Image
 						className='rounded-lg object-cover object-center shadow-lg'
 						src={BlogBanner}

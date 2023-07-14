@@ -1,9 +1,8 @@
 import Image from 'next/image';
 import urlFor from '@/lib/urlFor.ts';
 import ClientSiteRoute from '@/components/client-site-route.tsx';
-import {Post} from '../../typings.ts';
+import { Post } from '../../typings.ts';
 import RatingStarsComponent from '@/components/rating-stars.component.tsx';
-import RatingTextComponent from '@/components/rating-text.component.tsx';
 
 type PostCardProps = {
 	post: Post;
@@ -13,8 +12,8 @@ type PostCardProps = {
 function PostCardComponent({ post, index }: PostCardProps) {
 	return (
 		<ClientSiteRoute key={post._id} route={`/blog/post/${post.slug?.current}`}>
-			<div className='flex w-full flex-col overflow-hidden rounded-md shadow-lg transition-all post group bg-emperor-1000 h-[19rem]'>
-				<div className='relative w-full drop-shadow-xl transition-transform duration-200 ease-out h-[14.375rem] group-hover:rotate-1 group-hover:scale-105'>
+			<div className='post group flex h-[19rem] w-full flex-col overflow-hidden rounded-md bg-emperor-1000 shadow-lg transition-all'>
+				<div className='relative h-[14.375rem] w-full drop-shadow-xl transition-transform duration-200 ease-out group-hover:rotate-1 group-hover:scale-105'>
 					{post.mainImage ? (
 						<Image
 							className='object-cover object-left lg:object-center'
@@ -28,7 +27,7 @@ function PostCardComponent({ post, index }: PostCardProps) {
 
 				<div className='flex h-full w-full flex-col justify-between p-4'>
 					<div className='flex flex-col justify-between'>
-						<span className='text-lg font-bold transition-all line-clamp-3 text-emperor-100 decoration-emperor-100 group-hover:decoration-picton-blue-500 group-hover:underline group-hover:decoration-2'>
+						<span className='line-clamp-3 text-lg font-bold text-emperor-100 decoration-emperor-100 transition-all group-hover:underline group-hover:decoration-picton-blue-500 group-hover:decoration-2'>
 							{post.title}
 						</span>
 					</div>
@@ -37,7 +36,7 @@ function PostCardComponent({ post, index }: PostCardProps) {
 						<div className='relative flex h-full items-center justify-center'>
 							{post?.author?.image && (
 								<Image
-									className='rounded-full object-fill object-center min-w-[2rem] min-h-[2rem]'
+									className='min-h-[2rem] min-w-[2rem] rounded-full object-fill object-center'
 									src={urlFor(post.author.image, 32).url()}
 									alt={post.author.name}
 									width={32}
@@ -48,12 +47,8 @@ function PostCardComponent({ post, index }: PostCardProps) {
 
 						<div className='flex w-full flex-col text-emperor-100'>
 							<div className='flex w-full items-center justify-between'>
-								<span className=''>{post.author.name}</span>
-								<RatingTextComponent rating={post.rating} />
-							</div>
-							<div className='flex w-full items-center justify-between'>
 								<span className='text-xs'>{post.timeToRead}</span>
-								<RatingStarsComponent rating={post.rating} />
+								<RatingStarsComponent likes={post.likes} />
 							</div>
 						</div>
 					</div>
@@ -62,4 +57,5 @@ function PostCardComponent({ post, index }: PostCardProps) {
 		</ClientSiteRoute>
 	);
 }
+
 export default PostCardComponent;
