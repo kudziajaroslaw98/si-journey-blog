@@ -41,14 +41,14 @@ export const generateMetadata = async ({
 
 	const post: Post = await clientFetch(query, { slug });
 	return {
-		title: `Journey Blog: ${post.title}` ?? 'Journey - blog',
+		title: `Journey Blog: ${post?.title}`,
 		description:
 			post?.description ??
 			"Explore Journey's blog - your go-to guide for self-improvement and personal growth.",
 		keywords: post?.categories?.map((category) => category.title) ?? [],
 		creator: post?.author?.name ?? 'Journey',
 		openGraph: {
-			title: `Journey Blog: ${post.title}` ?? 'Journey - blog',
+			title: `Journey Blog: ${post?.title}` ?? 'Journey - blog',
 			description:
 				post?.description ??
 				"Explore Journey's blog - your go-to guide for self-improvement and personal growth.",
