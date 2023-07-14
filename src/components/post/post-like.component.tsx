@@ -13,11 +13,13 @@ type Props = {
 
 function PostLikeComponent({ post, title, className }: Props) {
 	const alreadyLiked = () => {
-		const likedPosts = localStorage.getItem('likedPosts');
-		if (likedPosts) {
-			const likedPostsArray = JSON.parse(likedPosts);
-			if (likedPostsArray.includes(post._id)) {
-				return true;
+		if (typeof window !== 'undefined') {
+			const likedPosts = localStorage.getItem('likedPosts');
+			if (likedPosts) {
+				const likedPostsArray = JSON.parse(likedPosts);
+				if (likedPostsArray.includes(post._id)) {
+					return true;
+				}
 			}
 		}
 		return false;
