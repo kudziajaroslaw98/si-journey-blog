@@ -1,19 +1,16 @@
-import {createClient, type SanityClient} from 'next-sanity';
-import {cache} from 'react';
-import {apiVersion, dataset, projectId} from '../env.ts';
+import { createClient, type SanityClient } from 'next-sanity';
+import { cache } from 'react';
+import { apiVersion, dataset, projectId } from '../env.ts';
 
 export function getClient(preview?: { token: string }): SanityClient {
 	const client = createClient({
 		projectId,
 		dataset,
-		// eslint-disable-next-line no-warning-comments
-		// @TODO perspectives require vX for now
 		apiVersion,
 		useCdn: true,
 		token: process.env.SANITY_API_READ_TOKEN,
 		perspective: 'published',
 		studioUrl: '/blog/studio',
-		logger: console,
 	});
 	if (preview) {
 		if (preview.token) {
@@ -28,5 +25,19 @@ export function getClient(preview?: { token: string }): SanityClient {
 	return client;
 }
 
-const client = getClient();
+export function getReadWriteClient(): SanityClient {
+	const client = createClient({
+		projectId,
+		dataset,
+		apiVersion,
+		useCdn: true,
+		token: process.env.NEXT_PRIVATE_SANITY_READ_WRITE,
+		perspective: 'published',
+		studioUrl: '/blog/studio',
+	});
+	return client;
+}
+
+export const clientReadWrite = getReadWriteClient();
+export const client = getClient();
 export const clientFetch = cache(client.fetch.bind(client));

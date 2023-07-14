@@ -4,6 +4,7 @@ import {
 	ChatBubbleLeftIcon,
 	HeartIcon,
 	ShareIcon,
+	UserCircleIcon,
 } from '@heroicons/react/24/solid';
 import React, { cache } from 'react';
 import { groq } from 'next-sanity';
@@ -17,6 +18,8 @@ import urlFor from '@/lib/urlFor.ts';
 import { Post } from '../../../../../../typings.ts';
 import GoBackWithChildrenComponent from '@/components/blog-list/go-back-with-children.component.tsx';
 import getAbsolutePath from '@/utils/absolute-path.ts';
+import PostLikeComponent from '@/components/post/post-like.component.tsx';
+import CopyToClipboardComponent from '@/components/post/copy-to-clipboard.component.tsx';
 
 type Props = {
 	params: {
@@ -42,11 +45,16 @@ export const generateMetadata = async ({
 		description:
 			post?.description ??
 			"Explore Journey's blog - your go-to guide for self-improvement and personal growth.",
+		keywords: post?.categories?.map((category) => category.title) ?? [],
+		creator: post?.author?.name ?? 'Journey',
 		openGraph: {
 			title: `Journey Blog: ${post?.title}` ?? 'Journey - blog',
 			description:
 				post?.description ??
 				"Explore Journey's blog - your go-to guide for self-improvement and personal growth.",
+			authors: [post?.author?.name ?? 'Journey'],
+			tags: post?.categories?.map((category) => category.title) ?? [],
+			type: 'article',
 		},
 	};
 };
@@ -67,13 +75,7 @@ export async function generateStaticParams() {
 }
 
 const Page = async ({ params: { slug } }: Props) => {
-	const query = groq`
-       *[_type == "post" && slug.current == $slug][0]{
-              ...,
-              author->, 
-              categories[]->
-         }
-       `;
+	const query = groq`*[_type == "post" && slug.current == $slug][0]{..., author->, categories[]->, "comments": *[_type == "comment" && references(^._id) && approved == true] | order(_createdAt desc)}`;
 	const post: Post = await clientFetch(query, { slug });
 
 	return (
@@ -152,7 +154,7 @@ const Page = async ({ params: { slug } }: Props) => {
 												<HeartIcon title='Likes' className='w-6' />
 											</span>
 
-											<span>20</span>
+											<span>{post.likes}</span>
 										</div>
 
 										<div className='flex items-center justify-center space-x-2'>
@@ -160,7 +162,7 @@ const Page = async ({ params: { slug } }: Props) => {
 												<ChatBubbleLeftIcon title='Comments' className='w-6' />
 											</span>
 
-											<span>2</span>
+											<span>{post.comments.length}</span>
 										</div>
 									</div>
 								</div>
@@ -171,26 +173,57 @@ const Page = async ({ params: { slug } }: Props) => {
 					<section className='markdown whitespace-break-spaces py-10 font-open-sans text-xl font-extralight leading-relaxed text-emperor-100'>
 						<ReactMarkdown>{post?.markdown}</ReactMarkdown>
 					</section>
+
+					<hr className='my-8 w-full border-emperor-800' />
+
+					{post?.comments?.length > 0 && (
+						<section className='space-y-6 whitespace-break-spaces py-10 font-open-sans text-xl font-extralight leading-relaxed text-emperor-100'>
+							{post?.comments?.map((comment) => (
+								<div key={comment._id} className='flex gap-x-4'>
+									{comment.picture ? (
+										<span>picture</span>
+									) : (
+										<UserCircleIcon className='w-16' />
+									)}
+
+									<div className='flex flex-col space-y-2'>
+										<span className='font-inter text-xl font-semibold'>
+											{comment.name}
+										</span>
+										<span className='font-open-sans text-base font-light'>
+											{comment.message}
+										</span>
+										<span className='font-inter text-xs text-emperor-400'>
+											{new Date(comment._createdAt).toLocaleDateString('en-US', {
+												day: 'numeric',
+												month: 'long',
+												year: 'numeric',
+											})}
+										</span>
+									</div>
+								</div>
+							))}
+						</section>
+					)}
 				</article>
-				{/* <aside className='fixed right-0 bottom-2 flex w-fit flex-row gap-x-2 gap-y-2 rounded-md bg-emperor-1000 xl:top-[19rem] xl:sticky xl:-mr-16 xl:h-full xl:flex-col xl:bg-transparent xl:pt-12 xl:pl-16'> */}
-				{/* <aside className='fixed right-0 bottom-0 flex w-fit flex-row justify-center gap-x-2 gap-y-2 rounded-md bg-emperor-1000 xl:bottom-none xl:justify-normal xl:-mr-[8rem] xl:top-[19rem] xl:sticky xl:h-full xl:flex-col xl:bg-transparent xl:pt-8 xl:pl-12'> */}
-				<aside className='xl:bottom-nonexl:-mr-[8rem] fixed bottom-0 right-0 flex w-full flex-row justify-center gap-x-2 gap-y-2 bg-emperor-1000 xl:sticky xl:top-[19rem] xl:h-full xl:w-fit xl:flex-col xl:justify-normal xl:bg-transparent xl:pl-12 xl:pt-8'>
+
+				<aside className='fixed bottom-0 right-0 flex h-16 w-full flex-row items-center justify-center gap-x-8 gap-y-2 bg-emperor-1000 xl:sticky xl:top-[19rem] xl:-mr-[8rem] xl:h-full xl:w-fit xl:flex-col xl:justify-normal xl:bg-transparent xl:pl-12 xl:pt-8'>
 					<GoBackWithChildrenComponent>
 						<span className='flex h-12 w-12 items-center justify-center rounded-md bg-emperor-1000 text-emperor-100 transition-colors hover:cursor-pointer hover:bg-emperor-900 xl:rounded-full'>
-							<ArrowUturnLeftIcon title='Go Back' className='w-5' />
+							<ArrowUturnLeftIcon title='Go Back' className='w-8 xl:w-5' />
 						</span>
 					</GoBackWithChildrenComponent>
 
-					<span className='flex h-12 w-12 items-center justify-center rounded-md bg-emperor-1000 text-emperor-100 transition-colors hover:cursor-pointer hover:bg-emperor-900 xl:rounded-full'>
-						<ShareIcon title='Share' className='w-5' />
-					</span>
+					<CopyToClipboardComponent>
+						<span className='flex h-12 w-12 items-center justify-center rounded-md bg-emperor-1000 text-emperor-100 transition-colors hover:cursor-pointer hover:bg-emperor-900 xl:rounded-full'>
+							<ShareIcon title='Share' className='w-8 xl:w-5' />
+						</span>
+					</CopyToClipboardComponent>
+
+					<PostLikeComponent post={post} title='Likes' className='w-8 xl:w-5' />
 
 					<span className='flex h-12 w-12 items-center justify-center rounded-md bg-emperor-1000 text-emperor-100 transition-colors hover:cursor-pointer hover:bg-emperor-900 xl:rounded-full'>
-						<HeartIcon title='Likes' className='w-5' />
-					</span>
-
-					<span className='flex h-12 w-12 items-center justify-center rounded-md bg-emperor-1000 text-emperor-100 transition-colors hover:cursor-pointer hover:bg-emperor-900 xl:rounded-full'>
-						<ChatBubbleLeftIcon title='Comments' className='w-5' />
+						<ChatBubbleLeftIcon title='Comments' className='w-8 xl:w-5' />
 					</span>
 				</aside>
 			</div>
