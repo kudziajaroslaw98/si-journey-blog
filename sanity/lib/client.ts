@@ -26,7 +26,7 @@ export function getClient(preview?: { token: string }): SanityClient {
 }
 
 export function getReadWriteClient(): SanityClient {
-	const client = createClient({
+	return createClient({
 		projectId,
 		dataset,
 		apiVersion,
@@ -35,7 +35,6 @@ export function getReadWriteClient(): SanityClient {
 		perspective: 'published',
 		studioUrl: '/blog/studio',
 	});
-	return client;
 }
 
 export const clientReadWrite = getReadWriteClient();

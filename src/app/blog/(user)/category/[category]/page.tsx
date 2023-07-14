@@ -34,7 +34,7 @@ type Props = {
 };
 
 const Page = async ({ params: { category } }: Props) => {
-	let posts = [];
+	let posts;
 	const from = 0;
 	const PAGE_SIZE = 18;
 	if (category === 'all') {
