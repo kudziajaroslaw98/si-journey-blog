@@ -3,6 +3,10 @@ const nextConfig = {
 	images: {
 		domains: ['cdn.sanity.io', 'images.unsplash.com'],
 	},
+	compiler: {
+		// ssr and displayName are configured by default
+		styledComponents: true,
+	},
 	webpack(config) {
 		config.module.rules.push({
 			test: /\.svg$/,

@@ -34,8 +34,7 @@ export const revalidate = 10;
 export const generateMetadata = async ({
 	params: { slug },
 }: Props): Promise<Metadata> => {
-	const query = groq`
-       *[_type == "post" && slug.current == $slug]{...,author->, categories[]->}[0]`;
+	const query = groq`*[_type == "post" && slug.current == $slug]{...,author->, categories[]->}[0]`;
 
 	const post: Post = await clientFetch(query, { slug });
 	return {
@@ -58,12 +57,7 @@ export const generateMetadata = async ({
 };
 
 export async function generateStaticParams() {
-	const query = groq`
-        *[_type == "post"]
-        {
-            slug
-        }
-    `;
+	const query = groq`*[_type == "post"]{ slug }`;
 	const slugs: Post[] = await clientFetch(query);
 	const slugRoutes = slugs.map((slug) => slug.slug.current);
 
