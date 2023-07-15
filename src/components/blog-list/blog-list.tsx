@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, useTransition } from 'react';
 import PostCardComponent from '@/components/post-card.component.tsx';
-import { Post } from '../../typings.ts';
+import { Post } from '../../../typings.ts';
 import getAbsolutePath from '@/utils/absolute-path.ts';
 
 export interface Props {
@@ -15,7 +15,7 @@ function BlogList({ category, initialPosts }: Props) {
 
 	const [postList, setPostList] = useState<Post[]>(initialPosts ?? []);
 	const [reachedEnd, setReachedEnd] = useState<boolean>(
-		(postList.length < PAGE_SIZE && postList.length !== initialPosts?.length) ||
+		(postList.length < PAGE_SIZE && postList.length === initialPosts?.length) ||
 			initialPosts?.length === 0
 	);
 	const [isPending, startTransition] = useTransition();
@@ -28,7 +28,7 @@ function BlogList({ category, initialPosts }: Props) {
 	}&to=${postList.length + PAGE_SIZE}`;
 
 	useEffect(() => {
-		if (!isPending) {
+		if (!isPending && !reachedEnd) {
 			observer = new IntersectionObserver(async ([entry]) => {
 				if (entry.isIntersecting && !reachedEnd && !isPending) {
 					const posts = await fetch(fetchMoreApi).then((res) => res.json());
@@ -54,7 +54,7 @@ function BlogList({ category, initialPosts }: Props) {
 			{postList?.map((post, index) => (
 				<PostCardComponent key={post._id} post={post} index={index} />
 			))}
-			{(!reachedEnd || postList.length === PAGE_SIZE) && (
+			{!reachedEnd && (
 				<span className='w-full' ref={loadingRef}>
 					Loading...
 				</span>

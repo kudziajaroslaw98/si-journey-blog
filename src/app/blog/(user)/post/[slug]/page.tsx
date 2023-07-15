@@ -6,14 +6,14 @@ import {
 	ShareIcon,
 	UserCircleIcon,
 } from '@heroicons/react/24/solid';
-import React, { cache } from 'react';
-import { groq } from 'next-sanity';
+import React from 'react';
 import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import Link from 'next/link';
-
 import { draftMode } from 'next/headers';
-import { getClient } from '@/sanity/lib/client.ts';
+import { groq } from 'next-sanity';
+
+import { clientFetch } from '@/sanity/lib/client.ts';
 import urlFor from '@/lib/urlFor.ts';
 import { Post } from '../../../../../../typings.ts';
 import GoBackWithChildrenComponent from '@/components/blog-list/go-back-with-children.component.tsx';
@@ -28,8 +28,6 @@ type Props = {
 };
 
 export const revalidate = 10;
-const client = getClient();
-const clientFetch = cache(client.fetch.bind(client));
 
 // *[_type == "post" && categories[]->slug.current match $categorySlug] | order(_createdAt desc) [5...10] - searching posts by category
 
@@ -37,22 +35,22 @@ export const generateMetadata = async ({
 	params: { slug },
 }: Props): Promise<Metadata> => {
 	const query = groq`
-       *[_type == "post" && slug.current == $slug][0]{...,author->, categories[]->}  | order(_createdAt desc)`;
+       *[_type == "post" && slug.current == $slug]{...,author->, categories[]->}[0]`;
 
 	const post: Post = await clientFetch(query, { slug });
 	return {
-		title: `Journey Blog: ${post?.title}`,
+		title: `Journey SI Blog: ${post.title}` ?? 'Journey SI - blog',
 		description:
 			post?.description ??
 			"Explore Journey's blog - your go-to guide for self-improvement and personal growth.",
 		keywords: post?.categories?.map((category) => category.title) ?? [],
-		creator: post?.author?.name ?? 'Journey',
+		creator: post?.author?.name ?? 'Journey SI',
 		openGraph: {
-			title: `Journey Blog: ${post?.title}` ?? 'Journey - blog',
+			title: `Journey SI Blog: ${post.title}` ?? 'Journey SI - blog',
 			description:
 				post?.description ??
 				"Explore Journey's blog - your go-to guide for self-improvement and personal growth.",
-			authors: [post?.author?.name ?? 'Journey'],
+			authors: [post?.author?.name ?? 'Journey SI'],
 			tags: post?.categories?.map((category) => category.title) ?? [],
 			type: 'article',
 		},
@@ -77,7 +75,34 @@ export async function generateStaticParams() {
 const Page = async ({ params: { slug } }: Props) => {
 	const query = groq`*[_type == "post" && slug.current == $slug][0]{..., author->, categories[]->, "comments": *[_type == "comment" && references(^._id) && approved == true] | order(_createdAt desc)}`;
 	const post: Post = await clientFetch(query, { slug });
+	const MarkdownComponents: object = {
+		p: (paragraph: any) => {
+			const { node } = paragraph;
 
+			if (node.children[0].tagName === 'img') {
+				const image = node.children[0];
+				const metastring = image.properties.alt;
+				const alt = metastring?.replace(/ *\{[^)]*\} */g, '');
+				const metaWidth = metastring.match(/{([^}]+)x/);
+				const metaHeight = metastring.match(/x([^}]+)}/);
+				const width = metaWidth ? metaWidth[1] : '768';
+				const height = metaHeight ? metaHeight[1] : '432';
+				const isPriority = metastring?.toLowerCase().match('{priority}');
+
+				return (
+					<Image
+						src={image.properties.src}
+						width={width}
+						height={height}
+						className='postImg'
+						alt={alt}
+						priority={isPriority}
+					/>
+				);
+			}
+			return <p>{paragraph.children}</p>;
+		},
+	};
 	return (
 		<article className='mx-auto flex max-w-6xl flex-col justify-center overflow-x-clip px-6 pt-6 md:px-10 md:pt-14'>
 			<h1 className='text-5xl'>{draftMode().isEnabled ? 'preview mode' : ''}</h1>
@@ -88,6 +113,7 @@ const Page = async ({ params: { slug } }: Props) => {
 						className='rounded-lg object-cover shadow-lg'
 						alt={post?.title}
 						src={urlFor(post?.mainImage, 888).url()}
+						loading='eager'
 						priority
 						fill
 					/>
@@ -127,7 +153,7 @@ const Page = async ({ params: { slug } }: Props) => {
 											{post?.author?.name}
 										</h3>
 
-										<span className='text-emperor-500'>{post?.timeToRead}</span>
+										<span className='text-emperor-300'>{post?.timeToRead}</span>
 									</div>
 								</div>
 
@@ -171,7 +197,9 @@ const Page = async ({ params: { slug } }: Props) => {
 					</section>
 
 					<section className='markdown whitespace-break-spaces py-10 font-open-sans text-xl font-extralight leading-relaxed text-emperor-100'>
-						<ReactMarkdown>{post?.markdown}</ReactMarkdown>
+						<ReactMarkdown components={MarkdownComponents}>
+							{post?.markdown}
+						</ReactMarkdown>
 					</section>
 
 					<hr className='my-8 w-full border-emperor-800' />
@@ -179,12 +207,14 @@ const Page = async ({ params: { slug } }: Props) => {
 					{post?.comments?.length > 0 && (
 						<section className='space-y-6 whitespace-break-spaces py-10 font-open-sans text-xl font-extralight leading-relaxed text-emperor-100'>
 							{post?.comments?.map((comment) => (
-								<div key={comment._id} className='flex gap-x-4'>
-									{comment.picture ? (
-										<span>picture</span>
-									) : (
-										<UserCircleIcon className='w-16' />
-									)}
+								<div key={comment._id} className='flex w-full gap-x-4'>
+									<div className='flex h-full w-16 justify-center'>
+										{comment.picture ? (
+											<span>picture</span>
+										) : (
+											<UserCircleIcon className='w-16' />
+										)}
+									</div>
 
 									<div className='flex flex-col space-y-2'>
 										<span className='font-inter text-xl font-semibold'>
