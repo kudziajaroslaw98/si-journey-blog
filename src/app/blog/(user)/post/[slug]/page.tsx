@@ -166,7 +166,7 @@ const Page = async ({ params: { slug } }: Props) => {
 										))}
 									</div>
 
-									<div className='flex items-center justify-start space-x-6 text-emperor-500'>
+									<div className='flex items-center justify-start space-x-6 text-emperor-500 md:justify-end'>
 										<div className='flex items-center justify-center space-x-2'>
 											<span className='flex space-x-2'>
 												<HeartIcon title='Likes' className='w-6' />

@@ -28,6 +28,7 @@ export function CommentsDialogComponent() {
 		<div className='relative'>
 			<button
 				type='button'
+				name='Comments'
 				onKeyDown={(e) => e.key === 'Enter' && toggleOpenDialog()}
 				onClick={() => toggleOpenDialog()}
 				className='flex h-12 w-12 items-center justify-center rounded-md bg-emperor-1000 text-emperor-100 transition-colors hover:cursor-pointer hover:bg-emperor-900 xl:rounded-full'
