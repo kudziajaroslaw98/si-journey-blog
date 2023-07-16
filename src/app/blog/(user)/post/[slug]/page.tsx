@@ -19,8 +19,8 @@ import GoBackWithChildrenComponent from '@/components/blog-list/go-back-with-chi
 import getAbsolutePath from '@/utils/absolute-path.ts';
 import PostLikeComponent from '@/components/post/post-like.component.tsx';
 import CopyToClipboardComponent from '@/components/post/copy-to-clipboard.component.tsx';
-import defaultPicture from '@/public/images/people/default-picture.png';
 import { CommentsDialogComponent } from '@/components/post/comments-dialog.component.tsx';
+import CommentsSectionComponent from '@/components/post/comments-section.component.tsx';
 
 type Props = {
 	params: {
@@ -110,9 +110,9 @@ const Page = async ({ params: { slug } }: Props) => {
 				)}
 			</section>
 
-			<div className='mx-auto flex w-full max-w-3xl py-8 text-gray-100'>
+			<div className='mx-auto flex w-full max-w-3xl py-8 text-emperor-100'>
 				<article>
-					<section className='w-full py-8 text-gray-100'>
+					<section className='w-full py-8 text-emperor-100'>
 						<div className='flex flex-col justify-between space-y-10'>
 							<div className='flex flex-col gap-y-2'>
 								<h1 className='text-3xl font-extrabold md:text-4xl xl:text-5xl '>
@@ -196,56 +196,7 @@ const Page = async ({ params: { slug } }: Props) => {
 
 					<hr className='my-8 w-full border-emperor-800' />
 
-					{post?.comments?.length > 0 && (
-						<section className='space-y-6 whitespace-break-spaces py-10 font-open-sans text-xl font-extralight leading-relaxed text-emperor-100 md:space-y-12'>
-							<span className='flex items-center pb-8 font-inter text-3xl font-semibold text-emperor-100'>
-								Comments
-								<span className='pl-4 font-inter text-xl font-semibold text-emperor-800'>
-									({post.comments.length})
-								</span>
-							</span>
-
-							{post.comments.map((comment, index) => (
-								<div
-									key={comment._id}
-									className='relative flex w-full flex-col gap-x-8 md:flex-row'
-								>
-									<div className='relative z-10 flex h-full w-8 justify-center md:w-16'>
-										{comment.picture ? (
-											<span>picture</span>
-										) : (
-											<Image
-												src={defaultPicture}
-												fetchPriority='low'
-												alt='Default profile picture'
-												className='rounded-full object-cover'
-											/>
-										)}
-									</div>
-
-									{index < post.comments.length - 1 && (
-										<span className='absolute -bottom-8 left-[0.95rem] -z-10 h-full w-[2px] bg-emperor-900 md:-bottom-16 md:left-8' />
-									)}
-
-									<div className='-mt-9 flex flex-col space-y-2 pl-16 font-open-sans text-lg font-extralight leading-relaxed text-emperor-100 md:-mt-0 md:pl-0 md:text-xl'>
-										<span className='font-inter text-xl font-semibold'>
-											{comment.name}
-										</span>
-
-										<span className='font-open-sans font-light'>{comment.message}</span>
-
-										<span className='font-inter text-xs text-emperor-400'>
-											{new Date(comment._createdAt).toLocaleDateString('en-US', {
-												day: 'numeric',
-												month: 'long',
-												year: 'numeric',
-											})}
-										</span>
-									</div>
-								</div>
-							))}
-						</section>
-					)}
+					<CommentsSectionComponent comments={post?.comments} />
 				</article>
 
 				<aside className='fixed bottom-0 right-0 z-40 flex h-16 w-full flex-row items-center justify-center gap-x-8 gap-y-2 bg-emperor-1000 xl:sticky xl:top-[19rem] xl:-mr-[8rem] xl:h-full xl:w-fit xl:flex-col xl:justify-normal xl:bg-transparent xl:pl-12 xl:pt-8'>
