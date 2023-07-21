@@ -24,6 +24,7 @@
     "global-require": "warn",
     "import/prefer-default-export": "off",
     "react/require-default-props": "warn",
-    "jsx-a11y/no-noninteractive-tabindex": "off"
+    "jsx-a11y/no-noninteractive-tabindex": "off",
+    "react/jsx-props-no-spreading": "off"
   }
 }

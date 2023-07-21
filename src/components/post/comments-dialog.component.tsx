@@ -2,10 +2,19 @@
 
 import { ChatBubbleLeftIcon, XMarkIcon } from '@heroicons/react/24/solid';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 export function CommentsDialogComponent() {
 	const [showDialog, setShowDialog] = useState(false);
 	const [slideOut, setSlideOut] = useState(false);
+
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm();
+	const onSubmit = (data: any) => console.log(data);
+	console.log(errors);
 
 	const openDialog = () => {
 		setShowDialog(true);
@@ -41,7 +50,7 @@ export function CommentsDialogComponent() {
 					${showDialog && 'animate-pop-in'} ${slideOut && 'animate-pop-out'}
 					fixed bottom-16 left-0 -z-10 flex w-full items-center justify-center xl:absolute xl:-bottom-16 xl:left-auto xl:right-[4rem] xl:w-[40rem]`}
 				>
-					<div className='flex w-full max-w-[40rem] flex-col gap-y-8 border border-emperor-800 bg-emperor-1000 p-8 shadow sm:rounded-lg'>
+					<div className='flex w-full max-w-[40rem] flex-col gap-y-2 bg-emperor-1000 p-4 shadow min-[360px]:gap-y-8 min-[360px]:p-8 sm:rounded-lg sm:border sm:border-emperor-800'>
 						<div className='flex w-full flex-col '>
 							<div className='flex w-full items-center justify-between'>
 								<div className='flex items-center justify-center gap-x-4 text-2xl font-semibold leading-loose text-neutral-200'>
@@ -64,37 +73,59 @@ export function CommentsDialogComponent() {
 							</span>
 						</div>
 
-						<div className='flex w-full'>
-							<input
-								type='text'
-								placeholder='Your name...'
-								className='flex w-full rounded-lg bg-emperor-950 p-4 placeholder-emperor-400'
-							/>
-						</div>
+						<form
+							onSubmit={handleSubmit(onSubmit)}
+							className='flex flex-col gap-y-2 min-[360px]:gap-y-3  sm:gap-y-8'
+						>
+							<div className='flex w-full flex-col'>
+								<input
+									type='text'
+									placeholder='Your name...'
+									className={`
+										${errors?.nickname && 'border border-red-400'}
+										flex w-full rounded-lg bg-emperor-950 p-4 placeholder-emperor-400
+									`}
+									{...register('nickname', { maxLength: 30 })}
+								/>
+								{errors?.nickname && (
+									<span className='pt-2 text-sm text-red-400'>
+										* Nickname can`t be longer than 30 characters
+									</span>
+								)}
+							</div>
 
-						<div className='flex w-full'>
-							<textarea
-								placeholder='Your thoughts...'
-								className='flex h-[9rem] w-full rounded-lg bg-emperor-950 p-4 placeholder-emperor-400'
-							/>
-						</div>
+							<div className='flex w-full flex-col'>
+								<textarea
+									placeholder='Your thoughts...'
+									className={`
+									${errors?.message && 'border border-red-400'}
+									flex h-[9rem] w-full rounded-lg bg-emperor-950 p-4 placeholder-emperor-400`}
+									{...register('message', { maxLength: 180 })}
+								/>
+								{errors?.message && (
+									<span className='pt-2 text-sm text-red-400'>
+										* Message can`t be longer than 180 characters
+									</span>
+								)}
+							</div>
 
-						<div className='flex w-full flex-col gap-x-4 gap-y-4 sm:flex-row'>
-							<button
-								type='button'
-								onClick={() => closeDialog()}
-								className='w-full rounded-lg border-2 border-picton-blue-600 py-2 font-inter font-bold text-picton-blue-600 transition-colors hover:border-picton-blue-500 hover:bg-picton-blue-500 hover:text-emperor-100'
-							>
-								Cancel
-							</button>
+							<div className='flex w-full flex-col gap-x-4 gap-y-2 min-[360px]:gap-y-3 sm:flex-row sm:gap-y-4'>
+								<button
+									type='button'
+									onClick={() => closeDialog()}
+									className='w-full rounded-lg border-2 border-picton-blue-600 py-2 font-inter font-bold text-picton-blue-600 transition-colors hover:border-picton-blue-500 hover:bg-picton-blue-500 hover:text-emperor-100'
+								>
+									Cancel
+								</button>
 
-							<button
-								type='submit'
-								className='w-full rounded-lg bg-picton-blue-600 py-2 font-inter font-bold transition-colors hover:bg-picton-blue-500'
-							>
-								Submit
-							</button>
-						</div>
+								<button
+									type='submit'
+									className='w-full rounded-lg bg-picton-blue-600 py-2 font-inter font-bold transition-colors hover:bg-picton-blue-500'
+								>
+									Submit
+								</button>
+							</div>
+						</form>
 					</div>
 				</div>
 			)}
