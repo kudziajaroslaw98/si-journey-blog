@@ -9,11 +9,14 @@
 
 import { Metadata } from 'next';
 import { metadata as studioMetadata } from 'next-sanity/studio/metadata';
+import dynamic from 'next/dynamic';
 import Studio from './Studio.tsx';
 
+dynamic(() => require('easymde/dist/easymde.min.css'));
+
 export const metadata: Metadata = {
-  ...studioMetadata,
+	...studioMetadata,
 };
 export default function StudioPage() {
-  return <Studio />;
+	return <Studio />;
 }

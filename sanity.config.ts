@@ -2,17 +2,14 @@
  * This configuration is used to for the Sanity Studio that’s mounted on the `\src\app\studio\[[...index]]\page.tsx` route
  */
 
-import { visionTool } from '@sanity/vision';
-import { defineConfig } from 'sanity';
-import {
-  unsplashAssetSource,
-  unsplashImageAsset,
-} from 'sanity-plugin-asset-source-unsplash';
-import { markdownSchema } from 'sanity-plugin-markdown/next';
+import {visionTool} from '@sanity/vision';
+import {defineConfig} from 'sanity';
+import {unsplashAssetSource, unsplashImageAsset,} from 'sanity-plugin-asset-source-unsplash';
+import {markdownSchema} from 'sanity-plugin-markdown/next';
 
-import { deskTool } from 'sanity/desk';
+import {deskTool} from 'sanity/desk';
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
-import { apiVersion, dataset, projectId } from './sanity/env.ts';
+import {apiVersion, dataset, projectId} from './sanity/env.ts';
 import schema from './sanity/schema.ts';
 import getDefaultDocumentNode from './structure.ts';
 

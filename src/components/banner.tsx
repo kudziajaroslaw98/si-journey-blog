@@ -1,6 +1,6 @@
 function Banner() {
   return (
-    <div className="flex flex-col lg:flex-row lg:space-x-5 justify-between font-bold px-10 py-5 mb-10">
+    <div className="mb-10 flex flex-col justify-between px-10 py-5 font-bold lg:space-x-5 lg:flex-row">
       <div>
         <h2 className="mt-5 text-gray-200">
           <span>Unravel the Secret to Your </span>
@@ -11,7 +11,7 @@ function Banner() {
         </h2>
       </div>
 
-      <p className="mt-5 md:mt-2 text-gray-400 max-w-sm">
+      <p className="mt-5 max-w-sm text-gray-400 md:mt-2">
         Unlock Your Potential | Revolutionary Self-Help Tools | Weekly Dose of
         Wisdom & More!
       </p>

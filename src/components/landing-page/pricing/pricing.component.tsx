@@ -3,15 +3,15 @@ import ButtonComponent from '@/components/button.component.tsx';
 
 export default function PricingComponent() {
 	return (
-		<div className='space-y-16 text-center flex flex-col items-center font-normal'>
-			<p className='text-2xl sm:text-3xl md:text-4xl font-open-sans'>
+		<div className='flex flex-col items-center text-center font-normal space-y-16'>
+			<p className='text-2xl font-open-sans sm:text-3xl md:text-4xl'>
 				We believe that everyone should have <br /> the same possibilities to change
 				their lives. <br />
 				That’s why this blog is entirely
 				<span className='gradient-text !font-bold'> free.</span>
 			</p>
 
-			<p className='text-lg sm:text-xl md:text-2xl  font-open-sans'>
+			<p className='text-lg font-open-sans sm:text-xl md:text-2xl'>
 				However, if u still would like to help us consider becoming our
 				<br />
 				<span className='gradient-text !font-bold'> Patreon</span>
