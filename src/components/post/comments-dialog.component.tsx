@@ -4,7 +4,7 @@ import { ChatBubbleLeftIcon, XMarkIcon } from '@heroicons/react/24/solid';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-export function CommentsDialogComponent() {
+function CommentsDialogComponent({ postId }: { postId: string }) {
 	const [showDialog, setShowDialog] = useState(false);
 	const [slideOut, setSlideOut] = useState(false);
 
@@ -13,9 +13,6 @@ export function CommentsDialogComponent() {
 		handleSubmit,
 		formState: { errors },
 	} = useForm();
-	const onSubmit = (data: any) => console.log(data);
-	console.log(errors);
-
 	const openDialog = () => {
 		setShowDialog(true);
 	};
@@ -27,6 +24,16 @@ export function CommentsDialogComponent() {
 			setSlideOut(false);
 		}, 300);
 	};
+
+	const onSubmit = (data: any) =>
+		fetch('/api/post/comment', {
+			method: 'POST',
+			body: JSON.stringify({ ...data, postId }),
+		}).then((res) => {
+			if (res.status === 200) {
+				closeDialog();
+			}
+		});
 
 	const toggleOpenDialog = () => {
 		if (showDialog) closeDialog();
@@ -85,11 +92,15 @@ export function CommentsDialogComponent() {
 										${errors?.nickname && 'border border-red-400'}
 										flex w-full rounded-lg bg-emperor-950 p-4 placeholder-emperor-400
 									`}
-									{...register('nickname', { maxLength: 30 })}
+									{...register('nickname', {
+										minLength: 3,
+										maxLength: 30,
+										required: true,
+									})}
 								/>
 								{errors?.nickname && (
 									<span className='pt-2 text-sm text-red-400'>
-										* Nickname can`t be longer than 30 characters
+										* Nickname needs to be between 3-30 characters long
 									</span>
 								)}
 							</div>
@@ -100,11 +111,15 @@ export function CommentsDialogComponent() {
 									className={`
 									${errors?.message && 'border border-red-400'}
 									flex h-[9rem] w-full rounded-lg bg-emperor-950 p-4 placeholder-emperor-400`}
-									{...register('message', { maxLength: 180 })}
+									{...register('message', {
+										minLength: 3,
+										maxLength: 180,
+										required: true,
+									})}
 								/>
 								{errors?.message && (
 									<span className='pt-2 text-sm text-red-400'>
-										* Message can`t be longer than 180 characters
+										* Message needs to be between 3-180 characters long
 									</span>
 								)}
 							</div>
@@ -136,3 +151,5 @@ export function CommentsDialogComponent() {
 		</div>
 	);
 }
+
+export default CommentsDialogComponent;

@@ -28,6 +28,7 @@ function PostCardComponent({ post, index }: PostCardProps) {
 							alt={post.author.name}
 							fetchPriority={index < 3 ? 'high' : 'low'}
 							loading={index < 3 ? 'eager' : 'lazy'}
+							sizes='90vw (max-width: 768px) 336px (max-width: 880px) 416px (max-width: 1024px) 304px (max-width: 1280px) 368px'
 							fill
 						/>
 					) : null}

@@ -67,6 +67,7 @@ const Page = async ({ params: { category } }: Props) => {
 						priority
 						fetchPriority='high'
 						placeholder='blur'
+						sizes='90vw (max-width:1024px) 1152px'
 						fill
 					/>
 				</div>

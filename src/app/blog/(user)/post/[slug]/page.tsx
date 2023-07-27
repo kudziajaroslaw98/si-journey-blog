@@ -19,8 +19,9 @@ import GoBackWithChildrenComponent from '@/components/blog-list/go-back-with-chi
 import getAbsolutePath from '@/utils/absolute-path.ts';
 import PostLikeComponent from '@/components/post/post-like.component.tsx';
 import CopyToClipboardComponent from '@/components/post/copy-to-clipboard.component.tsx';
-import { CommentsDialogComponent } from '@/components/post/comments-dialog.component.tsx';
+import CommentsDialogComponent from '@/components/post/comments-dialog.component.tsx';
 import CommentsSectionComponent from '@/components/post/comments-section.component.tsx';
+import { MarkdownComponents } from '@/lib/markdown-components.tsx';
 
 type Props = {
 	params: {
@@ -36,14 +37,14 @@ export const generateMetadata = async ({
 	const query = groq`*[_type == "post" && slug.current == $slug]{...,author->, categories[]->}[0]`;
 	const post: Post = await clientFetch(query, { slug });
 	return {
-		title: `Journey SI Blog: ${post.title}` ?? 'Journey SI - blog',
+		title: post.title ? `Journey SI Blog: ${post.title}` : 'Journey SI - blog',
 		description:
 			post?.description ??
 			"Explore Journey's blog - your go-to guide for self-improvement and personal growth.",
 		keywords: post?.categories?.map((category) => category.title) ?? [],
 		creator: post?.author?.name ?? 'Journey SI',
 		openGraph: {
-			title: `Journey SI Blog: ${post.title}` ?? 'Journey SI - blog',
+			title: post.title ? `Journey SI Blog: ${post.title}` : 'Journey SI - blog',
 			description:
 				post?.description ??
 				"Explore Journey's blog - your go-to guide for self-improvement and personal growth.",
@@ -66,52 +67,25 @@ export async function generateStaticParams() {
 const Page = async ({ params: { slug } }: Props) => {
 	const query = groq`*[_type == "post" && slug.current == $slug][0]{..., author->, categories[]->, "comments": *[_type == "comment" && references(^._id) && approved == true] | order(_createdAt desc)}`;
 	const post: Post = await clientFetch(query, { slug });
-	const MarkdownComponents: object = {
-		p: (paragraph: any) => {
-			const { node } = paragraph;
-
-			if (node.children[0].tagName === 'img') {
-				const image = node.children[0];
-				const metastring = image.properties.alt;
-				const alt = metastring?.replace(/ *\{[^)]*\} */g, '');
-				const metaHeight = metastring.match(/{height:([^}]+)}/);
-				const height = metaHeight ? metaHeight[1] : '432';
-				const isPriority = metastring?.toLowerCase().match('{priority}');
-
-				return (
-					<div className='relative flex w-full' style={{ height: `${height}px` }}>
-						<Image
-							src={image.properties.src}
-							className='rounded-lg bg-emperor-400 object-cover object-center shadow-lg'
-							alt={alt}
-							priority={isPriority}
-							fill
-						/>
-					</div>
-				);
-			}
-			return <p>{paragraph.children}</p>;
-		},
-	};
 	return (
-		<article className='mx-auto flex max-w-6xl flex-col justify-center overflow-x-clip px-6 pt-6 md:px-10 md:pt-14'>
+		<article className='mx-auto flex max-w-6xl flex-col justify-center overflow-x-clip pt-6 md:pt-14'>
 			<h1 className='text-5xl'>{draftMode().isEnabled ? 'preview mode' : ''}</h1>
-
 			<section className='relative my-8 flex h-[25rem] w-full'>
 				{post?.mainImage && (
 					<Image
 						className='rounded-lg object-cover shadow-lg'
 						alt={post?.title}
-						src={urlFor(post?.mainImage, 888).url()}
+						src={urlFor(post?.mainImage, 952).url()}
 						loading='eager'
 						priority
+						sizes='90vw (max-width:1024px) 1152px'
 						fill
 					/>
 				)}
 			</section>
 
-			<div className='mx-auto flex w-full max-w-3xl py-8 text-emperor-100'>
-				<article>
+			<div className='mx-auto flex w-full max-w-3xl px-6 py-8 text-emperor-100 md:px-10'>
+				<article className='overflow-x-clip'>
 					<section className='w-full py-8 text-emperor-100'>
 						<div className='flex flex-col justify-between space-y-10'>
 							<div className='flex flex-col gap-y-2'>
@@ -150,7 +124,7 @@ const Page = async ({ params: { slug } }: Props) => {
 								</div>
 
 								<div className='flex flex-col gap-y-4 pt-8 sm:gap-y-2 sm:pt-0'>
-									<div className='flex justify-start gap-x-2'>
+									<div className='flex justify-start gap-x-2 sm:justify-end'>
 										{post?.categories?.map((category) => (
 											<Link
 												key={category._id}
@@ -214,7 +188,7 @@ const Page = async ({ params: { slug } }: Props) => {
 
 					<PostLikeComponent post={post} title='Likes' className='w-8 xl:w-5' />
 
-					<CommentsDialogComponent />
+					<CommentsDialogComponent postId={post._id} />
 				</aside>
 			</div>
 		</article>

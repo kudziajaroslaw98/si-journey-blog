@@ -10,13 +10,16 @@ function CopyToClipboardComponent({ children }: Props) {
 	const copyCurrentWindowPathToClipboard = () => {
 		const copyText = window.location.href;
 		navigator.clipboard.writeText(copyText);
+		if (navigator.canShare({ url: copyText })) {
+			navigator.share({ url: copyText });
+		}
 	};
 
 	return (
 		// eslint-disable-next-line jsx-a11y/no-static-element-interactions
 		<span
 			tabIndex={0}
-			onKeyPress={(e) => e.key === 'Enter' && copyCurrentWindowPathToClipboard()}
+			onKeyDown={(e) => e.key === 'Enter' && copyCurrentWindowPathToClipboard()}
 			onClick={copyCurrentWindowPathToClipboard}
 		>
 			{children}

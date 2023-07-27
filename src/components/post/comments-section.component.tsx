@@ -23,15 +23,15 @@ function CommentsSectionComponent({ comments }: Props) {
 						key={comment._id}
 						className='relative flex w-full flex-col gap-x-8 md:flex-row'
 					>
-						<div className='relative z-10 flex h-full w-8 justify-center md:w-16'>
+						<div className='relative z-10 flex w-8 h-8 md:w-16 md:h-16'>
 							{comment.picture ? (
-								<span>picture</span>
+								<span className=' flex w-8 h-8 md:w-16 md:h-16'>picture</span>
 							) : (
 								<Image
 									src={defaultPicture}
 									fetchPriority='low'
 									alt='Default profile picture'
-									className='rounded-full object-cover'
+									className='rounded-full flex object-cover !max-w-[32px] md:!max-w-[64px] w-8 h-8 md:w-16 md:h-16'
 								/>
 							)}
 						</div>
@@ -43,7 +43,7 @@ function CommentsSectionComponent({ comments }: Props) {
 						<div className='-mt-9 flex flex-col gap-y-2 pl-16 font-open-sans text-lg font-extralight leading-relaxed text-emperor-100 md:-mt-0 md:pl-0 md:text-xl'>
 							<span className='font-inter text-xl font-semibold'>{comment.name}</span>
 
-							<span className='font-open-sans font-light'>{comment.message}</span>
+							<span className='font-open-sans font-light break-words'>{comment.message}</span>
 
 							<span className='font-inter text-xs text-emperor-400'>
 								{new Date(comment._createdAt).toLocaleDateString('en-US', {
