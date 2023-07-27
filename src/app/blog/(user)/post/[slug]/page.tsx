@@ -1,25 +1,27 @@
 import { Metadata } from 'next';
+import Image from 'next/image';
+import Link from 'next/link';
 import {
 	ArrowUturnLeftIcon,
 	ChatBubbleLeftIcon,
 	HeartIcon,
 	ShareIcon,
-	UserCircleIcon,
 } from '@heroicons/react/24/solid';
-import React, { cache } from 'react';
-import { groq } from 'next-sanity';
-import Image from 'next/image';
+import React from 'react';
 import ReactMarkdown from 'react-markdown';
-import Link from 'next/link';
-
 import { draftMode } from 'next/headers';
-import { getClient } from '@/sanity/lib/client.ts';
+import { groq } from 'next-sanity';
+
+import { clientFetch } from '@/sanity/lib/client.ts';
 import urlFor from '@/lib/urlFor.ts';
 import { Post } from '../../../../../../typings.ts';
 import GoBackWithChildrenComponent from '@/components/blog-list/go-back-with-children.component.tsx';
 import getAbsolutePath from '@/utils/absolute-path.ts';
 import PostLikeComponent from '@/components/post/post-like.component.tsx';
 import CopyToClipboardComponent from '@/components/post/copy-to-clipboard.component.tsx';
+import CommentsDialogComponent from '@/components/post/comments-dialog.component.tsx';
+import CommentsSectionComponent from '@/components/post/comments-section.component.tsx';
+import { MarkdownComponents } from '@/lib/markdown-components.tsx';
 
 type Props = {
 	params: {
@@ -28,31 +30,25 @@ type Props = {
 };
 
 export const revalidate = 10;
-const client = getClient();
-const clientFetch = cache(client.fetch.bind(client));
-
-// *[_type == "post" && categories[]->slug.current match $categorySlug] | order(_createdAt desc) [5...10] - searching posts by category
 
 export const generateMetadata = async ({
 	params: { slug },
 }: Props): Promise<Metadata> => {
-	const query = groq`
-       *[_type == "post" && slug.current == $slug][0]{...,author->, categories[]->}  | order(_createdAt desc)`;
-
+	const query = groq`*[_type == "post" && slug.current == $slug]{...,author->, categories[]->}[0]`;
 	const post: Post = await clientFetch(query, { slug });
 	return {
-		title: `Journey Blog: ${post?.title}`,
+		title: post.title ? `Journey SI Blog: ${post.title}` : 'Journey SI - blog',
 		description:
 			post?.description ??
 			"Explore Journey's blog - your go-to guide for self-improvement and personal growth.",
 		keywords: post?.categories?.map((category) => category.title) ?? [],
-		creator: post?.author?.name ?? 'Journey',
+		creator: post?.author?.name ?? 'Journey SI',
 		openGraph: {
-			title: `Journey Blog: ${post?.title}` ?? 'Journey - blog',
+			title: post.title ? `Journey SI Blog: ${post.title}` : 'Journey SI - blog',
 			description:
 				post?.description ??
 				"Explore Journey's blog - your go-to guide for self-improvement and personal growth.",
-			authors: [post?.author?.name ?? 'Journey'],
+			authors: [post?.author?.name ?? 'Journey SI'],
 			tags: post?.categories?.map((category) => category.title) ?? [],
 			type: 'article',
 		},
@@ -60,15 +56,9 @@ export const generateMetadata = async ({
 };
 
 export async function generateStaticParams() {
-	const query = groq`
-        *[_type == "post"]
-        {
-            slug
-        }
-    `;
+	const query = groq`*[_type == "post"]{ slug }`;
 	const slugs: Post[] = await clientFetch(query);
 	const slugRoutes = slugs.map((slug) => slug.slug.current);
-
 	return slugRoutes.map((slug) => ({
 		slug,
 	}));
@@ -77,29 +67,31 @@ export async function generateStaticParams() {
 const Page = async ({ params: { slug } }: Props) => {
 	const query = groq`*[_type == "post" && slug.current == $slug][0]{..., author->, categories[]->, "comments": *[_type == "comment" && references(^._id) && approved == true] | order(_createdAt desc)}`;
 	const post: Post = await clientFetch(query, { slug });
-
 	return (
-		<article className='mx-auto flex max-w-6xl flex-col justify-center overflow-x-clip px-6 pt-6 md:px-10 md:pt-14'>
+		<article className='mx-auto flex max-w-6xl flex-col justify-center overflow-x-clip pt-6 md:pt-14'>
 			<h1 className='text-5xl'>{draftMode().isEnabled ? 'preview mode' : ''}</h1>
-
 			<section className='relative my-8 flex h-[25rem] w-full'>
 				{post?.mainImage && (
 					<Image
 						className='rounded-lg object-cover shadow-lg'
 						alt={post?.title}
-						src={urlFor(post?.mainImage, 888).url()}
+						src={urlFor(post?.mainImage, 952).url()}
+						loading='eager'
 						priority
+						sizes='90vw (max-width:1024px) 1152px'
 						fill
 					/>
 				)}
 			</section>
 
-			<div className='mx-auto flex w-full max-w-3xl py-8 text-gray-100'>
-				<article>
-					<section className='w-full py-8 text-gray-100'>
+			<div className='mx-auto flex w-full max-w-3xl px-6 py-8 text-emperor-100 md:px-10'>
+				<article className='overflow-x-clip'>
+					<section className='w-full py-8 text-emperor-100'>
 						<div className='flex flex-col justify-between space-y-10'>
 							<div className='flex flex-col gap-y-2'>
-								<h1 className='text-4xl font-extrabold'>{post?.title}</h1>
+								<h1 className='text-3xl font-extrabold md:text-4xl xl:text-5xl '>
+									{post?.title}
+								</h1>
 
 								<p className='text-sm text-gray-400'>
 									{new Date(post?._createdAt).toLocaleDateString('en-US', {
@@ -127,12 +119,12 @@ const Page = async ({ params: { slug } }: Props) => {
 											{post?.author?.name}
 										</h3>
 
-										<span className='text-emperor-500'>{post?.timeToRead}</span>
+										<span className='text-emperor-300'>{post?.timeToRead}</span>
 									</div>
 								</div>
 
-								<div className='flex flex-col gap-y-2'>
-									<div className='flex justify-end gap-x-2'>
+								<div className='flex flex-col gap-y-4 pt-8 sm:gap-y-2 sm:pt-0'>
+									<div className='flex justify-start gap-x-2 sm:justify-end'>
 										{post?.categories?.map((category) => (
 											<Link
 												key={category._id}
@@ -148,7 +140,7 @@ const Page = async ({ params: { slug } }: Props) => {
 										))}
 									</div>
 
-									<div className='flex items-center justify-end space-x-6 text-emperor-500'>
+									<div className='flex items-center justify-start space-x-6 text-emperor-500 sm:justify-end'>
 										<div className='flex items-center justify-center space-x-2'>
 											<span className='flex space-x-2'>
 												<HeartIcon title='Likes' className='w-6' />
@@ -170,44 +162,18 @@ const Page = async ({ params: { slug } }: Props) => {
 						</div>
 					</section>
 
-					<section className='markdown whitespace-break-spaces py-10 font-open-sans text-xl font-extralight leading-relaxed text-emperor-100'>
-						<ReactMarkdown>{post?.markdown}</ReactMarkdown>
+					<section className='markdown whitespace-break-spaces py-10 font-open-sans text-lg font-extralight leading-relaxed text-emperor-100 md:text-xl'>
+						<ReactMarkdown components={MarkdownComponents}>
+							{post?.markdown}
+						</ReactMarkdown>
 					</section>
 
 					<hr className='my-8 w-full border-emperor-800' />
 
-					{post?.comments?.length > 0 && (
-						<section className='space-y-6 whitespace-break-spaces py-10 font-open-sans text-xl font-extralight leading-relaxed text-emperor-100'>
-							{post?.comments?.map((comment) => (
-								<div key={comment._id} className='flex gap-x-4'>
-									{comment.picture ? (
-										<span>picture</span>
-									) : (
-										<UserCircleIcon className='w-16' />
-									)}
-
-									<div className='flex flex-col space-y-2'>
-										<span className='font-inter text-xl font-semibold'>
-											{comment.name}
-										</span>
-										<span className='font-open-sans text-base font-light'>
-											{comment.message}
-										</span>
-										<span className='font-inter text-xs text-emperor-400'>
-											{new Date(comment._createdAt).toLocaleDateString('en-US', {
-												day: 'numeric',
-												month: 'long',
-												year: 'numeric',
-											})}
-										</span>
-									</div>
-								</div>
-							))}
-						</section>
-					)}
+					<CommentsSectionComponent comments={post?.comments} />
 				</article>
 
-				<aside className='fixed bottom-0 right-0 flex h-16 w-full flex-row items-center justify-center gap-x-8 gap-y-2 bg-emperor-1000 xl:sticky xl:top-[19rem] xl:-mr-[8rem] xl:h-full xl:w-fit xl:flex-col xl:justify-normal xl:bg-transparent xl:pl-12 xl:pt-8'>
+				<aside className='fixed bottom-0 right-0 z-40 flex h-16 w-full flex-row items-center justify-center gap-x-8 gap-y-2 bg-emperor-1000 xl:sticky xl:top-[19rem] xl:-mr-[8rem] xl:h-full xl:w-fit xl:flex-col xl:justify-normal xl:bg-transparent xl:pl-12 xl:pt-8'>
 					<GoBackWithChildrenComponent>
 						<span className='flex h-12 w-12 items-center justify-center rounded-md bg-emperor-1000 text-emperor-100 transition-colors hover:cursor-pointer hover:bg-emperor-900 xl:rounded-full'>
 							<ArrowUturnLeftIcon title='Go Back' className='w-8 xl:w-5' />
@@ -222,9 +188,7 @@ const Page = async ({ params: { slug } }: Props) => {
 
 					<PostLikeComponent post={post} title='Likes' className='w-8 xl:w-5' />
 
-					<span className='flex h-12 w-12 items-center justify-center rounded-md bg-emperor-1000 text-emperor-100 transition-colors hover:cursor-pointer hover:bg-emperor-900 xl:rounded-full'>
-						<ChatBubbleLeftIcon title='Comments' className='w-8 xl:w-5' />
-					</span>
+					<CommentsDialogComponent postId={post._id} />
 				</aside>
 			</div>
 		</article>

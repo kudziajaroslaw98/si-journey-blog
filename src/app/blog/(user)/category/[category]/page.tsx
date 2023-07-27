@@ -1,15 +1,16 @@
 import { groq } from 'next-sanity';
 import Image from 'next/image';
-import { cache } from 'react';
+import dynamic from 'next/dynamic';
 import BlogBanner from '@/public/images/blog-banner.webp';
-import { getClient } from '@/sanity/lib/client.ts';
-import BlogList from '@/components/blog-list.tsx';
+import BlogList from '@/components/blog-list/blog-list.tsx';
+import { clientFetch } from '@/sanity/lib/client.ts';
 import { QueryUtils } from '@/utils/query-utils.ts';
-import CategoryNavComponent from '@/components/blog-posts/category-nav/category-nav.component.tsx';
 import { Category } from '../../../../../../typings.ts';
 
-const client = getClient();
-const clientFetch = cache(client.fetch.bind(client));
+const CategoryNavComponent = dynamic(
+	() => import('@/components/blog-posts/category-nav/category-nav.component.tsx')
+);
+
 export const revalidate = 600;
 
 export async function generateStaticParams() {
@@ -60,12 +61,13 @@ const Page = async ({ params: { category } }: Props) => {
 			<div className='relative mx-auto max-w-6xl space-y-16 pt-6'>
 				<div className='relative h-[18.25rem] w-full shadow-lg'>
 					<Image
-						className='rounded-lg object-cover object-center shadow-lg'
+						className='rounded-lg bg-emperor-400 object-cover object-center shadow-lg'
 						src={BlogBanner}
 						alt='Joruney blog banner'
 						priority
 						fetchPriority='high'
 						placeholder='blur'
+						sizes='90vw (max-width:1024px) 1152px'
 						fill
 					/>
 				</div>

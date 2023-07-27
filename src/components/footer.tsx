@@ -14,10 +14,9 @@ function Footer() {
 	const isPost = pathname.includes('/blog/post');
 	return (
 		<div
-			className={`
-			${isStudioMode ? 'hidden' : ''}
-			${isPost ? 'pb-24' : 'pb-16'}
-			w-full space-y-4 pt-36 text-emperor-100`}
+			className={`${isStudioMode ? 'hidden' : ''} ${
+				isPost ? 'pb-24' : 'pb-16'
+			} w-full space-y-4 pt-36 text-emperor-100`}
 		>
 			<div className='max-w-6xl space-y-8 px-12 sm:px-24 xl:mx-auto xl:px-0'>
 				<div className='flex items-center justify-center lg:justify-between'>

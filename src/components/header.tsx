@@ -1,10 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import {Bars3Icon} from '@heroicons/react/24/solid';
-import {usePathname} from 'next/navigation';
+import { Bars3Icon } from '@heroicons/react/24/solid';
+import { usePathname } from 'next/navigation';
 
-import {NavLinkComponent} from '@/components/nav-link.component.tsx';
+import { NavLinkComponent } from '@/components/nav-link.component.tsx';
 import Logo from '@/public/images/svg/logo.svg';
 
 export default function Header() {
@@ -14,11 +14,11 @@ export default function Header() {
 		<header
 			className={`${
 				isStudioMode ? 'hidden' : 'fixed'
-			} w-full z-50 top-0 bg-emperor-950 space-x-2 px-5 py-3 drop-shadow-2xl md:px-10`}
+			} top-0 z-50 w-full space-x-2 bg-emperor-950 px-5 py-3 drop-shadow-2xl md:px-10`}
 		>
 			<div className='flex w-full items-center justify-between xl:mx-auto xl:max-w-6xl'>
 				<Link className='flex items-center gap-2 sm:gap-6' href='/'>
-					<Logo className='h-8 w-8 object-fit' />
+					<Logo className='object-fit h-8 w-8' />
 
 					<h1 className='text-xl uppercase leading-6 text-emperor-100 md:text-3xl'>
 						Journey
@@ -44,6 +44,14 @@ export default function Header() {
 						/>
 
 						<NavLinkComponent href='/blog/category/all' label='Blog' button={false} />
+
+						<NavLinkComponent
+							href='https://si-journey-journal.vercel.app/'
+							label='Journal'
+							button={false}
+							scroll={false}
+							className='hidden sm:block'
+						/>
 					</div>
 				</div>
 			</div>

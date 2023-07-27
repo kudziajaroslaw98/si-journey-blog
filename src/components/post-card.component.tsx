@@ -1,8 +1,15 @@
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import urlFor from '@/lib/urlFor.ts';
 import ClientSiteRoute from '@/components/client-site-route.tsx';
 import { Post } from '../../typings.ts';
-import RatingStarsComponent from '@/components/rating-stars.component.tsx';
+
+const PostCardLikesComponent = dynamic(
+	() => import('@/components/blog-list/post-card-likes.component.tsx')
+);
+const PostCardCommentsComponent = dynamic(
+	() => import('@/components/blog-list/post-card-comments.component.tsx')
+);
 
 type PostCardProps = {
 	post: Post;
@@ -16,10 +23,12 @@ function PostCardComponent({ post, index }: PostCardProps) {
 				<div className='relative h-[14.375rem] w-full drop-shadow-xl transition-transform duration-200 ease-out group-hover:rotate-1 group-hover:scale-105'>
 					{post.mainImage ? (
 						<Image
-							className='object-cover object-left lg:object-center'
+							className='bg-emperor-200 object-cover object-left lg:object-center'
 							src={urlFor(post.mainImage, 368).url()}
 							alt={post.author.name}
 							fetchPriority={index < 3 ? 'high' : 'low'}
+							loading={index < 3 ? 'eager' : 'lazy'}
+							sizes='90vw (max-width: 768px) 336px (max-width: 880px) 416px (max-width: 1024px) 304px (max-width: 1280px) 368px'
 							fill
 						/>
 					) : null}
@@ -47,8 +56,14 @@ function PostCardComponent({ post, index }: PostCardProps) {
 
 						<div className='flex w-full flex-col text-emperor-100'>
 							<div className='flex w-full items-center justify-between'>
-								<span className='text-xs'>{post.timeToRead}</span>
-								<RatingStarsComponent likes={post.likes} />
+								<span className=''>{post.author.name}</span>
+							</div>
+							<div className='flex w-full items-center justify-between'>
+								<span className='text-xs text-emperor-500'>{post.timeToRead}</span>
+								<div className='flex gap-x-4'>
+									<PostCardLikesComponent likes={post.likes} />
+									<PostCardCommentsComponent comments={post.comments?.length ?? 0} />
+								</div>
 							</div>
 						</div>
 					</div>
