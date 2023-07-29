@@ -6,6 +6,7 @@ import BlogList from '@/components/blog-list/blog-list.tsx';
 import { clientFetch } from '@/sanity/lib/client.ts';
 import { QueryUtils } from '@/utils/query-utils.ts';
 import { Category } from '../../../../../../typings.ts';
+import Constants from '@/utils/constants.ts';
 
 const CategoryNavComponent = dynamic(
 	() => import('@/components/blog-posts/category-nav/category-nav.component.tsx')
@@ -37,7 +38,7 @@ type Props = {
 const Page = async ({ params: { category } }: Props) => {
 	let posts;
 	const from = 0;
-	const PAGE_SIZE = 18;
+	const { PAGE_SIZE } = Constants();
 	if (category === 'all') {
 		posts = await clientFetch(QueryUtils().fetchPaginatedPostsQuery, {
 			from,

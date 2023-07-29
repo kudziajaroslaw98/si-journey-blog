@@ -1,8 +1,7 @@
 import { Metadata } from 'next';
 import './globals.css';
 import dynamic from 'next/dynamic';
-import React from 'react';
-// eslint-disable-next-line camelcase
+import React from 'react'; // eslint-disable-next-line camelcase
 import { Inter, Open_Sans } from 'next/font/google';
 import Footer from '@/components/footer.tsx';
 
@@ -21,6 +20,8 @@ const Header = dynamic(() => import('@/components/header.tsx'));
 export const metadata: Metadata = {
 	metadataBase: new URL(`https://si-journey-blog.vercel.app/`),
 	title: 'Journey - blog',
+	manifest: '/manifest.json',
+	themeColor: '#1A1A1A',
 	viewport: 'width=device-width, initial-scale=1.0',
 	openGraph: {
 		type: 'website',
@@ -60,8 +61,11 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<html lang='en' className={`${inter.className} ${openSans.className}`}>
-			<body className='no-scrollbar overflow-x-clip bg-emperor-950 font-inter text-emperor-100'>
+		<html
+			lang='en'
+			className={`${inter.className} ${openSans.className}  bg-emperor-1000`}
+		>
+			<body className='no-scrollbar overflow-x-clip font-inter text-emperor-100'>
 				<div className='w-full'>
 					<div className=''>
 						<Header />

@@ -14,7 +14,7 @@ export default function Header() {
 		<header
 			className={`${
 				isStudioMode ? 'hidden' : 'fixed'
-			} top-0 z-50 w-full space-x-2 bg-emperor-950 px-5 py-3 drop-shadow-2xl md:px-10`}
+			} top-0 z-50 w-full space-x-2 bg-emperor-1000 px-5 py-3 drop-shadow-2xl md:px-10`}
 		>
 			<div className='flex w-full items-center justify-between xl:mx-auto xl:max-w-6xl'>
 				<Link className='flex items-center gap-2 sm:gap-6' href='/'>

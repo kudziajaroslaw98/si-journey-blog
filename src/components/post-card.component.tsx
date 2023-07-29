@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
+import { motion } from 'framer-motion';
 import urlFor from '@/lib/urlFor.ts';
 import ClientSiteRoute from '@/components/client-site-route.tsx';
 import { Post } from '../../typings.ts';
@@ -19,8 +20,33 @@ type PostCardProps = {
 function PostCardComponent({ post, index }: PostCardProps) {
 	return (
 		<ClientSiteRoute key={post._id} route={`/blog/post/${post.slug?.current}`}>
-			<div className='post group flex h-[19rem] w-full flex-col overflow-hidden rounded-md bg-emperor-1000 shadow-lg transition-all'>
-				<div className='relative h-[14.375rem] w-full drop-shadow-xl transition-transform duration-200 ease-out group-hover:rotate-1 group-hover:scale-105'>
+			<motion.div
+				whileHover={{
+					transitionTimingFunction: 'linear',
+					scale: 1.02,
+					transition: {
+						duration: 0.1,
+					},
+				}}
+				initial={{
+					opacity: 0,
+					y: 120,
+				}}
+				animate={{
+					opacity: 1,
+					y: 0,
+					transitionTimingFunction: 'linear',
+					transition: {
+						type: 'spring',
+						bounce: 0.25,
+						stiffness: 100,
+						duration: 0.1,
+						delay: index * 0.08,
+					},
+				}}
+				className='post group flex h-[19rem] w-full flex-col overflow-hidden rounded-md bg-emperor-950 shadow-lg transition-all hover:scale-[1.02]'
+			>
+				<div className='relative h-[14.375rem] w-full drop-shadow-xl transition-transform duration-200'>
 					{post.mainImage ? (
 						<Image
 							className='bg-emperor-200 object-cover object-left lg:object-center'
@@ -68,7 +94,7 @@ function PostCardComponent({ post, index }: PostCardProps) {
 						</div>
 					</div>
 				</div>
-			</div>
+			</motion.div>
 		</ClientSiteRoute>
 	);
 }

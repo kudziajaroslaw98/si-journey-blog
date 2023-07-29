@@ -36,6 +36,8 @@ function Footer() {
 						<Link href='/'>Home</Link>
 
 						<Link href='/blog/category/all'>Blog</Link>
+
+						<Link href='https://si-journey-journal.vercel.app/'>Journal</Link>
 					</div>
 				</div>
 			</div>

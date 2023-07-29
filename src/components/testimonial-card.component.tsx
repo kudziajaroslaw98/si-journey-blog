@@ -1,4 +1,4 @@
-import Image, {StaticImageData} from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import Quote from '@/public/images/svg/quote.svg';
 
 type TestimonialCardComponentProps = {
@@ -7,6 +7,7 @@ type TestimonialCardComponentProps = {
 	text: string;
 	image: StaticImageData;
 };
+
 function TestimonialCardComponent({
 	className,
 	name,
@@ -16,7 +17,7 @@ function TestimonialCardComponent({
 	return (
 		<div>
 			<div
-				className={`p-6 rounded-lg w-[16.625rem] h-[27.75rem] flex flex-col items-center relative bg-[#101010] shadow-xl ${className}`}
+				className={`relative flex h-[27.75rem] w-[16.625rem] flex-col items-center rounded-lg bg-emperor-950 p-6 shadow-xl ${className}`}
 			>
 				<div className='flex flex-col items-center space-y-4'>
 					<Image
@@ -34,7 +35,7 @@ function TestimonialCardComponent({
 						<Quote />
 					</span>
 					{text}
-					<span className='absolute rotate-180 right-[1.3125rem] bottom-[4.11544rem]'>
+					<span className='absolute bottom-[4.11544rem] right-[1.3125rem] rotate-180'>
 						<Quote />
 					</span>
 				</p>
