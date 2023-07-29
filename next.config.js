@@ -1,4 +1,13 @@
 /** @type {import('next').NextConfig} */
+const getConfigUrlPath = () => {
+	if (process.env.NEXT_VERCEL_ENV === 'PROD') {
+		return 'https://si-journey-blog.vercel.app';
+	}
+	if (process.env.NEXT_VERCEL_ENV === 'DEV') {
+		return 'https://si-journey-blog-git-develop-kj44389.vercel.app';
+	}
+	return 'http://localhost:3000';
+};
 
 const withPWA = require('next-pwa')({
 	dest: 'public',
@@ -48,7 +57,7 @@ const nextConfig = withPWA({
 					},
 					{
 						key: 'Permissions-Policy',
-						value: 'camera=(); battery=(); geolocation=(); microphone=()',
+						value: `fullscreen=(self ${getConfigUrlPath()}\`), camera=(); battery=(); geolocation=(); microphone=()`,
 					},
 					{
 						key: 'Referrer-Policy',

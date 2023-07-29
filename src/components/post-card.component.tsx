@@ -29,6 +29,7 @@ function PostCardComponent({ post, index }: PostCardProps) {
 					},
 				}}
 				initial={{
+					transitionTimingFunction: 'linear',
 					opacity: 0,
 					y: 120,
 				}}
