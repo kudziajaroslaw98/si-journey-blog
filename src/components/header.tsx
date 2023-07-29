@@ -26,7 +26,6 @@ export default function Header() {
 				</Link>
 
 				<div className='flex flex-1 items-center justify-end gap-6 md:gap-12'>
-					{/* TODO: add sliding in menu */}
 					<HamburgerMenuComponent />
 
 					<div className='hidden items-center justify-end gap-6 md:flex md:gap-12'>
