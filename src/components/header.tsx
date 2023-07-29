@@ -1,11 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import { Bars3Icon } from '@heroicons/react/24/solid';
 import { usePathname } from 'next/navigation';
 
 import { NavLinkComponent } from '@/components/nav-link.component.tsx';
 import Logo from '@/public/images/svg/logo.svg';
+import HamburgerMenuComponent from '@/components/layout/hamburger-menu/hamburger-menu.component.tsx';
 
 export default function Header() {
 	const pathname = usePathname();
@@ -26,7 +26,8 @@ export default function Header() {
 				</Link>
 
 				<div className='flex flex-1 items-center justify-end gap-6 md:gap-12'>
-					<Bars3Icon className='h-8 w-8 cursor-pointer text-emperor-100 md:hidden' />
+					{/* TODO: add sliding in menu */}
+					<HamburgerMenuComponent />
 
 					<div className='hidden items-center justify-end gap-6 md:flex md:gap-12'>
 						<NavLinkComponent
@@ -40,7 +41,7 @@ export default function Header() {
 							label='Home'
 							button={false}
 							scroll={false}
-							className='hidden sm:block'
+							linkClassName='hidden sm:block'
 						/>
 
 						<NavLinkComponent href='/blog/category/all' label='Blog' button={false} />
@@ -50,7 +51,7 @@ export default function Header() {
 							label='Journal'
 							button={false}
 							scroll={false}
-							className='hidden sm:block'
+							linkClassName='hidden sm:block'
 						/>
 					</div>
 				</div>
