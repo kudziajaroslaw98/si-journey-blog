@@ -14,18 +14,18 @@ function AsideMenuComponent({ post }: Props) {
 	return (
 		<aside className='fixed bottom-0 right-0 z-[2000] flex h-12 w-full flex-row items-center justify-center gap-x-8 gap-y-2 bg-emperor-1000 xl:sticky xl:top-[19rem] xl:-mr-[8rem] xl:h-full xl:w-fit xl:flex-col xl:justify-normal xl:bg-transparent xl:pl-12 xl:pt-8'>
 			<GoBackWithChildrenComponent>
-				<span className='flex h-12 w-12 items-center justify-center rounded-md bg-emperor-1000 text-emperor-100 transition-colors hover:cursor-pointer hover:bg-emperor-900 xl:rounded-full'>
-					<ArrowUturnLeftIcon title='Go Back' className='w-6 xl:w-5' />
+				<span className='flex h-12 w-12 items-center justify-center rounded-md text-emperor-100 transition-colors hover:cursor-pointer hover:bg-emperor-900 xl:rounded-full xl:bg-emperor-950'>
+					<ArrowUturnLeftIcon title='Go Back' className='w-7 xl:w-5' />
 				</span>
 			</GoBackWithChildrenComponent>
 
 			<CopyToClipboardComponent>
-				<span className='flex h-12 w-12 items-center justify-center rounded-md bg-emperor-1000 text-emperor-100 transition-colors hover:cursor-pointer hover:bg-emperor-900 xl:rounded-full'>
-					<ShareIcon title='Share' className='w-6 xl:w-5' />
+				<span className='flex h-12 w-12 items-center justify-center rounded-md text-emperor-100 transition-colors hover:cursor-pointer hover:bg-emperor-900 xl:rounded-full xl:bg-emperor-950'>
+					<ShareIcon title='Share' className='w-7 xl:w-5' />
 				</span>
 			</CopyToClipboardComponent>
 
-			<PostLikeComponent post={post} className='w-6 xl:w-5' />
+			<PostLikeComponent post={post} className='w-7 xl:w-5' />
 
 			<CommentsDialogComponent postId={post._id} />
 		</aside>

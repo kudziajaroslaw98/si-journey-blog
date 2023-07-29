@@ -82,7 +82,7 @@ function PostLikeComponent({ post, className }: Props) {
 			title='like'
 			type='button'
 			onClick={handleLike}
-			className='flex h-12 w-12 items-center justify-center rounded-md bg-emperor-1000 text-emperor-100 transition-colors hover:cursor-pointer hover:bg-emperor-900 xl:rounded-full'
+			className='flex h-12 w-12 items-center justify-center rounded-md text-emperor-100 transition-colors hover:cursor-pointer hover:bg-emperor-900 xl:rounded-full xl:bg-emperor-950'
 		>
 			{liked ? (
 				<HeartIcon title='Unlike' className={`${className} text-red-500`} />

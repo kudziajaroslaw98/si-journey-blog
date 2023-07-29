@@ -47,9 +47,9 @@ function CommentsDialogComponent({ postId }: { postId: string }) {
 				title='Add Comment'
 				onKeyDown={(e) => e.key === 'Enter' && toggleOpenDialog()}
 				onClick={() => toggleOpenDialog()}
-				className='flex h-12 w-12 items-center justify-center rounded-md bg-emperor-1000 text-emperor-100 transition-colors hover:cursor-pointer hover:bg-emperor-900 xl:rounded-full'
+				className='flex h-12 w-12 items-center justify-center rounded-md text-emperor-100 transition-colors hover:cursor-pointer hover:bg-emperor-900 xl:rounded-full xl:bg-emperor-950'
 			>
-				<ChatBubbleLeftIcon title='Comments' className='w-6 xl:w-5' />
+				<ChatBubbleLeftIcon title='Comments' className='w-7 xl:w-5' />
 			</button>
 			{showDialog && (
 				<div
