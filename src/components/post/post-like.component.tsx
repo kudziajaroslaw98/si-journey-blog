@@ -7,11 +7,10 @@ import { Post } from '../../../typings.ts';
 
 type Props = {
 	post: Post;
-	title: string;
 	className: string;
 };
 
-function PostLikeComponent({ post, title, className }: Props) {
+function PostLikeComponent({ post, className }: Props) {
 	const alreadyLiked = () => {
 		if (typeof window !== 'undefined') {
 			const likedPosts = localStorage.getItem('likedPosts');
@@ -83,12 +82,12 @@ function PostLikeComponent({ post, title, className }: Props) {
 			title='like'
 			type='button'
 			onClick={handleLike}
-			className='flex h-12 w-12 items-center justify-center rounded-md bg-emperor-1000 text-emperor-100 transition-colors hover:cursor-pointer hover:bg-emperor-900 xl:rounded-full'
+			className='flex h-12 w-12 items-center justify-center rounded-md text-emperor-100 transition-colors hover:cursor-pointer hover:bg-emperor-900 xl:rounded-full xl:bg-emperor-950'
 		>
 			{liked ? (
-				<HeartIcon title={title} className={`${className} text-red-500`} />
+				<HeartIcon title='Unlike' className={`${className} text-red-500`} />
 			) : (
-				<HeartIcon title={title} className={`${className} text-emperor-100`} />
+				<HeartIcon title='Like' className={`${className} text-emperor-100`} />
 			)}
 		</button>
 	);

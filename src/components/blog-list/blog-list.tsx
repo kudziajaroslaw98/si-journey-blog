@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useTransition } from 'react';
 import PostCardComponent from '@/components/post-card.component.tsx';
 import { Post } from '../../../typings.ts';
 import getAbsolutePath from '@/utils/absolute-path.ts';
+import Constants from '@/utils/constants.ts';
 
 export interface Props {
 	category: string;
@@ -11,7 +12,7 @@ export interface Props {
 }
 
 function BlogList({ category, initialPosts }: Props) {
-	const PAGE_SIZE = 18;
+	const { PAGE_SIZE } = Constants();
 
 	const [postList, setPostList] = useState<Post[]>(initialPosts ?? []);
 	const [reachedEnd, setReachedEnd] = useState<boolean>(

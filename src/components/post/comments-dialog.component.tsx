@@ -44,12 +44,12 @@ function CommentsDialogComponent({ postId }: { postId: string }) {
 		<div className='relative'>
 			<button
 				type='button'
-				name='Comments'
+				title='Add Comment'
 				onKeyDown={(e) => e.key === 'Enter' && toggleOpenDialog()}
 				onClick={() => toggleOpenDialog()}
-				className='flex h-12 w-12 items-center justify-center rounded-md bg-emperor-1000 text-emperor-100 transition-colors hover:cursor-pointer hover:bg-emperor-900 xl:rounded-full'
+				className='flex h-12 w-12 items-center justify-center rounded-md text-emperor-100 transition-colors hover:cursor-pointer hover:bg-emperor-900 xl:rounded-full xl:bg-emperor-950'
 			>
-				<ChatBubbleLeftIcon title='Comments' className='w-8 xl:w-5' />
+				<ChatBubbleLeftIcon title='Comments' className='w-7 xl:w-5' />
 			</button>
 			{showDialog && (
 				<div
@@ -66,6 +66,7 @@ function CommentsDialogComponent({ postId }: { postId: string }) {
 								</div>
 
 								<button
+									title='Close'
 									onKeyDown={(e) => e.key === 'Enter' && closeDialog()}
 									onClick={() => closeDialog()}
 									className='rounded-lg p-1 transition-colors hover:cursor-pointer hover:bg-emperor-900'
@@ -126,6 +127,7 @@ function CommentsDialogComponent({ postId }: { postId: string }) {
 
 							<div className='flex w-full flex-col gap-x-4 gap-y-2 min-[360px]:gap-y-3 sm:flex-row sm:gap-y-4'>
 								<button
+									title='Cancel'
 									type='button'
 									onClick={() => closeDialog()}
 									className='w-full rounded-lg border-2 border-picton-blue-600 py-2 font-inter font-bold text-picton-blue-600 transition-colors hover:border-picton-blue-500 hover:bg-picton-blue-500 hover:text-emperor-100'
@@ -134,6 +136,7 @@ function CommentsDialogComponent({ postId }: { postId: string }) {
 								</button>
 
 								<button
+									title='Submit'
 									type='submit'
 									className='w-full rounded-lg bg-picton-blue-600 py-2 font-inter font-bold transition-colors hover:bg-picton-blue-500'
 								>
