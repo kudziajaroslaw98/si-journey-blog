@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { groq } from 'next-sanity';
 import { Category, Post } from '../../../../typings.ts';
 import { clientFetch } from '@/sanity/lib/client.ts';
+import getAbsolutePath from '@/utils/absolute-path.ts';
 
 export async function GET() {
 	const query = groq`*[_type == "post"]{ slug }`;
@@ -13,11 +14,11 @@ export async function GET() {
 	const categorySlugRoutes = categorySlugs.map((slug) => slug.slug.current);
 
 	const postRoutes = postSlugRoutes.map(
-		(slug) => `https://si-journey-blog.vercel.app/blog/post/${slug}`
+		(slug) => `${getAbsolutePath()}/blog/post/${slug}`
 	);
 
 	const categoryRoutes = categorySlugRoutes.map(
-		(slug) => `https://si-journey-blog.vercel.app/blog/category/${slug}`
+		(slug) => `${getAbsolutePath()}/blog/category/${slug}`
 	);
 
 	return NextResponse.json({ posts: postRoutes, categories: categoryRoutes });
