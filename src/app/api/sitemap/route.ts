@@ -6,6 +6,7 @@ import getAbsolutePath from '@/utils/absolute-path.ts';
 function generateSiteMap(postRoutes: string[], categoryRoutes: string[]) {
 	return `<?xml version="1.0" encoding="UTF-8"?>
    <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+     <!--We manually set the two URLs we know already-->
      <url>
        <loc>${getAbsolutePath()}/</loc>
        <lastmod>${new Date().toISOString()}</lastmod>
@@ -60,7 +61,7 @@ export async function GET() {
 		status: 200,
 		headers: {
 			'Cache-control': 'public, s-maxage=86400, stale-while-revalidate',
-			'content-type': 'text/xml',
+			'Content-Type': 'application/xml',
 		},
 	});
 }
