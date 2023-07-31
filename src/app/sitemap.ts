@@ -16,7 +16,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 			lastModified: new Date(),
 		},
 		{
-			url: `${getAbsolutePath()}/blog/categories/all`,
+			url: `${getAbsolutePath()}/blog/category/all`,
 			lastModified: new Date(),
 		},
 		...posts.map((post: string) => ({
