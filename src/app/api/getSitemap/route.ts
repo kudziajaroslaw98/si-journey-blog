@@ -1,7 +1,8 @@
+import { NextResponse } from 'next/server';
 import { groq } from 'next-sanity';
 import { clientFetch } from '@/sanity/lib/client.ts';
 import getAbsolutePath from '@/utils/absolute-path.ts';
-import { Category, Post } from '../../../typings.ts';
+import { Category, Post } from '../../../../typings.ts';
 
 function generateSiteMap(postRoutes: string[], categoryRoutes: string[]) {
 	return `<?xml version="1.0" encoding="UTF-8"?>
@@ -57,11 +58,5 @@ export async function GET() {
 
 	const body = generateSiteMap(postRoutes, categoryRoutes);
 
-	return new Response(body, {
-		status: 200,
-		headers: {
-			'Cache-control': 'public, s-maxage=86400, stale-while-revalidate',
-			'Content-Type': 'text/xml',
-		},
-	});
+	NextResponse.json({ xml: body });
 }
