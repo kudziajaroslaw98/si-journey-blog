@@ -9,18 +9,18 @@ function generateSiteMap(postRoutes: string[], categoryRoutes: string[]) {
      <!--We manually set the two URLs we know already-->
      <url>
        <loc>${getAbsolutePath()}/</loc>
-       <lastmod>${new Date().toISOString()}</lastmod>
+       <lastmod>${new Date().toISOString().slice(0, 10)}</lastmod>
      </url>
      <url>
        <loc>${getAbsolutePath()}/blog/category/all</loc>
-       <lastmod>${new Date().toISOString()}</lastmod>
+       <lastmod>${new Date().toISOString().slice(0, 10)}</lastmod>
      </url>
      ${postRoutes
 						.map(
 							(route: string) => `
            <url>
                <loc>${route}</loc>
-               <lastmod>${new Date().toISOString()}</lastmod>
+               <lastmod>${new Date().toISOString().slice(0, 10)}</lastmod>
            </url>`
 						)
 						.join('')}
@@ -29,7 +29,7 @@ function generateSiteMap(postRoutes: string[], categoryRoutes: string[]) {
 							(route: string) => `
            <url>
                <loc>${route}</loc>
-               <lastmod>${new Date().toISOString()}</lastmod>
+               <lastmod>${new Date().toISOString().slice(0, 10)}</lastmod>
            </url>`
 						)
 						.join('')}
