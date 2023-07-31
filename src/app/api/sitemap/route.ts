@@ -4,6 +4,11 @@ import { Category, Post } from '../../../../typings.ts';
 import { clientFetch } from '@/sanity/lib/client.ts';
 import getAbsolutePath from '@/utils/absolute-path.ts';
 
+export const headers = {
+	'Content-Type': 'application/json',
+	'Cache-control': 'stale-while-revalidate, s-maxage=3600',
+};
+
 export async function GET() {
 	const query = groq`*[_type == "post"]{ slug }`;
 	const query2 = groq`*[_type == "category"]{ slug }`;

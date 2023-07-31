@@ -5,7 +5,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 	const { posts, categories } = await fetch(`${getAbsolutePath()}/api/sitemap`, {
 		headers: {
 			'Content-Type': 'application/json',
-			'Cache-control': 'stale-while-revalidate, s-maxage=3600',
 		},
 		method: 'GET',
 	}).then((res) => res.json());
