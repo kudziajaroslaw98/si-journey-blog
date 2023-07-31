@@ -4,7 +4,7 @@ export default function robots(): MetadataRoute.Robots {
 	return {
 		rules: {
 			userAgent: '*',
-			allow: '/',
+			allow: ['/', '/sitemap.xml', '/sitemap', '/robots.txt', '/favicon.ico'],
 			disallow: '/blog/studio/',
 		},
 		sitemap: `https://si-journey-blog.vercel.app/sitemap.xml`,

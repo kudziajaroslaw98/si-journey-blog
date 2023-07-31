@@ -78,6 +78,10 @@ const nextConfig = withPWA({
 				source: '/sitemap.xml',
 				destination: '/api/sitemap',
 			},
+			{
+				source: '/sitemap',
+				destination: '/api/sitemap',
+			},
 		];
 	},
 });
