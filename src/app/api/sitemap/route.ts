@@ -1,4 +1,3 @@
-import { NextResponse } from 'next/server';
 import { groq } from 'next-sanity';
 import { clientFetch } from '@/sanity/lib/client.ts';
 import getAbsolutePath from '@/utils/absolute-path.ts';
@@ -58,5 +57,11 @@ export async function GET() {
 
 	const body = generateSiteMap(postRoutes, categoryRoutes);
 
-	NextResponse.json({ xml: body });
+	return new Response(body, {
+		status: 200,
+		headers: {
+			'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate',
+			'Content-Type': 'text/xml',
+		},
+	});
 }

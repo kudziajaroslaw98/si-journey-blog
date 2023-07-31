@@ -10,8 +10,8 @@ import Twitter from '@/public/images/svg/twitter.svg';
 
 function Footer() {
 	const pathname = usePathname();
-	const isStudioMode = pathname.includes('studio');
-	const isPost = pathname.includes('/blog/post');
+	const isStudioMode = pathname?.includes('studio');
+	const isPost = pathname?.includes('/blog/post');
 	return (
 		<div
 			className={`${isStudioMode ? 'hidden' : ''} ${

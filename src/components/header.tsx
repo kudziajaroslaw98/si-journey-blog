@@ -9,7 +9,7 @@ import HamburgerMenuComponent from '@/components/layout/hamburger-menu/hamburger
 
 export default function Header() {
 	const pathname = usePathname();
-	const isStudioMode = pathname.includes('studio');
+	const isStudioMode = pathname?.includes('studio');
 	return (
 		<header
 			className={`${

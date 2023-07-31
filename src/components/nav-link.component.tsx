@@ -35,7 +35,7 @@ export function NavLinkComponent({
 
 	function isActiveRoute(route: string) {
 		if (route === '/') return pathname === route;
-		return pathname.startsWith(route);
+		return pathname?.startsWith(route);
 	}
 
 	const active = isActiveRoute(href);
