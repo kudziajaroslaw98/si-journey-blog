@@ -6,11 +6,12 @@ import getAbsolutePath from '@/utils/absolute-path.ts';
 
 export async function GET() {
 	const query = groq`*[_type == "post"]{ slug }`;
-	const slugs: Post[] = await clientFetch(query);
-	const postSlugRoutes = slugs.map((slug) => slug.slug.current);
-
 	const query2 = groq`*[_type == "category"]{ slug }`;
+
+	const slugs: Post[] = await clientFetch(query);
 	const categorySlugs: Category[] = await clientFetch(query2);
+
+	const postSlugRoutes = slugs.map((slug) => slug.slug.current);
 	const categorySlugRoutes = categorySlugs.map((slug) => slug.slug.current);
 
 	const postRoutes = postSlugRoutes.map(
