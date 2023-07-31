@@ -1,13 +1,41 @@
-import { NextResponse } from 'next/server';
 import { groq } from 'next-sanity';
 import { Category, Post } from '../../../../typings.ts';
 import { clientFetch } from '@/sanity/lib/client.ts';
 import getAbsolutePath from '@/utils/absolute-path.ts';
 
-export const headers = {
-	'Content-Type': 'application/json',
-	'Cache-control': 'stale-while-revalidate, s-maxage=3600',
-};
+function generateSiteMap(postRoutes: string[], categoryRoutes: string[]) {
+	return `<?xml version="1.0" encoding="UTF-8"?>
+   <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+     <!--We manually set the two URLs we know already-->
+     <url>
+       <loc>${getAbsolutePath()}/</loc>
+       <lastmod>${new Date().toISOString()}</lastmod>
+     </url>
+     <url>
+       <loc>${getAbsolutePath()}/blog/category/all</loc>
+       <lastmod>${new Date().toISOString()}</lastmod>
+     </url>
+     ${postRoutes
+						.map(
+							(route: string) => `
+           <url>
+               <loc>${route}</loc>
+               <lastmod>${new Date().toISOString()}</lastmod>
+           </url>`
+						)
+						.join('')}
+     ${categoryRoutes
+						.map(
+							(route: string) => `
+           <url>
+               <loc>${route}</loc>
+               <lastmod>${new Date().toISOString()}</lastmod>
+           </url>`
+						)
+						.join('')}
+   </urlset>
+ `;
+}
 
 export async function GET() {
 	const query = groq`*[_type == "post"]{ slug }`;
@@ -27,5 +55,13 @@ export async function GET() {
 		(slug) => `${getAbsolutePath()}/blog/category/${slug}`
 	);
 
-	return NextResponse.json({ posts: postRoutes, categories: categoryRoutes });
+	const body = generateSiteMap(postRoutes, categoryRoutes);
+
+	return new Response(body, {
+		status: 200,
+		headers: {
+			'Cache-control': 'public, s-maxage=86400, stale-while-revalidate',
+			'content-type': 'application/xml',
+		},
+	});
 }
