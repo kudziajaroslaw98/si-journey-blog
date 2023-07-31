@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next';
+import getAbsolutePath from '@/utils/absolute-path.ts';
 
 export default function robots(): MetadataRoute.Robots {
 	return {
@@ -7,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
 			allow: ['/', '/blog/categories/all'],
 			disallow: ['/blog/studio'],
 		},
-		sitemap: 'https://si-journey-blog.vercel.app/sitemap.xml',
+		sitemap: `${getAbsolutePath()}/sitemap.xml`,
 	};
 }

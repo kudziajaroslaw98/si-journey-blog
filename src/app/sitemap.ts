@@ -12,11 +12,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
 	return [
 		{
-			url: 'https://si-journey-blog.vercel.app/',
+			url: `${getAbsolutePath()}/`,
 			lastModified: new Date(),
 		},
 		{
-			url: 'https://si-journey-blog.vercel.app/blog/categories/all',
+			url: `${getAbsolutePath()}/blog/categories/all`,
 			lastModified: new Date(),
 		},
 		...posts.map((post: string) => ({
