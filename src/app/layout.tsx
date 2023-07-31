@@ -18,6 +18,7 @@ const openSans = Open_Sans({
 const Header = dynamic(() => import('@/components/header.tsx'));
 
 export const metadata: Metadata = {
+	verification: { google: 'EPuqp0UDoJjXzwCJejUwce22XlJ02peLBCdw7cFTg1Q' },
 	metadataBase: new URL(`https://si-journey-blog.vercel.app/`),
 	title: 'Journey - blog',
 	manifest: '/manifest.json',
