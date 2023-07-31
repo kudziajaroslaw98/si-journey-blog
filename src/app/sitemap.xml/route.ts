@@ -1,7 +1,7 @@
 import { groq } from 'next-sanity';
-import { Category, Post } from '../../../../typings.ts';
 import { clientFetch } from '@/sanity/lib/client.ts';
 import getAbsolutePath from '@/utils/absolute-path.ts';
+import { Category, Post } from '../../../typings.ts';
 
 function generateSiteMap(postRoutes: string[], categoryRoutes: string[]) {
 	return `<?xml version="1.0" encoding="UTF-8"?>
@@ -61,7 +61,7 @@ export async function GET() {
 		status: 200,
 		headers: {
 			'Cache-control': 'public, s-maxage=86400, stale-while-revalidate',
-			'Content-Type': 'application/xml',
+			'Content-Type': 'text/xml',
 		},
 	});
 }
