@@ -20,14 +20,14 @@ function ButtonComponent({
 			onClick={onClick}
 			type='button'
 			className={`${
-				className || ''
-			} group inline-flex py-2 px-6 items-start gap-2.5 rounded-lg hover:bg-picton-blue-900 transition-colors ${
+				className ?? ''
+			} group inline-flex items-start gap-2.5 rounded-lg px-6 py-2 transition-colors hover:bg-picton-blue-900 ${
 				outline ? 'border border-picton-blue-500' : ''
 			}`}
 		>
-			<span className='flex after:hidden items-center font-bold transition-colors text-picton-blue-500 group-hover:text-emperor-100'>
+			<span className='flex items-center font-bold text-picton-blue-500 transition-colors after:hidden group-hover:text-emperor-100'>
 				{text}{' '}
-				{arrow && <Arrow className='ml-3 arrow-fill animate-bounce-horizontal' />}
+				{arrow && <Arrow className='arrow-fill ml-3 animate-bounce-horizontal' />}
 			</span>
 		</button>
 	);

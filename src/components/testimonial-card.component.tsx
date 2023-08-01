@@ -2,10 +2,10 @@ import Image, { StaticImageData } from 'next/image';
 import Quote from '@/public/images/svg/quote.svg';
 
 type TestimonialCardComponentProps = {
-	className?: string;
 	name: string;
 	text: string;
 	image: StaticImageData;
+	className?: string;
 };
 
 function TestimonialCardComponent({

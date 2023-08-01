@@ -6,15 +6,23 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { draftMode } from 'next/headers';
 import { groq } from 'next-sanity';
+import dynamic from 'next/dynamic';
 
 import { clientFetch } from '@/sanity/lib/client.ts';
 import urlFor from '@/lib/urlFor.ts';
-import { Post } from '../../../../../../typings.ts';
 import getAbsolutePath from '@/utils/absolute-path.ts';
-import CommentsSectionComponent from '@/components/post/comments-section.component.tsx';
+
 import { MarkdownComponents } from '@/lib/markdown-components.tsx';
-import AsideMenuComponent from '@/components/post/aside-menu.component.tsx';
 import MotionWrapperClientComponent from '@/components/layout/motion-wrapper-client.component.tsx';
+import { Post } from '@/types/typings.ts';
+
+const CommentsSectionComponent = dynamic(
+	() => import('@/components/post/comments-section.component.tsx')
+);
+
+const AsideMenuComponent = dynamic(
+	() => import('@/components/post/aside-menu.component.tsx')
+);
 
 type Props = {
 	params: {

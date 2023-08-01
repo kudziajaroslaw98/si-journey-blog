@@ -1,12 +1,13 @@
 'use client';
 
 import Link from 'next/link';
-import {usePathname} from 'next/navigation';
-import {Category} from '../../../../typings.ts';
+import { usePathname } from 'next/navigation';
+import { Category } from '@/types/typings.ts';
 
 type Props = {
 	categories: Category[];
 };
+
 function CategoryNavComponent({ categories }: Props) {
 	const pathname = usePathname();
 	const isCategoryActive = (category: string) => {
@@ -19,7 +20,7 @@ function CategoryNavComponent({ categories }: Props) {
 		<div className='flex flex-wrap gap-x-4 gap-y-4 text-emperor-500'>
 			<Link href='/blog/category/all'>
 				<div
-					className={`category hover:text-picton-blue-600 transition-colors cursor-pointer ${
+					className={`category cursor-pointer transition-colors hover:text-picton-blue-600 ${
 						isCategoryActive('all') ? 'text-picton-blue-500' : ''
 					}`}
 				>
@@ -33,7 +34,7 @@ function CategoryNavComponent({ categories }: Props) {
 				>
 					<div
 						key={categoryPill._id}
-						className={`category hover:text-picton-blue-600 transition-colors cursor-pointer ${
+						className={`category cursor-pointer transition-colors hover:text-picton-blue-600 ${
 							isCategoryActive(categoryPill.slug.current) ? 'text-picton-blue-500' : ''
 						}`}
 					>
@@ -44,4 +45,5 @@ function CategoryNavComponent({ categories }: Props) {
 		</div>
 	);
 }
+
 export default CategoryNavComponent;

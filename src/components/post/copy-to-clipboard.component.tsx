@@ -9,7 +9,6 @@ type Props = {
 function CopyToClipboardComponent({ children }: Props) {
 	const copyCurrentWindowPathToClipboard = () => {
 		const copyText = window.location.href;
-		navigator.clipboard.writeText(copyText);
 		if (navigator.canShare({ url: copyText })) {
 			navigator.share({ url: copyText });
 		}

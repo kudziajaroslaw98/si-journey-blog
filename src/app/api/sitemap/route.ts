@@ -1,7 +1,7 @@
 import { groq } from 'next-sanity';
 import { clientFetch } from '@/sanity/lib/client.ts';
 import getAbsolutePath from '@/utils/absolute-path.ts';
-import { Category, Post } from '../../../../typings.ts';
+import { Category, Post } from '@/types/typings.ts';
 
 function generateSiteMap(postRoutes: string[], categoryRoutes: string[]) {
 	return `<?xml version="1.0" encoding="UTF-8"?>

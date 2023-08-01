@@ -7,11 +7,12 @@
  * https://github.com/sanity-io/next-sanity
  */
 
-import { Metadata } from 'next';
-import { metadata as studioMetadata } from 'next-sanity/studio/metadata';
+import {Metadata} from 'next';
+import {metadata as studioMetadata} from 'next-sanity/studio/metadata';
 import dynamic from 'next/dynamic';
 import Studio from './Studio.tsx';
 
+// eslint-disable-next-line global-require
 dynamic(() => require('easymde/dist/easymde.min.css'));
 
 export const metadata: Metadata = {

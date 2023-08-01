@@ -3,8 +3,8 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { NavLinkComponent } from '@/components/nav-link.component.tsx';
 import Logo from '@/public/images/svg/logo.svg';
+import { NavLinkComponent } from '@/components/nav-link.component.tsx';
 import HamburgerMenuComponent from '@/components/layout/hamburger-menu/hamburger-menu.component.tsx';
 
 export default function Header() {

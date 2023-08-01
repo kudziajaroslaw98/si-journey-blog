@@ -2,9 +2,9 @@
 
 import { useEffect, useRef, useState, useTransition } from 'react';
 import PostCardComponent from '@/components/post-card.component.tsx';
-import { Post } from '../../../typings.ts';
 import getAbsolutePath from '@/utils/absolute-path.ts';
 import Constants from '@/utils/constants.ts';
+import { Post } from '@/types/typings.ts';
 
 export interface Props {
 	category: string;

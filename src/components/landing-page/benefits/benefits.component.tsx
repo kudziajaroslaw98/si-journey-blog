@@ -2,7 +2,7 @@ import BenefitComponent from '@/components/landing-page/benefits/benefit.compone
 
 export default function BenefitsComponent() {
 	return (
-		<div className='flex flex-wrap justify-center space-y-16 md:space-y-0 md:justify-between'>
+		<div className='flex flex-wrap justify-center space-y-16 md:justify-between md:space-y-0'>
 			<BenefitComponent
 				title={'Continuous \nGrowth'}
 				description={

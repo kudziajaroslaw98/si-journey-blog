@@ -3,10 +3,10 @@
 import Link from 'next/link';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid';
 import { AnimatePresence, motion, useCycle } from 'framer-motion';
-import { NavLinkComponent } from '@/components/nav-link.component.tsx';
 import Instagram from '@/public/images/svg/instagram.svg';
 import Patreon from '@/public/images/svg/patreon.svg';
 import Twitter from '@/public/images/svg/twitter.svg';
+import { NavLinkComponent } from '@/components/nav-link.component.tsx';
 
 function HamburgerMenuComponent() {
 	const [open, cycleOpen] = useCycle(false, true);
@@ -52,7 +52,11 @@ function HamburgerMenuComponent() {
 	return (
 		<>
 			<div className='btn-container z-50'>
-				<button type='button' onClick={() => cycleOpen()}>
+				<button
+					type='button'
+					onClick={() => cycleOpen()}
+					title={open ? 'Open Menu' : 'Close menu'}
+				>
 					{open ? (
 						<XMarkIcon className='h-8 w-8 cursor-pointer text-emperor-100 md:hidden' />
 					) : (

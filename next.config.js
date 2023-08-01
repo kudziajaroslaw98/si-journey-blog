@@ -11,9 +11,17 @@ const getConfigUrlPath = () => {
 
 const withPWA = require('next-pwa')({
 	dest: 'public',
+	fallbacks: {
+		image: '/static/images/fallback.png',
+		// document: '/other-offline',  // if you want to fallback to a custom page other than /_offline
+		// font: '/static/font/fallback.woff2',
+		// audio: ...,
+		// video: ...,
+	},
 	register: true,
 	skipWaiting: true,
 	disable: process.env.NODE_ENV === 'development',
+	customWorkerDir: 'serviceworker',
 });
 
 const nextConfig = withPWA({
@@ -57,7 +65,7 @@ const nextConfig = withPWA({
 					},
 					{
 						key: 'Permissions-Policy',
-						value: `fullscreen=(self ${getConfigUrlPath()}\`), camera=(); battery=(); geolocation=(); microphone=()`,
+						value: `fullscreen=(self ${getConfigUrlPath()}), camera=(); battery=(); geolocation=(); microphone=()`,
 					},
 					{
 						key: 'Referrer-Policy',

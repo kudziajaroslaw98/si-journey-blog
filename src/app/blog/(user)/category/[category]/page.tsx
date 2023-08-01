@@ -5,8 +5,8 @@ import BlogBanner from '@/public/images/blog-banner.webp';
 import BlogList from '@/components/blog-list/blog-list.tsx';
 import { clientFetch } from '@/sanity/lib/client.ts';
 import { QueryUtils } from '@/utils/query-utils.ts';
-import { Category } from '../../../../../../typings.ts';
 import Constants from '@/utils/constants.ts';
+import { Category } from '@/types/typings.ts';
 
 const CategoryNavComponent = dynamic(
 	() => import('@/components/blog-posts/category-nav/category-nav.component.tsx')

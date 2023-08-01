@@ -2,7 +2,7 @@ import Image from 'next/image';
 import ChatBubbleLeftIcon from '@heroicons/react/24/solid/ChatBubbleLeftIcon';
 import React from 'react';
 import defaultPicture from '@/public/images/people/default-picture.png';
-import { Comment } from '../../../typings.ts';
+import { Comment } from '@/types/typings.ts';
 
 type Props = {
 	comments: Comment[];

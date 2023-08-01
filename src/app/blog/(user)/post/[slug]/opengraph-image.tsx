@@ -15,7 +15,10 @@ export default async function Image({ params }: { params: { slug: string } }) {
 	).then((res) => res.json());
 
 	return new ImageResponse(
-		<img src={urlFor(post.mainImage, 1200).url()} alt={post.title} />,
+		(
+			// eslint-disable-next-line @next/next/no-img-element
+			<img src={urlFor(post.mainImage, 1200).url()} alt={post.title} />
+		),
 		{
 			...size,
 		}

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import HeartIcon from '@heroicons/react/24/solid/HeartIcon';
 import getAbsolutePath from '@/utils/absolute-path.ts';
-import { Post } from '../../../typings.ts';
+import { Post } from '@/types/typings.ts';
 
 type Props = {
 	post: Post;

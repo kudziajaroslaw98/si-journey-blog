@@ -1,10 +1,11 @@
 import { ArrowUturnLeftIcon, ShareIcon } from '@heroicons/react/24/solid';
 import React from 'react';
-import GoBackWithChildrenComponent from '@/components/blog-list/go-back-with-children.component.tsx';
+
+import { Post } from '@/types/typings.ts';
 import CopyToClipboardComponent from '@/components/post/copy-to-clipboard.component.tsx';
+import GoBackWithChildrenComponent from '@/components/blog-list/go-back-with-children.component.tsx';
 import PostLikeComponent from '@/components/post/post-like.component.tsx';
 import CommentsDialogComponent from '@/components/post/comments-dialog.component.tsx';
-import { Post } from '../../../typings.ts';
 
 type Props = {
 	post: Post;

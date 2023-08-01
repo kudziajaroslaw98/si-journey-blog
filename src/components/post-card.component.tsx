@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import urlFor from '@/lib/urlFor.ts';
 import ClientSiteRoute from '@/components/client-site-route.tsx';
-import { Post } from '../../typings.ts';
+import { Post } from '@/types/typings.ts';
 
 const PostCardLikesComponent = dynamic(
 	() => import('@/components/blog-list/post-card-likes.component.tsx')

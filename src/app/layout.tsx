@@ -4,15 +4,19 @@ import dynamic from 'next/dynamic';
 import React from 'react'; // eslint-disable-next-line camelcase
 import { Inter, Open_Sans } from 'next/font/google';
 import Footer from '@/components/footer.tsx';
+import ServiceWorkerWrapperComponent from '@/components/layout/service-worker-wrapper.component.tsx';
 
 const inter = Inter({
 	subsets: ['latin'],
 	variable: '--font-inter',
+	display: 'swap',
+	preload: true,
 });
 
 const openSans = Open_Sans({
 	subsets: ['latin'],
 	variable: '--font-open-sans',
+	display: 'swap',
 });
 
 const Header = dynamic(() => import('@/components/header.tsx'));
@@ -72,6 +76,7 @@ export default function RootLayout({
 						<Header />
 
 						<div>{children}</div>
+						<ServiceWorkerWrapperComponent />
 
 						<Footer />
 					</div>
