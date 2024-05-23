@@ -50,17 +50,17 @@ function Footer() {
 
 					<div className='flex space-x-8'>
 						<Link
-							href='#'
+							href='https://si-journey-blog.vercel.app/'
 							title='instagram'
 						>
 							<Instagram />
 						</Link>
 
-						<Link href='#' title='patreon'>
+						<Link href='https://si-journey-blog.vercel.app/' title='patreon'>
 							<Patreon />
 						</Link>
 
-						<Link href='#' title='twitter'>
+						<Link href='https://si-journey-blog.vercel.app/' title='twitter'>
 							<Twitter />
 						</Link>
 					</div>
