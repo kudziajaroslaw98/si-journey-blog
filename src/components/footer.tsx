@@ -50,17 +50,17 @@ function Footer() {
 
 					<div className='flex space-x-8'>
 						<Link
-							href='https://www.instagram.com/embrace.journey.si/'
+							href='#'
 							title='instagram'
 						>
 							<Instagram />
 						</Link>
 
-						<Link href='https://www.patreon.com/JourneySI' title='patreon'>
+						<Link href='#' title='patreon'>
 							<Patreon />
 						</Link>
 
-						<Link href='https://twitter.com/JarekJorney' title='twitter'>
+						<Link href='#' title='twitter'>
 							<Twitter />
 						</Link>
 					</div>
